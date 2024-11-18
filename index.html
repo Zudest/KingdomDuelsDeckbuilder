@@ -201,7 +201,7 @@
                     <img src="${card.image}" alt="${card.name}">
                     <div class="card-info">
                         <span class="card-title">${card.name}</span></br>
-                        <span class="card-details">Type: ${card.types}<br/>ID: ${card.cardid}</span>
+                        <span class="card-details">${card.types}<br/>${card.cardid}</span>
                     </div>
                 `;
                 cardElement.onclick = () => addToDeck(card);
