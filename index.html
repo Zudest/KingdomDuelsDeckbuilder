@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Kingdom Duels Deckbuilder</title>
+</head>
+<body>
+    <div class="container">
+        <div class="cards-container">
+            <div class="filters">
+                <select id="setFilter">
+                    <option value="">Every Set</option>
+                </select>
+                <select id="frameFilter">
+                    <option value="">Every Card Frame</option>
+                </select>
+            </div>
+            <div class="filters">
+                <input type="text" id="nameFilter" placeholder="Filter by card came">
+                <input type="text" id="codeFilter" placeholder="Filter by card id">
+                <input type="text" id="typeFilter" placeholder="Filter by types">
+            </div>
+            <div class="card-grid" id="cardGrid"></div>
+            <p id="limitMessage"></p>
+        </div>
+        <div class="deck-container">
+            <h2>Kingdom Duels Deckbuilder <span class="version-text">Version 0.1</span></h2>
+            <div class="deck-status" id="deckStatus"></div>
+            <div class="deck-section">
+                <h4>Main Deck</h4>
+                <div id="deckListA"></div>
+            </div>
+            <div class="deck-section">
+                <h4>Extra Deck</h4>
+                <div id="deckListB"></div>
+            </div>
+            <div class="import-export">
+                <div class="button-group">
+                    <button class="button-alt" onclick="document.getElementById('fileInput').click()">Import Deck</button>
+                    <button class="button-alt" onclick="exportDeckJSON()">Export as JSON</button>
+                </div>
+                <p id="importError">Error importing the deck</p>
+            </div>
+            <button class="button-warning" onclick="clearDeck()">Reset Decks</button>
+            <button class="button" onclick="showDeckPreview()">Preview</button>
+            <button class="button" onclick="saveDeck()">Save as Text</button>
+        </div>
+    </div>
+
+    <div class="preview-container" id="previewContainer">
+        <span class="close-preview" onclick="closePreview()">×</span>
+        <div class="preview-content">
+            <div class="preview-grid" id="previewGrid"></div>
+        </div>
+    </div>
+
+    <div id="cardPopup" class="card-popup" onclick="this.style.display='none'">
+        <img id="popupImage" src="" alt="Card preview">
+    </div>
+
+    <input type="file" id="fileInput" accept=".json" style="display: none;">
+
+    <script>
+        // Configuración de límites de cartas y mazos
+        const CARD_DISPLAY_LIMIT = 100;
+        const DECK_LIMITS = {
+            A: 30,
+            B: 20
+        };
+
+        let cardsData = [];
+        let deck = [];
+        let filteredCards = [...cardsData];
+
+        // Inicializar datos de cartas
+        function loadCardsData() {
+            cardsData = CARDS_DATABASE.cards;
+            filteredCards = [...cardsData];
+            initializeFilters();
+            renderCards();
+        }
+
+        // Import functionality
+        document.querySelector('.button-group').innerHTML = `
+            <button class="button-alt" onclick="document.getElementById('fileInput').click()">Import Deck</button>
+            <button class="button-alt" onclick="exportDeckJSON()">Export as JSON</button>
+        `;
+
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            importDeck(file);
+        });
+
+        // Función para importar mazo
+        async function importDeck(file) {
+            const importError = document.getElementById('importError');
+            importError.style.display = 'none';
+
+            if (!file) return;
+
+            try {
+                const fileContent = await file.text();
+                const importedDeck = JSON.parse(fileContent);
+                
+                // Verificar que el archivo tenga el formato correcto
+                if (!Array.isArray(importedDeck.cards)) {
+                    throw new Error('Invalid file format');
+                }
+
+                // Limpiar el mazo actual
+                deck = [];
+
+                // Agregar cada carta del archivo importado
+                importedDeck.cards.forEach(cardCode => {
+                    const card = cardsData.find(c => c.cardid === cardCode);
+                    if (card) {
+                        deck.push({ ...card });
+                    }
+                });
+
+                renderDeck();
+                updateDeckStatus();
+
+
+            } catch (error) {
+                console.error('Error importing the deck:', error);
+                importError.style.display = 'block';
+            }
+        }
+
+        // Función para exportar mazo como JSON
+        function exportDeckJSON() {
+            const deckData = {
+                cards: deck.map(card => card.cardid)
+            };
+
+            const blob = new Blob([JSON.stringify(deckData, null, 2)], { type: 'application/json' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'kingdomduels_deck.json';
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        function initializeFilters() {
+            const sets = [...new Set(cardsData.map(card => card.set))];
+            const frames = [...new Set(cardsData.map(card => card.frame))].sort();
+
+            const setFilter = document.getElementById('setFilter');
+            const frameFilter = document.getElementById('frameFilter');
+
+            sets.forEach(set => {
+                const option = document.createElement('option');
+                option.value = set;
+                option.textContent = set;
+                setFilter.appendChild(option);
+            });
+            
+            frames.forEach(frame => {
+                const option = document.createElement('option');
+                option.value = frame;
+                option.textContent = frame;
+                frameFilter.appendChild(option);
+            });
+        }
+
+        function applyFilters() {
+            const nameFilter = document.getElementById('nameFilter').value.toLowerCase();
+            const codeFilter = document.getElementById('codeFilter').value.toLowerCase();
+            const typeFilter = document.getElementById('typeFilter').value.toLowerCase();
+            const setFilter = document.getElementById('setFilter').value;
+            const frameFilter = document.getElementById('frameFilter').value;
+
+            filteredCards = cardsData.filter(card => {
+                return card.name.toLowerCase().includes(nameFilter) &&
+                    card.cardid.toLowerCase().includes(codeFilter) &&
+                    card.types.toLowerCase().includes(typeFilter) &&
+                    (!setFilter || card.set === setFilter) &&
+                    (!frameFilter || card.frame === frameFilter);
+            });
+
+            renderCards();
+        }
+
+        function renderCards() {
+            const cardGrid = document.getElementById('cardGrid');
+            cardGrid.innerHTML = '';
+
+            // Limit the total display of cards
+            totalCards = filteredCards.length;
+            filteredCards = filteredCards.slice(0, CARD_DISPLAY_LIMIT);
+
+            filteredCards.forEach(card => {
+                const cardElement = document.createElement('div');
+                cardElement.className = 'card';
+                cardElement.innerHTML = `
+                    <img src="${card.image}" alt="${card.name}">
+                    <div class="card-info">
+                        <span class="card-title">${card.name}</span></br>
+                        <span class="card-details">Type: ${card.types}<br/>ID: ${card.cardid}</span>
+                    </div>
+                `;
+                cardElement.onclick = () => addToDeck(card);
+                cardElement.oncontextmenu = (e) => showCardPopup(e, card.image);
+                cardGrid.appendChild(cardElement);
+            });
+
+            const messageElement = document.getElementById('limitMessage');
+
+            if (totalCards > CARD_DISPLAY_LIMIT) {
+                messageElement.style.display = 'block';
+                messageElement.textContent = `Showing ${filteredCards.length} of ${totalCards} cards, apply a filter to display more elements.`;
+            } else {
+                messageElement.style.display = 'block';
+                messageElement.textContent = `Showing ${filteredCards.length} of ${totalCards} cards`;
+            }
+        }
+
+        function getDeckCounts() {
+            return {
+                A: deck.filter(card => card.deck === 'A').length,
+                B: deck.filter(card => card.deck === 'B').length
+            };
+        }
+
+        function updateDeckStatus() {
+            const counts = getDeckCounts();
+            const statusElement = document.getElementById('deckStatus');
+            statusElement.innerHTML = `
+                Main Deck: ${counts.A}/${DECK_LIMITS.A}<br>
+                Extra Deck: ${counts.B}/${DECK_LIMITS.B}
+            `;
+        }
+
+        function addToDeck(card) {
+            const counts = getDeckCounts();
+            if (card.deck === 'A' && counts.A >= DECK_LIMITS.A) {
+                alert(`The Main Deck has reached its limit of ${DECK_LIMITS.A} cards`);
+                return;
+            }
+            if (card.deck === 'B' && counts.B >= DECK_LIMITS.B) {
+                alert(`The Extra Deck has reached its limit of ${DECK_LIMITS.B} cards`);
+                return;
+            }
+            
+            deck.push(card);
+            renderDeck();
+            updateDeckStatus();
+        }
+
+        function renderDeck() {
+            const deckListA = document.getElementById('deckListA');
+            const deckListB = document.getElementById('deckListB');
+            deckListA.innerHTML = '';
+            deckListB.innerHTML = '';
+
+            const cardCounts = {};
+            deck.forEach(card => {
+                cardCounts[card.cardid] = (cardCounts[card.cardid] || 0) + 1;
+            });
+
+            // Ordenar las cartas por mazo
+            const sortedCards = Object.entries(cardCounts).map(([cardid, count]) => {
+                const card = deck.find(c => c.cardid === cardid);
+                return { card, count };
+            }).sort((a, b) => {
+                if (a.card.deck === b.card.deck) {
+                    return a.card.name.localeCompare(b.card.name);
+                }
+                return a.card.deck.localeCompare(b.card.deck);
+            });
+
+            sortedCards.forEach(({ card, count }) => {
+                const deckCard = document.createElement('div');
+                deckCard.className = 'deck-card';
+                deckCard.innerHTML = `
+                    <img src="${card.image}" alt="${card.name}">
+                    <span>${card.name} (${count})</span>
+                    <button onclick="removeFromDeck('${card.cardid}')">x</button>
+                `;
+                
+                if (card.deck === 'A') {
+                    deckListA.appendChild(deckCard);
+                } else {
+                    deckListB.appendChild(deckCard);
+                }
+            });
+        }
+
+        function removeFromDeck(cardid) {
+            const index = deck.findIndex(card => card.cardid === cardid);
+            if (index !== -1) {
+                deck.splice(index, 1);
+                renderDeck();
+                updateDeckStatus();
+            }
+        }
+
+        function saveDeck() {
+            const deckText = deck.map(card => {
+                const deckType = card.deck === 'A' ? "Main Deck" : "Extra Deck";
+                return `${card.cardid} (${card.name}) - ${deckType}`
+                }).join('\n');
+            const blob = new Blob([deckText], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'kingdomduels_deck.txt';
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        function showDeckPreview() {
+            const previewContainer = document.getElementById('previewContainer');
+            const previewGrid = document.getElementById('previewGrid');
+            previewGrid.innerHTML = '';
+
+            // Ordenar las cartas: primero mazo A, despues mazo B
+            const sortedDeck = [...deck].sort((a, b) => {
+                if (a.deck === b.deck) {
+                    return a.name.localeCompare(b.name);
+                }
+                return a.deck.localeCompare(b.deck);
+            });
+
+            sortedDeck.forEach(card => {
+                const previewCard = document.createElement('div');
+                previewCard.className = 'preview-card';
+                previewCard.innerHTML = `<img src="${card.image}" alt="${card.name}">`;
+                previewGrid.appendChild(previewCard);
+            });
+
+            previewContainer.style.display = 'flex';
+        }
+
+        function closePreview() {
+            document.getElementById('previewContainer').style.display = 'none';
+        }
+
+        // Clear deck function
+        function clearDeck() {
+            if (confirm('Are you sure you want to clear your deck?')) {
+                deck = [];
+                renderDeck();
+                updateDeckStatus();
+            }
+        }
+
+        // Function to show card popup
+        function showCardPopup(event, imageUrl) {
+            event.preventDefault(); // Prevent default right-click menu
+            
+            const popup = document.getElementById('cardPopup');
+            const popupImage = document.getElementById('popupImage');
+            
+            // Set image source
+            popupImage.src = imageUrl;
+            
+            // Position popup near cursor
+            popup.style.left = event.pageX + 'px';
+            popup.style.top = event.pageY + 'px';
+            
+            // Show popup
+            popup.style.display = 'block';
+        }
+
+        // Add event listener to close popup when clicking outside
+        document.addEventListener('click', function(event) {
+            const popup = document.getElementById('cardPopup');
+            if (event.target !== popup && !popup.contains(event.target)) {
+                popup.style.display = 'none';
+            }
+        });
+
+        document.getElementById('nameFilter').addEventListener('input', applyFilters);
+        document.getElementById('codeFilter').addEventListener('input', applyFilters);
+        document.getElementById('typeFilter').addEventListener('input', applyFilters);
+        document.getElementById('setFilter').addEventListener('change', applyFilters);
+        document.getElementById('frameFilter').addEventListener('change', applyFilters);
+
+        // Run the application
+        initializeFilters();
+        renderCards();
+        updateDeckStatus();
+
+        document.addEventListener('DOMContentLoaded', loadCardsData);
+
+        //##############################################################################################################################
+        const CARDS_DATABASE = {
+            "cards": [
+            {"name": "Yugi","frame": "Rule","types": "Rule Duelist Setup","set": "01 - Seal of Exodia","cardid": "SOE-01","image": "./cards/SOE/01.jpg","deck": "B"}
+,{"name": "Jonouchi","frame": "Rule","types": "Rule Duelist Setup","set": "01 - Seal of Exodia","cardid": "SOE-02","image": "./cards/SOE/02.jpg","deck": "B"}
+,{"name": "Tabletop","frame": "Rule","types": "Rule Field Setup","set": "01 - Seal of Exodia","cardid": "SOE-03","image": "./cards/SOE/03.jpg","deck": "B"}
+,{"name": "Shien's Body Double","frame": "Monster","types": "Monster Warrior Support","set": "01 - Seal of Exodia","cardid": "SOE-04","image": "./cards/SOE/04.jpg","deck": "A"}
+,{"name": "Shadow Fighter","frame": "Monster","types": "Monster Warrior","set": "01 - Seal of Exodia","cardid": "SOE-05","image": "./cards/SOE/05.jpg","deck": "A"}
+,{"name": "Sea King of Anger","frame": "Monster","types": "Monster Aquatic Warrior","set": "01 - Seal of Exodia","cardid": "SOE-06","image": "./cards/SOE/06.jpg","deck": "A"}
+,{"name": "Claw Reacher","frame": "Monster","types": "Monster Demon","set": "01 - Seal of Exodia","cardid": "SOE-07","image": "./cards/SOE/07.jpg","deck": "A"}
+,{"name": "Death Stalker","frame": "Monster","types": "Monster Warrior Insect","set": "01 - Seal of Exodia","cardid": "SOE-08","image": "./cards/SOE/08.jpg","deck": "A"}
+,{"name": "Dark Dragon","frame": "Monster","types": "Monster Dragon Fireblast Flying","set": "01 - Seal of Exodia","cardid": "SOE-09","image": "./cards/SOE/09.jpg","deck": "A"}
+,{"name": "Kaiba","frame": "Rule","types": "Rule Duelist Setup","set": "01 - Seal of Exodia","cardid": "SOE-10","image": "./cards/SOE/10.jpg","deck": "B"}
+,{"name": "Kaiba Corporation Arena","frame": "Rule","types": "Rule Field Setup Matched (Red Side)","set": "01 - Seal of Exodia","cardid": "SOE-11","image": "./cards/SOE/11.jpg","deck": "B"}
+,{"name": "Kaiba Corporation Arena","frame": "Rule","types": "Rule Field Setup Matched (Blue Side)","set": "01 - Seal of Exodia","cardid": "SOE-12","image": "./cards/SOE/12.jpg","deck": "B"}
+,{"name": "Cyclops","frame": "Monster","types": "Monster Beast Warrior","set": "01 - Seal of Exodia","cardid": "SOE-13","image": "./cards/SOE/13.jpg","deck": "A"}
+,{"name": "Winged Dragon, Guardian of the Fortress","frame": "Monster","types": "Monster Dragon Fireblast Flying","set": "01 - Seal of Exodia","cardid": "SOE-14","image": "./cards/SOE/14.jpg","deck": "A"}
+,{"name": "Saggi the Dark Clown","frame": "Monster","types": "Monster Spellcaster","set": "01 - Seal of Exodia","cardid": "SOE-15","image": "./cards/SOE/15.jpg","deck": "A"}
+,{"name": "Dark Generator","frame": "Spell","types": "Spell Equip","set": "01 - Seal of Exodia","cardid": "SOE-16","image": "./cards/SOE/16.jpg","deck": "A"}
+,{"name": "Critter","frame": "Monster","types": "Monster Demon","set": "01 - Seal of Exodia","cardid": "SOE-17","image": "./cards/SOE/17.jpg","deck": "A"}
+,{"name": "Bull Devil","frame": "Monster","types": "Monster Beast Warrior","set": "01 - Seal of Exodia","cardid": "SOE-18","image": "./cards/SOE/18.jpg","deck": "A"}
+,{"name": "Saigar","frame": "Monster","types": "Monster Beast","set": "01 - Seal of Exodia","cardid": "SOE-19","image": "./cards/SOE/19.jpg","deck": "A"}
+,{"name": "Gaia the Fierce Knight","frame": "Monster","types": "Monster Warrior","set": "01 - Seal of Exodia","cardid": "SOE-20","image": "./cards/SOE/20.jpg","deck": "A"}
+,{"name": "Blue-Eyes White Dragon","frame": "Monster","types": "Monster Dragon Flying","set": "01 - Seal of Exodia","cardid": "SOE-21","image": "./cards/SOE/21.jpg","deck": "A"}
+,{"name": "Imp","frame": "Monster","types": "Monster Demon","set": "01 - Seal of Exodia","cardid": "SOE-22","image": "./cards/SOE/22.jpg","deck": "A"}
+,{"name": "Beaver Warrior","frame": "Monster","types": "Monster Beast Warrior","set": "01 - Seal of Exodia","cardid": "SOE-23","image": "./cards/SOE/23.jpg","deck": "A"}
+,{"name": "Swords of Revealing Light","frame": "Spell","types": "Spell Persist (3 opponent End Phases)","set": "01 - Seal of Exodia","cardid": "SOE-24","image": "./cards/SOE/24.jpg","deck": "A"}
+,{"name": "Rude Kaiser","frame": "Monster","types": "Monster Reptillian Warrior","set": "01 - Seal of Exodia","cardid": "SOE-25","image": "./cards/SOE/25.jpg","deck": "A"}
+,{"name": "Judge Man","frame": "Monster","types": "Monster Warrior","set": "01 - Seal of Exodia","cardid": "SOE-26","image": "./cards/SOE/26.jpg","deck": "A"}
+,{"name": "Dark Magician","frame": "Monster","types": "Monster Spellcaster","set": "01 - Seal of Exodia","cardid": "SOE-27","image": "./cards/SOE/27.jpg","deck": "A"}
+,{"name": "Heart of the Cards","frame": "Rule","types": "Rule Symbol","set": "01 - Seal of Exodia","cardid": "SOE-28","image": "./cards/SOE/28.jpg","deck": "B"}
+,{"name": "Head of the Sealed One","frame": "Divine Monster","types": "Divine Monster Spellcaster Sealed Palace God (Hierarchy 1)","set": "01 - Seal of Exodia","cardid": "SOE-29","image": "./cards/SOE/29.jpg","deck": "A"}
+,{"name": "Right Leg of the Sealed One","frame": "Divine Monster","types": "Divine Monster Spellcaster Sealed Palace God (Hierarchy 1)","set": "01 - Seal of Exodia","cardid": "SOE-30","image": "./cards/SOE/30.jpg","deck": "A"}
+,{"name": "Left Leg of the Sealed One","frame": "Divine Monster","types": "Divine Monster Spellcaster Sealed Palace God (Hierarchy 1)","set": "01 - Seal of Exodia","cardid": "SOE-31","image": "./cards/SOE/31.jpg","deck": "A"}
+,{"name": "Right Arm of the Sealed One","frame": "Divine Monster","types": "Divine Monster Spellcaster Sealed Palace God (Hierarchy 1)","set": "01 - Seal of Exodia","cardid": "SOE-32","image": "./cards/SOE/32.jpg","deck": "A"}
+,{"name": "Left Arm of the Sealed One","frame": "Divine Monster","types": "Divine Monster Spellcaster Sealed Palace God (Hierarchy 1)","set": "01 - Seal of Exodia","cardid": "SOE-33","image": "./cards/SOE/33.jpg","deck": "A"}
+,{"name": "Palace God Pantheon","frame": "Rule","types": "Rule","set": "01 - Seal of Exodia","cardid": "SOE-34","image": "./cards/SOE/34.jpg","deck": "B"}
+,{"name": "Exodia","frame": "Divine Fusion Monster","types": "Divine Fusion Monster Spellcaster Warrior Palace God (Hierarchy 7)","set": "01 - Seal of Exodia","cardid": "SOE-35","image": "./cards/SOE/35.jpg","deck": "B"}
+,{"name": "Anzu","frame": "Rule","types": "Rule Duelist Setup","set": "01 - Seal of Exodia","cardid": "SOE-36","image": "./cards/SOE/36.jpg","deck": "B"}
+,{"name": "Cavern Devil - Ogre Rock","frame": "Monster","types": "Monster Elemental","set": "01 - Seal of Exodia","cardid": "SOE-37","image": "./cards/SOE/37.jpg","deck": "A"}
+,{"name": "Happy Lover","frame": "Monster","types": "Monster Angel Flying","set": "01 - Seal of Exodia","cardid": "SOE-38","image": "./cards/SOE/38.jpg","deck": "A"}
+,{"name": "Breath of God","frame": "Spell","types": "Spell","set": "01 - Seal of Exodia","cardid": "SOE-39","image": "./cards/SOE/39.jpg","deck": "A"}
+,{"name": "Haga","frame": "Rule","types": "Rule Duelist Setup","set": "01 - Seal of Exodia","cardid": "SOE-40","image": "./cards/SOE/40.jpg","deck": "B"}
+,{"name": "Ryuzaki","frame": "Rule","types": "Rule Duelist Setup","set": "01 - Seal of Exodia","cardid": "SOE-41","image": "./cards/SOE/41.jpg","deck": "B"}
+,{"name": "Two-Headed King Rex","frame": "Monster","types": "Monster Dinosaur Flying","set": "01 - Seal of Exodia","cardid": "SOE-42","image": "./cards/SOE/42.jpg","deck": "A"}
+,{"name": "Basic Insect","frame": "Monster","types": "Monster Insect","set": "01 - Seal of Exodia","cardid": "SOE-43","image": "./cards/SOE/43.jpg","deck": "A"}
+,{"name": "Messiah's Antlion Larva","frame": "Trap","types": "Trap Equip","set": "01 - Seal of Exodia","cardid": "SOE-44","image": "./cards/SOE/44.jpg","deck": "A"}
+,{"name": "Insect Armor with Laser Cannon LV. 5","frame": "Spell","types": "Spell Equip","set": "01 - Seal of Exodia","cardid": "SOE-45","image": "./cards/SOE/45.jpg","deck": "A"}
+,{"name": "Pegasus","frame": "Rule","types": "Rule Duelist Setup","set": "01 - Seal of Exodia","cardid": "SOE-46","image": "./cards/SOE/46.jpg","deck": "B"}
+,{"name": "Millennium Eye","frame": "Rule","types": "Rule Symbol Millennium Item","set": "01 - Seal of Exodia","cardid": "SOE-47","image": "./cards/SOE/47.jpg","deck": "B"}
+,{"name": "Devil Dragon","frame": "Monster","types": "Monster Demon Dragon Fireblast Flying","set": "01 - Seal of Exodia","cardid": "SOE-48","image": "./cards/SOE/48.jpg","deck": "A"}
+,{"name": "Pot of Dragon-Tribe Sealing","frame": "Trap Monster","types": "Trap Monster Demon","set": "01 - Seal of Exodia","cardid": "SOE-49","image": "./cards/SOE/49.jpg","deck": "A"}
+,{"name": "Silver Fang","frame": "Monster","types": "Monster Beast","set": "01 - Seal of Exodia","cardid": "SOE-50","image": "./cards/SOE/50.jpg","deck": "A"}
+,{"name": "Jar Djinn","frame": "Monster","types": "Monster Spellcaster","set": "01 - Seal of Exodia","cardid": "SOE-51","image": "./cards/SOE/51.jpg","deck": "A"}
+,{"name": "Sun Shower","frame": "Trap","types": "Trap","set": "01 - Seal of Exodia","cardid": "SOE-52","image": "./cards/SOE/52.jpg","deck": "A"}
+,{"name": "Undead Warrior","frame": "Monster","types": "Monster Undead Warrior","set": "01 - Seal of Exodia","cardid": "SOE-53","image": "./cards/SOE/53.jpg","deck": "A"}
+,{"name": "Book of Secret Arts","frame": "Spell","types": "Spell Equip","set": "01 - Seal of Exodia","cardid": "SOE-54","image": "./cards/SOE/54.jpg","deck": "A"}
+,{"name": "Illusionist Faceless Mage","frame": "Monster","types": "Monster Spellcaster","set": "01 - Seal of Exodia","cardid": "SOE-55","image": "./cards/SOE/55.jpg","deck": "A"}
+,{"name": "Eye of Illusion","frame": "Spell","types": "Spell Equip","set": "01 - Seal of Exodia","cardid": "SOE-56","image": "./cards/SOE/56.jpg","deck": "A"}
+,{"name": "Power of Hypnosis","frame": "Rule","types": "Rule","set": "01 - Seal of Exodia","cardid": "SOE-57","image": "./cards/SOE/57.jpg","deck": "B"}
+,{"name": "Elf Swordsman","frame": "Monster","types": "Monster Warrior","set": "01 - Seal of Exodia","cardid": "SOE-58","image": "./cards/SOE/58.jpg","deck": "A"}
+,{"name": "Demon's Summon","frame": "Monster","types": "Monster Demon Thunderblast","set": "01 - Seal of Exodia","cardid": "SOE-59","image": "./cards/SOE/59.jpg","deck": "A"}
+
+,{"name": "Duelist Kingdom","frame": "Emblem","types": "Emblem (This card cannot be used in a Duel)","set": "02 - The Star Chasers","cardid": "TSC-01","image": "./cards/TSC/01.jpg","deck": "A"}
+,{"name": "Set Sail for the Kingdom","frame": "Emblem","types": "Emblem (This card cannot be used in a Duel)","set": "02 - The Star Chasers","cardid": "TSC-02","image": "./cards/TSC/02.jpg","deck": "A"}
+,{"name": "Duelist's Glove","frame": "Emblem","types": "Emblem (This card cannot be used in a Duel)","set": "02 - The Star Chasers","cardid": "TSC-03","image": "./cards/TSC/03.jpg","deck": "A"}
+,{"name": "Glory of the King's Right Hand","frame": "Emblem","types": "Emblem (This card cannot be used in a Duel)","set": "02 - The Star Chasers","cardid": "TSC-04","image": "./cards/TSC/04.jpg","deck": "A"}
+,{"name": "Glory of the King's Left Hand","frame": "Emblem","types": "Emblem (This card cannot be used in a Duel)","set": "02 - The Star Chasers","cardid": "TSC-05","image": "./cards/TSC/05.jpg","deck": "A"}
+,{"name": "Yugi","frame": "Rule","types": "Rule Duelist Setup","set": "02 - The Star Chasers","cardid": "TSC-06","image": "./cards/TSC/06.jpg","deck": "B"}
+,{"name": "Haga","frame": "Rule","types": "Rule Duelist Setup","set": "02 - The Star Chasers","cardid": "TSC-07","image": "./cards/TSC/07.jpg","deck": "B"}
+,{"name": "Forest Glade","frame": "Rule","types": "Rule Field Setup Matched (Red Side)","set": "02 - The Star Chasers","cardid": "TSC-08","image": "./cards/TSC/08.jpg","deck": "B"}
+,{"name": "Forest Glade","frame": "Rule","types": "Rule Field Setup Matched (Blue Side)","set": "02 - The Star Chasers","cardid": "TSC-09","image": "./cards/TSC/09.jpg","deck": "B"}
+,{"name": "Killer Bee","frame": "Monster","types": "Monster Insect Flying","set": "02 - The Star Chasers","cardid": "TSC-10","image": "./cards/TSC/10.jpg","deck": "A"}
+,{"name": "Mammoth Graveyard","frame": "Monster","types": "Monster Undead Dinosaur","set": "02 - The Star Chasers","cardid": "TSC-11","image": "./cards/TSC/11.jpg","deck": "A"}
+,{"name": "Hercules Beetle","frame": "Monster","types": "Monster Insect","set": "02 - The Star Chasers","cardid": "TSC-12","image": "./cards/TSC/12.jpg","deck": "A"}
+,{"name": "Gremlin","frame": "Monster","types": "Monster Demon","set": "02 - The Star Chasers","cardid": "TSC-13","image": "./cards/TSC/13.jpg","deck": "A"}
+,{"name": "Horn of the Unicorn","frame": "Spell","types": "Spell Equip","set": "02 - The Star Chasers","cardid": "TSC-14","image": "./cards/TSC/14.jpg","deck": "A"}
+,{"name": "Power Booster LV. 2","frame": "Spell","types": "Spell Equip","set": "02 - The Star Chasers","cardid": "TSC-15","image": "./cards/TSC/15.jpg","deck": "A"}
+,{"name": "LV. 3 Laser Cannon","frame": "Spell","types": "Spell Equip","set": "02 - The Star Chasers","cardid": "TSC-16","image": "./cards/TSC/16.jpg","deck": "A"}
+,{"name": "Griffore","frame": "Monster","types": "Monster Beast","set": "02 - The Star Chasers","cardid": "TSC-17","image": "./cards/TSC/17.jpg","deck": "A"}
+,{"name": "Roachball","frame": "Monster","types": "Monster Insect","set": "02 - The Star Chasers","cardid": "TSC-18","image": "./cards/TSC/18.jpg","deck": "A"}
+,{"name": "Big Ant","frame": "Monster","types": "Monster Insect","set": "02 - The Star Chasers","cardid": "TSC-19","image": "./cards/TSC/19.jpg","deck": "A"}
+,{"name": "Sickle Killer","frame": "Monster","types": "Monster Insect","set": "02 - The Star Chasers","cardid": "TSC-20","image": "./cards/TSC/20.jpg","deck": "A"}
+,{"name": "Holy Barrier - Mirror Force","frame": "Trap","types": "Trap","set": "02 - The Star Chasers","cardid": "TSC-21","image": "./cards/TSC/21.jpg","deck": "A"}
+,{"name": "Larva Moth","frame": "Monster","types": "Monster Insect","set": "02 - The Star Chasers","cardid": "TSC-22","image": "./cards/TSC/22.jpg","deck": "A"}
+,{"name": "Monster Recovery","frame": "Spell","types": "Spell","set": "02 - The Star Chasers","cardid": "TSC-23","image": "./cards/TSC/23.jpg","deck": "A"}
+,{"name": "Kuriboh","frame": "Monster","types": "Monster Demon","set": "02 - The Star Chasers","cardid": "TSC-24","image": "./cards/TSC/24.jpg","deck": "A"}
+,{"name": "Parasite Worm","frame": "Trap Monster","types": "Trap Monster Insect","set": "02 - The Star Chasers","cardid": "TSC-25","image": "./cards/TSC/25.jpg","deck": "A"}
+,{"name": "Cocoon of Evolution","frame": "Spell Monster","types": "Spell Monster Insect","set": "02 - The Star Chasers","cardid": "TSC-26","image": "./cards/TSC/26.jpg","deck": "A"}
+,{"name": "Curse of Dragon","frame": "Monster","types": "Monster Dragon Fireblast Flying","set": "02 - The Star Chasers","cardid": "TSC-27","image": "./cards/TSC/27.jpg","deck": "A"}
+,{"name": "Burning Land","frame": "Spell","types": "Spell","set": "02 - The Star Chasers","cardid": "TSC-28","image": "./cards/TSC/28.jpg","deck": "A"}
+,{"name": "Great Moth","frame": "Alter Monster","types": "Alter Monster Timeshifted Insect","set": "02 - The Star Chasers","cardid": "TSC-29","image": "./cards/TSC/29.jpg","deck": "B"}
+,{"name": "Corrosive Poison","frame": "Rule","types": "Rule","set": "02 - The Star Chasers","cardid": "TSC-30","image": "./cards/TSC/30.jpg","deck": "B"}
+,{"name": "Fusion","frame": "Spell","types": "Spell","set": "02 - The Star Chasers","cardid": "TSC-31","image": "./cards/TSC/31.jpg","deck": "A"}
+,{"name": "Gaia the Dragon Knight","frame": "Fusion Monster","types": "Fusion Monster Dragon Warrior Flying","set": "02 - The Star Chasers","cardid": "TSC-32","image": "./cards/TSC/32.jpg","deck": "B"}
+,{"name": "Magical Drizzle","frame": "Spell","types": "Spell","set": "02 - The Star Chasers","cardid": "TSC-33","image": "./cards/TSC/33.jpg","deck": "A"}
+,{"name": "Electric Current","frame": "Rule","types": "Rule","set": "02 - The Star Chasers","cardid": "TSC-34","image": "./cards/TSC/34.jpg","deck": "B"}
+,{"name": "Barren Valley","frame": "Rule","types": "Rule Field Setup Matched (Red Side)","set": "02 - The Star Chasers","cardid": "TSC-35","image": "./cards/TSC/35.jpg","deck": "B"}
+,{"name": "Barren Valley","frame": "Rule","types": "Rule Field Setup Matched (Blue Side)","set": "02 - The Star Chasers","cardid": "TSC-36","image": "./cards/TSC/36.jpg","deck": "B"}
+,{"name": "Jonouchi","frame": "Rule","types": "Rule Duelist Setup","set": "02 - The Star Chasers","cardid": "TSC-37","image": "./cards/TSC/37.jpg","deck": "B"}
+,{"name": "Mai","frame": "Rule","types": "Rule Duelist Setup","set": "02 - The Star Chasers","cardid": "TSC-38","image": "./cards/TSC/38.jpg","deck": "B"}
+,{"name": "Foot of the Mountain","frame": "Rule","types": "Rule Field Setup Matched (Red Side)","set": "02 - The Star Chasers","cardid": "TSC-39","image": "./cards/TSC/39.jpg","deck": "B"}
+,{"name": "Foot of the Mountain","frame": "Rule","types": "Rule Field Setup Matched (Blue Side)","set": "02 - The Star Chasers","cardid": "TSC-40","image": "./cards/TSC/40.jpg","deck": "B"}
+,{"name": "Masaki the Legendary Swordsman","frame": "Monster","types": "Monster Warrior","set": "02 - The Star Chasers","cardid": "TSC-41","image": "./cards/TSC/41.jpg","deck": "A"}
+,{"name": "Harpie Lady","frame": "Monster","types": "Monster Avian Flying","set": "02 - The Star Chasers","cardid": "TSC-42","image": "./cards/TSC/42.jpg","deck": "A"}
+,{"name": "Flying Advantage","frame": "Rule","types": "Rule","set": "02 - The Star Chasers","cardid": "TSC-43","image": "./cards/TSC/43.jpg","deck": "B"}
+,{"name": "Tiger Axe","frame": "Monster","types": "Monster Beast Warrior","set": "02 - The Star Chasers","cardid": "TSC-44","image": "./cards/TSC/44.jpg","deck": "A"}
+,{"name": "Cyber Bondage","frame": "Spell","types": "Spell Equip","set": "02 - The Star Chasers","cardid": "TSC-45","image": "./cards/TSC/45.jpg","deck": "A"}
+,{"name": "Demon Hunter","frame": "Monster","types": "Monster Warrior","set": "02 - The Star Chasers","cardid": "TSC-46","image": "./cards/TSC/46.jpg","deck": "A"}
+,{"name": "Baby Dragon","frame": "Monster","types": "Monster Dragon Flying","set": "02 - The Star Chasers","cardid": "TSC-47","image": "./cards/TSC/47.jpg","deck": "A"}
+,{"name": "Kaleidoscope - Elegant Doppelgangers","frame": "Spell","types": "Spell","set": "02 - The Star Chasers","cardid": "TSC-48","image": "./cards/TSC/48.jpg","deck": "A"}
+,{"name": "Time Wizard","frame": "Spell Monster","types": "Spell Monster Spellcaster","set": "02 - The Star Chasers","cardid": "TSC-49","image": "./cards/TSC/49.jpg","deck": "A"}
+,{"name": "Thousand Dragon","frame": "Alter Monster","types": "Alter Monster Timeshifted Dragon Fireblast Flying","set": "02 - The Star Chasers","cardid": "TSC-50","image": "./cards/TSC/50.jpg","deck": "B"}
+,{"name": "Decrepit Harpie Lady","frame": "Alter Monster","types": "Alter Monster Timeshifted Avian Flying","set": "02 - The Star Chasers","cardid": "TSC-51","image": "./cards/TSC/51.jpg","deck": "B"}
+            ]
+        };
+    </script>
+</body>
+</html>
