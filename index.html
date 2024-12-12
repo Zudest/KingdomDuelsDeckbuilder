@@ -18,8 +18,9 @@
                 </select>
             </div>
             <div class="filters">
-                <input type="text" id="nameFilter" placeholder="Filter by card came">
+                <input type="text" id="nameFilter" placeholder="Filter by card name">
                 <input type="text" id="codeFilter" placeholder="Filter by card id">
+                <input type="text" id="duelistFilter" placeholder="Filter by duelist">
                 <input type="text" id="typeFilter" placeholder="Filter by types">
             </div>
             <div class="card-grid" id="cardGrid"></div>
@@ -62,6 +63,10 @@
 
     <input type="file" id="fileInput" accept=".json" style="display: none;">
 
+    <!--DATA--> 
+    <script src="data/001_1.js"></script>
+    <script src="data/001_2.js"></script>
+
     <script>
         // Configuración de límites de cartas y mazos
         const CARD_DISPLAY_LIMIT = 100;
@@ -80,6 +85,9 @@
             filteredCards = [...cardsData];
             initializeFilters();
             renderCards();
+
+            // Check for URL filter after loading cards
+            checkUrlFilter();
         }
 
         // Import functionality
@@ -171,6 +179,7 @@
         function applyFilters() {
             const nameFilter = document.getElementById('nameFilter').value.toLowerCase();
             const codeFilter = document.getElementById('codeFilter').value.toLowerCase();
+            const duelistFilter = document.getElementById('duelistFilter').value.toLowerCase();
             const typeFilter = document.getElementById('typeFilter').value.toLowerCase();
             const setFilter = document.getElementById('setFilter').value;
             const frameFilter = document.getElementById('frameFilter').value;
@@ -178,12 +187,31 @@
             filteredCards = cardsData.filter(card => {
                 return card.name.toLowerCase().includes(nameFilter) &&
                     card.cardid.toLowerCase().includes(codeFilter) &&
+                    card.duelist.toLowerCase().includes(duelistFilter) &&
                     card.types.toLowerCase().includes(typeFilter) &&
                     (!setFilter || card.set === setFilter) &&
                     (!frameFilter || card.frame === frameFilter);
             });
 
             renderCards();
+        }
+
+        // Check and apply URL Set filter
+        function checkUrlFilter() {
+            // Remove the # from the hash if it exists
+            const hash = window.location.hash.replace('#', '');
+            
+            if (hash) {
+                // Try to find a matching set
+                const setFilter = document.getElementById('setFilter');
+                const matchingSet = Array.from(setFilter.options)
+                    .find(option => option.value.includes(hash));
+                
+                if (matchingSet) {
+                    setFilter.value = matchingSet.value;
+                    applyFilters();
+                }
+            }
         }
 
         function renderCards() {
@@ -394,6 +422,7 @@
 
         document.getElementById('nameFilter').addEventListener('input', applyFilters);
         document.getElementById('codeFilter').addEventListener('input', applyFilters);
+        document.getElementById('duelistFilter').addEventListener('input', applyFilters);
         document.getElementById('typeFilter').addEventListener('input', applyFilters);
         document.getElementById('setFilter').addEventListener('change', applyFilters);
         document.getElementById('frameFilter').addEventListener('change', applyFilters);
@@ -409,507 +438,11 @@
         
         const CARDS_DATABASE = {
             "cards": [
-            {"name": "Yugi","frame": "Rule","types": "Rule Duelist Setup","set": "01 - Seal of Exodia","cardid": "SOE-01","image": "./cards/SOE/01.jpg","deck": "B"}
-,{"name": "Jonouchi","frame": "Rule","types": "Rule Duelist Setup","set": "01 - Seal of Exodia","cardid": "SOE-02","image": "./cards/SOE/02.jpg","deck": "B"}
-,{"name": "Tabletop","frame": "Rule","types": "Rule Field Setup","set": "01 - Seal of Exodia","cardid": "SOE-03","image": "./cards/SOE/03.jpg","deck": "B"}
-,{"name": "Shien's Body Double","frame": "Monster","types": "Monster Warrior Support","set": "01 - Seal of Exodia","cardid": "SOE-04","image": "./cards/SOE/04.jpg","deck": "A"}
-,{"name": "Shadow Fighter","frame": "Monster","types": "Monster Warrior","set": "01 - Seal of Exodia","cardid": "SOE-05","image": "./cards/SOE/05.jpg","deck": "A"}
-,{"name": "Sea King of Anger","frame": "Monster","types": "Monster Aquatic Warrior","set": "01 - Seal of Exodia","cardid": "SOE-06","image": "./cards/SOE/06.jpg","deck": "A"}
-,{"name": "Claw Reacher","frame": "Monster","types": "Monster Demon","set": "01 - Seal of Exodia","cardid": "SOE-07","image": "./cards/SOE/07.jpg","deck": "A"}
-,{"name": "Death Stalker","frame": "Monster","types": "Monster Warrior Insect","set": "01 - Seal of Exodia","cardid": "SOE-08","image": "./cards/SOE/08.jpg","deck": "A"}
-,{"name": "Dark Dragon","frame": "Monster","types": "Monster Dragon Fireblast Flying","set": "01 - Seal of Exodia","cardid": "SOE-09","image": "./cards/SOE/09.jpg","deck": "A"}
-,{"name": "Kaiba","frame": "Rule","types": "Rule Duelist Setup","set": "01 - Seal of Exodia","cardid": "SOE-10","image": "./cards/SOE/10.jpg","deck": "B"}
-,{"name": "Yugi","frame": "Rule","types": "Rule Duelist Setup","set": "01 - Seal of Exodia","cardid": "SOE-11","image": "./cards/SOE/11.jpg","deck": "B"}
-,{"name": "Kaiba Corporation Arena","frame": "Rule","types": "Rule Field Setup Matched (Red Side)","set": "01 - Seal of Exodia","cardid": "SOE-12","image": "./cards/SOE/12.jpg","deck": "B"}
-,{"name": "Kaiba Corporation Arena","frame": "Rule","types": "Rule Field Setup Matched (Blue Side)","set": "01 - Seal of Exodia","cardid": "SOE-13","image": "./cards/SOE/13.jpg","deck": "B"}
-,{"name": "Cyclops","frame": "Monster","types": "Monster Beast Warrior","set": "01 - Seal of Exodia","cardid": "SOE-14","image": "./cards/SOE/14.jpg","deck": "A"}
-,{"name": "Winged Dragon, Guardian of the Fortress","frame": "Monster","types": "Monster Dragon Fireblast Flying","set": "01 - Seal of Exodia","cardid": "SOE-15","image": "./cards/SOE/15.jpg","deck": "A"}
-,{"name": "Saggi the Dark Clown","frame": "Monster","types": "Monster Spellcaster","set": "01 - Seal of Exodia","cardid": "SOE-16","image": "./cards/SOE/16.jpg","deck": "A"}
-,{"name": "Dark Generator","frame": "Spell","types": "Spell Equip","set": "01 - Seal of Exodia","cardid": "SOE-17","image": "./cards/SOE/17.jpg","deck": "A"}
-,{"name": "Critter","frame": "Monster","types": "Monster Demon","set": "01 - Seal of Exodia","cardid": "SOE-18","image": "./cards/SOE/18.jpg","deck": "A"}
-,{"name": "Bull Devil","frame": "Monster","types": "Monster Beast Warrior","set": "01 - Seal of Exodia","cardid": "SOE-19","image": "./cards/SOE/19.jpg","deck": "A"}
-,{"name": "Saigar","frame": "Monster","types": "Monster Beast","set": "01 - Seal of Exodia","cardid": "SOE-20","image": "./cards/SOE/20.jpg","deck": "A"}
-,{"name": "Gaia the Fierce Knight","frame": "Monster","types": "Monster Warrior","set": "01 - Seal of Exodia","cardid": "SOE-21","image": "./cards/SOE/21.jpg","deck": "A"}
-,{"name": "Blue-Eyes White Dragon","frame": "Monster","types": "Monster Dragon Flying","set": "01 - Seal of Exodia","cardid": "SOE-22","image": "./cards/SOE/22.jpg","deck": "A"}
-,{"name": "Imp","frame": "Monster","types": "Monster Demon","set": "01 - Seal of Exodia","cardid": "SOE-23","image": "./cards/SOE/23.jpg","deck": "A"}
-,{"name": "Beaver Warrior","frame": "Monster","types": "Monster Beast Warrior","set": "01 - Seal of Exodia","cardid": "SOE-24","image": "./cards/SOE/24.jpg","deck": "A"}
-,{"name": "Swords of Revealing Light","frame": "Spell","types": "Spell Persist (3 opponent End Phases)","set": "01 - Seal of Exodia","cardid": "SOE-25","image": "./cards/SOE/25.jpg","deck": "A"}
-,{"name": "Rude Kaiser","frame": "Monster","types": "Monster Reptillian Warrior","set": "01 - Seal of Exodia","cardid": "SOE-26","image": "./cards/SOE/26.jpg","deck": "A"}
-,{"name": "Judge Man","frame": "Monster","types": "Monster Warrior","set": "01 - Seal of Exodia","cardid": "SOE-27","image": "./cards/SOE/27.jpg","deck": "A"}
-,{"name": "Dark Magician","frame": "Monster","types": "Monster Spellcaster","set": "01 - Seal of Exodia","cardid": "SOE-28","image": "./cards/SOE/28.jpg","deck": "A"}
-,{"name": "Heart of the Cards","frame": "Rule","types": "Rule Symbol","set": "01 - Seal of Exodia","cardid": "SOE-29","image": "./cards/SOE/29.jpg","deck": "B"}
-,{"name": "Head of the Sealed One","frame": "Divine Monster","types": "Divine Monster Spellcaster Sealed Palace God (Hierarchy 1)","set": "01 - Seal of Exodia","cardid": "SOE-30","image": "./cards/SOE/30.jpg","deck": "A"}
-,{"name": "Right Leg of the Sealed One","frame": "Divine Monster","types": "Divine Monster Spellcaster Sealed Palace God (Hierarchy 1)","set": "01 - Seal of Exodia","cardid": "SOE-31","image": "./cards/SOE/31.jpg","deck": "A"}
-,{"name": "Left Leg of the Sealed One","frame": "Divine Monster","types": "Divine Monster Spellcaster Sealed Palace God (Hierarchy 1)","set": "01 - Seal of Exodia","cardid": "SOE-32","image": "./cards/SOE/32.jpg","deck": "A"}
-,{"name": "Right Arm of the Sealed One","frame": "Divine Monster","types": "Divine Monster Spellcaster Sealed Palace God (Hierarchy 1)","set": "01 - Seal of Exodia","cardid": "SOE-33","image": "./cards/SOE/33.jpg","deck": "A"}
-,{"name": "Left Arm of the Sealed One","frame": "Divine Monster","types": "Divine Monster Spellcaster Sealed Palace God (Hierarchy 1)","set": "01 - Seal of Exodia","cardid": "SOE-34","image": "./cards/SOE/34.jpg","deck": "A"}
-,{"name": "Palace God Pantheon","frame": "Rule","types": "Rule","set": "01 - Seal of Exodia","cardid": "SOE-35","image": "./cards/SOE/35.jpg","deck": "B"}
-,{"name": "Exodia","frame": "Divine Fusion Monster","types": "Divine Fusion Monster Spellcaster Warrior Palace God (Hierarchy 7)","set": "01 - Seal of Exodia","cardid": "SOE-36","image": "./cards/SOE/36.jpg","deck": "B"}
-,{"name": "Anzu","frame": "Rule","types": "Rule Duelist Setup","set": "01 - Seal of Exodia","cardid": "SOE-37","image": "./cards/SOE/37.jpg","deck": "B"}
-,{"name": "Jonouchi","frame": "Rule","types": "Rule Duelist Setup","set": "01 - Seal of Exodia","cardid": "SOE-38","image": "./cards/SOE/38.jpg","deck": "B"}
-,{"name": "Cavern Devil - Ogre Rock","frame": "Monster","types": "Monster Elemental","set": "01 - Seal of Exodia","cardid": "SOE-39","image": "./cards/SOE/39.jpg","deck": "A"}
-,{"name": "Happy Lover","frame": "Monster","types": "Monster Angel Flying","set": "01 - Seal of Exodia","cardid": "SOE-40","image": "./cards/SOE/40.jpg","deck": "A"}
-,{"name": "Breath of God","frame": "Spell","types": "Spell","set": "01 - Seal of Exodia","cardid": "SOE-41","image": "./cards/SOE/41.jpg","deck": "A"}
-,{"name": "Haga","frame": "Rule","types": "Rule Duelist Setup","set": "01 - Seal of Exodia","cardid": "SOE-42","image": "./cards/SOE/42.jpg","deck": "B"}
-,{"name": "Ryuzaki","frame": "Rule","types": "Rule Duelist Setup","set": "01 - Seal of Exodia","cardid": "SOE-43","image": "./cards/SOE/43.jpg","deck": "B"}
-,{"name": "Two-Headed King Rex","frame": "Monster","types": "Monster Dinosaur Flying","set": "01 - Seal of Exodia","cardid": "SOE-44","image": "./cards/SOE/44.jpg","deck": "A"}
-,{"name": "Basic Insect","frame": "Monster","types": "Monster Insect","set": "01 - Seal of Exodia","cardid": "SOE-45","image": "./cards/SOE/45.jpg","deck": "A"}
-,{"name": "Messiah's Antlion Larva","frame": "Trap","types": "Trap Equip","set": "01 - Seal of Exodia","cardid": "SOE-46","image": "./cards/SOE/46.jpg","deck": "A"}
-,{"name": "Insect Armor with Laser Cannon LV. 5","frame": "Spell","types": "Spell Equip","set": "01 - Seal of Exodia","cardid": "SOE-47","image": "./cards/SOE/47.jpg","deck": "A"}
-,{"name": "Yugi","frame": "Rule","types": "Rule Duelist Setup","set": "01 - Seal of Exodia","cardid": "SOE-48","image": "./cards/SOE/48.jpg","deck": "B"}
-,{"name": "Pegasus","frame": "Rule","types": "Rule Duelist Setup","set": "01 - Seal of Exodia","cardid": "SOE-49","image": "./cards/SOE/49.jpg","deck": "B"}
-,{"name": "Millennium Eye","frame": "Rule","types": "Rule Symbol Millennium Item","set": "01 - Seal of Exodia","cardid": "SOE-50","image": "./cards/SOE/50.jpg","deck": "B"}
-,{"name": "Devil Dragon","frame": "Monster","types": "Monster Demon Dragon Fireblast Flying","set": "01 - Seal of Exodia","cardid": "SOE-51","image": "./cards/SOE/51.jpg","deck": "A"}
-,{"name": "Pot of Dragon-Tribe Sealing","frame": "Trap Monster","types": "Trap Monster Demon","set": "01 - Seal of Exodia","cardid": "SOE-52","image": "./cards/SOE/52.jpg","deck": "A"}
-,{"name": "Silver Fang","frame": "Monster","types": "Monster Beast","set": "01 - Seal of Exodia","cardid": "SOE-53","image": "./cards/SOE/53.jpg","deck": "A"}
-,{"name": "Jar Djinn","frame": "Monster","types": "Monster Spellcaster","set": "01 - Seal of Exodia","cardid": "SOE-54","image": "./cards/SOE/54.jpg","deck": "A"}
-,{"name": "Sun Shower","frame": "Trap","types": "Trap","set": "01 - Seal of Exodia","cardid": "SOE-55","image": "./cards/SOE/55.jpg","deck": "A"}
-,{"name": "Undead Warrior","frame": "Monster","types": "Monster Undead Warrior","set": "01 - Seal of Exodia","cardid": "SOE-56","image": "./cards/SOE/56.jpg","deck": "A"}
-,{"name": "Book of Secret Arts","frame": "Spell","types": "Spell Equip","set": "01 - Seal of Exodia","cardid": "SOE-57","image": "./cards/SOE/57.jpg","deck": "A"}
-,{"name": "Illusionist Faceless Mage","frame": "Monster","types": "Monster Illusion Spellcaster","set": "01 - Seal of Exodia","cardid": "SOE-58","image": "./cards/SOE/58.jpg","deck": "A"}
-,{"name": "Eye of Illusion","frame": "Spell","types": "Spell Equip","set": "01 - Seal of Exodia","cardid": "SOE-59","image": "./cards/SOE/59.jpg","deck": "A"}
-,{"name": "Power of Hypnosis","frame": "Rule","types": "Rule","set": "01 - Seal of Exodia","cardid": "SOE-60","image": "./cards/SOE/60.jpg","deck": "B"}
-,{"name": "Elf Swordsman","frame": "Monster","types": "Monster Warrior","set": "01 - Seal of Exodia","cardid": "SOE-61","image": "./cards/SOE/61.jpg","deck": "A"}
-,{"name": "Demon's Summon","frame": "Monster","types": "Monster Demon Thunderblast","set": "01 - Seal of Exodia","cardid": "SOE-62","image": "./cards/SOE/62.jpg","deck": "A"}
-
-,{"name": "Duelist Kingdom","frame": "Emblem","types": "Emblem (This card cannot be used in a Duel)","set": "02 - The Star Chasers","cardid": "TSC-01","image": "./cards/TSC/01.jpg","deck": "A"}
-,{"name": "Set Sail for the Kingdom","frame": "Emblem","types": "Emblem (This card cannot be used in a Duel)","set": "02 - The Star Chasers","cardid": "TSC-02","image": "./cards/TSC/02.jpg","deck": "A"}
-,{"name": "Duelist's Glove","frame": "Emblem","types": "Emblem (This card cannot be used in a Duel)","set": "02 - The Star Chasers","cardid": "TSC-03","image": "./cards/TSC/03.jpg","deck": "A"}
-,{"name": "Glory of the King's Right Hand","frame": "Emblem","types": "Emblem (This card cannot be used in a Duel)","set": "02 - The Star Chasers","cardid": "TSC-04","image": "./cards/TSC/04.jpg","deck": "A"}
-,{"name": "Glory of the King's Left Hand","frame": "Emblem","types": "Emblem (This card cannot be used in a Duel)","set": "02 - The Star Chasers","cardid": "TSC-05","image": "./cards/TSC/05.jpg","deck": "A"}
-,{"name": "Yugi","frame": "Rule","types": "Rule Duelist Setup","set": "02 - The Star Chasers","cardid": "TSC-06","image": "./cards/TSC/06.jpg","deck": "B"}
-,{"name": "Haga","frame": "Rule","types": "Rule Duelist Setup","set": "02 - The Star Chasers","cardid": "TSC-07","image": "./cards/TSC/07.jpg","deck": "B"}
-,{"name": "Forest Glade","frame": "Rule","types": "Rule Field Setup Matched (Red Side)","set": "02 - The Star Chasers","cardid": "TSC-08","image": "./cards/TSC/08.jpg","deck": "B"}
-,{"name": "Forest Glade","frame": "Rule","types": "Rule Field Setup Matched (Blue Side)","set": "02 - The Star Chasers","cardid": "TSC-09","image": "./cards/TSC/09.jpg","deck": "B"}
-,{"name": "Killer Bee","frame": "Monster","types": "Monster Insect Flying","set": "02 - The Star Chasers","cardid": "TSC-10","image": "./cards/TSC/10.jpg","deck": "A"}
-,{"name": "Mammoth Graveyard","frame": "Monster","types": "Monster Undead Dinosaur","set": "02 - The Star Chasers","cardid": "TSC-11","image": "./cards/TSC/11.jpg","deck": "A"}
-,{"name": "Hercules Beetle","frame": "Monster","types": "Monster Insect","set": "02 - The Star Chasers","cardid": "TSC-12","image": "./cards/TSC/12.jpg","deck": "A"}
-,{"name": "Gremlin","frame": "Monster","types": "Monster Demon","set": "02 - The Star Chasers","cardid": "TSC-13","image": "./cards/TSC/13.jpg","deck": "A"}
-,{"name": "Horn of the Unicorn","frame": "Spell","types": "Spell Equip","set": "02 - The Star Chasers","cardid": "TSC-14","image": "./cards/TSC/14.jpg","deck": "A"}
-,{"name": "Power Booster LV. 2","frame": "Spell","types": "Spell Equip","set": "02 - The Star Chasers","cardid": "TSC-15","image": "./cards/TSC/15.jpg","deck": "A"}
-,{"name": "LV. 3 Laser Cannon","frame": "Spell","types": "Spell Equip","set": "02 - The Star Chasers","cardid": "TSC-16","image": "./cards/TSC/16.jpg","deck": "A"}
-,{"name": "Griffore","frame": "Monster","types": "Monster Beast","set": "02 - The Star Chasers","cardid": "TSC-17","image": "./cards/TSC/17.jpg","deck": "A"}
-,{"name": "Roachball","frame": "Monster","types": "Monster Insect","set": "02 - The Star Chasers","cardid": "TSC-18","image": "./cards/TSC/18.jpg","deck": "A"}
-,{"name": "Big Ant","frame": "Monster","types": "Monster Insect","set": "02 - The Star Chasers","cardid": "TSC-19","image": "./cards/TSC/19.jpg","deck": "A"}
-,{"name": "Sickle Killer","frame": "Monster","types": "Monster Insect","set": "02 - The Star Chasers","cardid": "TSC-20","image": "./cards/TSC/20.jpg","deck": "A"}
-,{"name": "Holy Barrier - Mirror Force","frame": "Trap","types": "Trap","set": "02 - The Star Chasers","cardid": "TSC-21","image": "./cards/TSC/21.jpg","deck": "A"}
-,{"name": "Larva Moth","frame": "Monster","types": "Monster Insect","set": "02 - The Star Chasers","cardid": "TSC-22","image": "./cards/TSC/22.jpg","deck": "A"}
-,{"name": "Monster Recovery","frame": "Spell","types": "Spell","set": "02 - The Star Chasers","cardid": "TSC-23","image": "./cards/TSC/23.jpg","deck": "A"}
-,{"name": "Kuriboh","frame": "Monster","types": "Monster Demon","set": "02 - The Star Chasers","cardid": "TSC-24","image": "./cards/TSC/24.jpg","deck": "A"}
-,{"name": "Parasite Worm","frame": "Trap Monster","types": "Trap Monster Insect","set": "02 - The Star Chasers","cardid": "TSC-25","image": "./cards/TSC/25.jpg","deck": "A"}
-,{"name": "Cocoon of Evolution","frame": "Spell Monster","types": "Spell Monster Insect","set": "02 - The Star Chasers","cardid": "TSC-26","image": "./cards/TSC/26.jpg","deck": "A"}
-,{"name": "Curse of Dragon","frame": "Monster","types": "Monster Dragon Fireblast Flying","set": "02 - The Star Chasers","cardid": "TSC-27","image": "./cards/TSC/27.jpg","deck": "A"}
-,{"name": "Burning Land","frame": "Spell","types": "Spell","set": "02 - The Star Chasers","cardid": "TSC-28","image": "./cards/TSC/28.jpg","deck": "A"}
-,{"name": "Great Moth","frame": "Alter Monster","types": "Alter Monster Timeshifted Insect","set": "02 - The Star Chasers","cardid": "TSC-29","image": "./cards/TSC/29.jpg","deck": "B"}
-,{"name": "Corrosive Poison","frame": "Rule","types": "Rule","set": "02 - The Star Chasers","cardid": "TSC-30","image": "./cards/TSC/30.jpg","deck": "B"}
-,{"name": "Fusion","frame": "Spell","types": "Spell","set": "02 - The Star Chasers","cardid": "TSC-31","image": "./cards/TSC/31.jpg","deck": "A"}
-,{"name": "Gaia the Dragon Knight","frame": "Fusion Monster","types": "Fusion Monster Dragon Warrior Flying","set": "02 - The Star Chasers","cardid": "TSC-32","image": "./cards/TSC/32.jpg","deck": "B"}
-,{"name": "Magical Drizzle","frame": "Spell","types": "Spell","set": "02 - The Star Chasers","cardid": "TSC-33","image": "./cards/TSC/33.jpg","deck": "A"}
-,{"name": "Electric Current","frame": "Rule","types": "Rule","set": "02 - The Star Chasers","cardid": "TSC-34","image": "./cards/TSC/34.jpg","deck": "B"}
-,{"name": "Barren Valley","frame": "Rule","types": "Rule Field Setup Matched (Red Side)","set": "02 - The Star Chasers","cardid": "TSC-35","image": "./cards/TSC/35.jpg","deck": "B"}
-,{"name": "Barren Valley","frame": "Rule","types": "Rule Field Setup Matched (Blue Side)","set": "02 - The Star Chasers","cardid": "TSC-36","image": "./cards/TSC/36.jpg","deck": "B"}
-,{"name": "Jonouchi","frame": "Rule","types": "Rule Duelist Setup","set": "02 - The Star Chasers","cardid": "TSC-37","image": "./cards/TSC/37.jpg","deck": "B"}
-,{"name": "Mai","frame": "Rule","types": "Rule Duelist Setup","set": "02 - The Star Chasers","cardid": "TSC-38","image": "./cards/TSC/38.jpg","deck": "B"}
-,{"name": "Foot of the Mountain","frame": "Rule","types": "Rule Field Setup Matched (Red Side)","set": "02 - The Star Chasers","cardid": "TSC-39","image": "./cards/TSC/39.jpg","deck": "B"}
-,{"name": "Foot of the Mountain","frame": "Rule","types": "Rule Field Setup Matched (Blue Side)","set": "02 - The Star Chasers","cardid": "TSC-40","image": "./cards/TSC/40.jpg","deck": "B"}
-,{"name": "Masaki the Legendary Swordsman","frame": "Monster","types": "Monster Warrior","set": "02 - The Star Chasers","cardid": "TSC-41","image": "./cards/TSC/41.jpg","deck": "A"}
-,{"name": "Harpie Lady","frame": "Monster","types": "Monster Avian Flying","set": "02 - The Star Chasers","cardid": "TSC-42","image": "./cards/TSC/42.jpg","deck": "A"}
-,{"name": "Flying Advantage","frame": "Rule","types": "Rule","set": "02 - The Star Chasers","cardid": "TSC-43","image": "./cards/TSC/43.jpg","deck": "B"}
-,{"name": "Tiger Axe","frame": "Monster","types": "Monster Beast Warrior","set": "02 - The Star Chasers","cardid": "TSC-44","image": "./cards/TSC/44.jpg","deck": "A"}
-,{"name": "Cyber Bondage","frame": "Spell","types": "Spell Equip","set": "02 - The Star Chasers","cardid": "TSC-45","image": "./cards/TSC/45.jpg","deck": "A"}
-,{"name": "Demon Hunter","frame": "Monster","types": "Monster Warrior","set": "02 - The Star Chasers","cardid": "TSC-46","image": "./cards/TSC/46.jpg","deck": "A"}
-,{"name": "Baby Dragon","frame": "Monster","types": "Monster Dragon Flying","set": "02 - The Star Chasers","cardid": "TSC-47","image": "./cards/TSC/47.jpg","deck": "A"}
-,{"name": "Kaleidoscope - Elegant Doppelgangers","frame": "Spell","types": "Spell","set": "02 - The Star Chasers","cardid": "TSC-48","image": "./cards/TSC/48.jpg","deck": "A"}
-,{"name": "Time Wizard","frame": "Spell Monster","types": "Spell Monster Spellcaster","set": "02 - The Star Chasers","cardid": "TSC-49","image": "./cards/TSC/49.jpg","deck": "A"}
-,{"name": "Thousand Dragon","frame": "Alter Monster","types": "Alter Monster Timeshifted Dragon Fireblast Flying","set": "02 - The Star Chasers","cardid": "TSC-50","image": "./cards/TSC/50.jpg","deck": "B"}
-,{"name": "Decrepit Harpie Lady","frame": "Alter Monster","types": "Alter Monster Timeshifted Avian Flying","set": "02 - The Star Chasers","cardid": "TSC-51","image": "./cards/TSC/51.jpg","deck": "B"}
-
-,{"name": "Yugi","frame": "Rule","types": "Rule Duelist Setup","set": "03 - Changing Tides","cardid": "CHT-01","image": "./cards/CHT/01.jpg","deck": "B"}
-,{"name": "Kajiki","frame": "Rule","types": "Rule Duelist Setup","set": "03 - Changing Tides","cardid": "CHT-02","image": "./cards/CHT/02.jpg","deck": "B"}
-,{"name": "Ocean Cliff","frame": "Rule","types": "Rule Field Setup Matched (Red Side)","set": "03 - Changing Tides","cardid": "CHT-03","image": "./cards/CHT/03.jpg","deck": "B"}
-,{"name": "Ocean Cliff","frame": "Rule","types": "Rule Field Setup Matched (Blue Side)","set": "03 - Changing Tides","cardid": "CHT-04","image": "./cards/CHT/04.jpg","deck": "B"}
-,{"name": "Devil Kraken","frame": "Monster","types": "Monster Aquatic","set": "03 - Changing Tides","cardid": "CHT-05","image": "./cards/CHT/05.jpg","deck": "A"}
-,{"name": "Jellyfish","frame": "Monster","types": "Monster Aquatic","set": "03 - Changing Tides","cardid": "CHT-06","image": "./cards/CHT/06.jpg","deck": "A"}
-,{"name": "Full Moon","frame": "Spell","types": "Spell Continuous","set": "03 - Changing Tides","cardid": "CHT-07","image": "./cards/CHT/07.jpg","deck": "A"}
-,{"name": "Leviathan","frame": "Monster","types": "Monster Aquatic Dragon","set": "03 - Changing Tides","cardid": "CHT-08","image": "./cards/CHT/08.jpg","deck": "A"}
-,{"name": "Giant Soldier of Stone","frame": "Monster","types": "Monster Elemental Warrior","set": "03 - Changing Tides","cardid": "CHT-09","image": "./cards/CHT/09.jpg","deck": "A"}
-,{"name": "Megalodon","frame": "Monster","types": "Monster Aquatic","set": "03 - Changing Tides","cardid": "CHT-10","image": "./cards/CHT/10.jpg","deck": "A"}
-,{"name": "Mokuba","frame": "Rule","types": "Rule Duelist Setup","set": "03 - Changing Tides","cardid": "CHT-11","image": "./cards/CHT/11.jpg","deck": "B"}
-,{"name": "Yugi","frame": "Rule","types": "Rule Duelist Setup","set": "03 - Changing Tides","cardid": "CHT-12","image": "./cards/CHT/12.jpg","deck": "B"}
-,{"name": "The Surrounding Forest","frame": "Rule","types": "Rule Field Setup Matched (Red Side)","set": "03 - Changing Tides","cardid": "CHT-13","image": "./cards/CHT/13.jpg","deck": "B"}
-,{"name": "The Surrounding Forest","frame": "Rule","types": "Rule Field Setup Matched (Blue Side)","set": "03 - Changing Tides","cardid": "CHT-14","image": "./cards/CHT/14.jpg","deck": "B"}
-,{"name": "Flesh-Eating Plant","frame": "Monster","types": "Monster Plant","set": "03 - Changing Tides","cardid": "CHT-15","image": "./cards/CHT/15.jpg","deck": "A"}
-,{"name": "Krokodilius","frame": "Monster","types": "Monster Reptillian Support","set": "03 - Changing Tides","cardid": "CHT-16","image": "./cards/CHT/16.jpg","deck": "A"}
-,{"name": "Yugi","frame": "Rule","types": "Rule Duelist Setup","set": "03 - Changing Tides","cardid": "CHT-17","image": "./cards/CHT/17.jpg","deck": "B"}
-,{"name": "Impersonator of Death","frame": "Rule","types": "Rule Duelist Setup","set": "03 - Changing Tides","cardid": "CHT-18","image": "./cards/CHT/18.jpg","deck": "B"}
-,{"name": "Kaiba","frame": "Rule","types": "Rule Duelist Setup","set": "03 - Changing Tides","cardid": "CHT-19","image": "./cards/CHT/19.jpg","deck": "B"}
-,{"name": "Defense Seal","frame": "Spell Trap","types": "Spell Trap","set": "03 - Changing Tides","cardid": "CHT-20","image": "./cards/CHT/20.jpg","deck": "A"}
-,{"name": "Magical Silk Hats","frame": "Spell","types": "Spell Persist (5 of your End Phases)","set": "03 - Changing Tides","cardid": "CHT-21","image": "./cards/CHT/21.jpg","deck": "A"}
-,{"name": "Silk Hat Token","frame": "Token Monster","types": "Token Monster Elemental","set": "03 - Changing Tides","cardid": "CHT-22","image": "./cards/CHT/22.jpg","deck": "A"}
-,{"name": "Curse of the Hexagram","frame": "Trap","types": "Trap Equip","set": "03 - Changing Tides","cardid": "CHT-23","image": "./cards/CHT/23.jpg","deck": "A"}
-,{"name": "Grappler","frame": "Monster","types": "Monster Reptillian","set": "03 - Changing Tides","cardid": "CHT-24","image": "./cards/CHT/24.jpg","deck": "A"}
-,{"name": "Kentauros","frame": "Monster","types": "Monster Beast","set": "03 - Changing Tides","cardid": "CHT-25","image": "./cards/CHT/25.jpg","deck": "A"}
-,{"name": "Holy Elf","frame": "Monster","types": "Monster Spellcaster Blessed","set": "03 - Changing Tides","cardid": "CHT-26","image": "./cards/CHT/26.jpg","deck": "A"}
-,{"name": "Attack Nullification","frame": "Spell","types": "Spell","set": "03 - Changing Tides","cardid": "CHT-27","image": "./cards/CHT/27.jpg","deck": "A"}
-,{"name": "Resurrection of the Dead","frame": "Spell","types": "Spell","set": "03 - Changing Tides","cardid": "CHT-28","image": "./cards/CHT/28.jpg","deck": "A"}
-,{"name": "Bond with Blue-Eyes","frame": "Rule","types": "Rule Symbol","set": "03 - Changing Tides","cardid": "CHT-29","image": "./cards/CHT/29.jpg","deck": "B"}
-,{"name": "Mai","frame": "Rule","types": "Rule Duelist Setup","set": "03 - Changing Tides","cardid": "CHT-30","image": "./cards/CHT/30.jpg","deck": "B"}
-,{"name": "The Forest Line","frame": "Rule","types": "Rule Field Setup Matched (Red Side)","set": "03 - Changing Tides","cardid": "CHT-31","image": "./cards/CHT/31.jpg","deck": "B"}
-,{"name": "The Forest Line","frame": "Rule","types": "Rule Field Setup Matched (Blue Side)","set": "03 - Changing Tides","cardid": "CHT-32","image": "./cards/CHT/32.jpg","deck": "B"}
-,{"name": "Honda","frame": "Rule","types": "Rule Duelist Setup","set": "03 - Changing Tides","cardid": "CHT-33","image": "./cards/CHT/33.jpg","deck": "B"}
-,{"name": "Ryuzaki","frame": "Rule","types": "Rule Duelist Setup","set": "03 - Changing Tides","cardid": "CHT-34","image": "./cards/CHT/34.jpg","deck": "B"}
-,{"name": "Jonouchi","frame": "Rule","types": "Rule Duelist Setup","set": "03 - Changing Tides","cardid": "CHT-35","image": "./cards/CHT/35.jpg","deck": "B"}
-,{"name": "Grassland's End","frame": "Rule","types": "Rule Field Setup Matched (Red Side)","set": "03 - Changing Tides","cardid": "CHT-36","image": "./cards/CHT/36.jpg","deck": "B"}
-,{"name": "Grassland's End","frame": "Rule","types": "Rule Field Setup Matched (Blue Side)","set": "03 - Changing Tides","cardid": "CHT-37","image": "./cards/CHT/37.jpg","deck": "B"}
-,{"name": "Leogun","frame": "Monster","types": "Monster Beast","set": "03 - Changing Tides","cardid": "CHT-38","image": "./cards/CHT/38.jpg","deck": "A"}
-,{"name": "Axe Raider","frame": "Monster","types": "Monster Warrior","set": "03 - Changing Tides","cardid": "CHT-39","image": "./cards/CHT/39.jpg","deck": "A"}
-,{"name": "Swordsaurus","frame": "Monster","types": "Monster Dinosaur","set": "03 - Changing Tides","cardid": "CHT-40","image": "./cards/CHT/40.jpg","deck": "A"}
-,{"name": "Megasaurus","frame": "Monster","types": "Monster Dinosaur","set": "03 - Changing Tides","cardid": "CHT-41","image": "./cards/CHT/41.jpg","deck": "A"}
-,{"name": "Flame Swordsman","frame": "Monster","types": "Monster Warrior Fireblast","set": "03 - Changing Tides","cardid": "CHT-42","image": "./cards/CHT/42.jpg","deck": "A"}
-,{"name": "Burning Fighting Spirit","frame": "Rule","types": "Rule","set": "03 - Changing Tides","cardid": "CHT-43","image": "./cards/CHT/43.jpg","deck": "B"}
-,{"name": "Corpse-Devouring Dinosaur","frame": "Monster","types": "Monster Dinosaur","set": "03 - Changing Tides","cardid": "CHT-44","image": "./cards/CHT/44.jpg","deck": "A"}
-,{"name": "Wild Raptor","frame": "Monster","types": "Monster Dinosaur","set": "03 - Changing Tides","cardid": "CHT-45","image": "./cards/CHT/45.jpg","deck": "A"}
-,{"name": "Barbarian #1","frame": "Monster","types": "Monster Beast Warrior","set": "03 - Changing Tides","cardid": "CHT-46","image": "./cards/CHT/46.jpg","deck": "A"}
-,{"name": "Barbarian #2","frame": "Monster","types": "Monster Beast Warrior","set": "03 - Changing Tides","cardid": "CHT-47","image": "./cards/CHT/47.jpg","deck": "A"}
-,{"name": "Evil Night Dragon","frame": "Monster","types": "Monster Dragon Flying","set": "03 - Changing Tides","cardid": "CHT-48","image": "./cards/CHT/48.jpg","deck": "A"}
-,{"name": "Trakodon","frame": "Monster","types": "Monster Dinosaur","set": "03 - Changing Tides","cardid": "CHT-49","image": "./cards/CHT/49.jpg","deck": "A"}
-,{"name": "Red-Eyes Black Dragon","frame": "Monster","types": "Monster Dragon Fireblast Flying","set": "03 - Changing Tides","cardid": "CHT-50","image": "./cards/CHT/50.jpg","deck": "A"}
-,{"name": "Claw of the Dark Dragon Tribe","frame": "Spell","types": "Spell Equip","set": "03 - Changing Tides","cardid": "CHT-51","image": "./cards/CHT/51.jpg","deck": "A"}
-
-,{"name": "Bakura","frame": "Rule","types": "Rule Duelist Setup","set": "04 - Nightfall Warriors","cardid": "NFW-01","image": "./cards/NFW/01.jpg","deck": "B"}
-,{"name": "The Other Yugi","frame": "Rule","types": "Rule Duelist Setup","set": "04 - Nightfall Warriors","cardid": "NFW-02","image": "./cards/NFW/02.jpg","deck": "B"}
-,{"name": "Yugi","frame": "Rule","types": "Rule Duelist Setup","set": "04 - Nightfall Warriors","cardid": "NFW-03","image": "./cards/NFW/03.jpg","deck": "B"}
-,{"name": "Jonouchi","frame": "Rule","types": "Rule Duelist Setup","set": "04 - Nightfall Warriors","cardid": "NFW-04","image": "./cards/NFW/04.jpg","deck": "B"}
-,{"name": "Anzu","frame": "Rule","types": "Rule Duelist Setup","set": "04 - Nightfall Warriors","cardid": "NFW-05","image": "./cards/NFW/05.jpg","deck": "B"}
-,{"name": "Honda","frame": "Rule","types": "Rule Duelist Setup","set": "04 - Nightfall Warriors","cardid": "NFW-06","image": "./cards/NFW/06.jpg","deck": "B"}
-,{"name": "Commander","frame": "Monster","types": "Monster Machine Warrior","set": "04 - Nightfall Warriors","cardid": "NFW-07","image": "./cards/NFW/07.jpg","deck": "A"}
-,{"name": "Honda, the Commander","frame": "Integration Monster","types": "Integration Monster Machine Warrior","set": "04 - Nightfall Warriors","cardid": "NFW-08","image": "./cards/NFW/08.jpg","deck": "B"}
-,{"name": "White Thief","frame": "Monster","types": "Monster Spellcaster","set": "04 - Nightfall Warriors","cardid": "NFW-09","image": "./cards/NFW/09.jpg","deck": "A"}
-,{"name": "Reaper of the Cards","frame": "Monster","types": "Monster Demon Flying","set": "04 - Nightfall Warriors","cardid": "NFW-10","image": "./cards/NFW/10.jpg","deck": "A"}
-,{"name": "Babylon","frame": "Monster","types": "Monster Demon","set": "04 - Nightfall Warriors","cardid": "NFW-11","image": "./cards/NFW/11.jpg","deck": "A"}
-,{"name": "Jonouchi, the Flame Swordsman","frame": "Integration Monster","types": "Integration Monster Warrior Fireblast","set": "04 - Nightfall Warriors","cardid": "NFW-12","image": "./cards/NFW/12.jpg","deck": "B"}
-,{"name": "Yugi, the Dark Magician","frame": "Integration Monster","types": "Integration Monster Spellcaster","set": "04 - Nightfall Warriors","cardid": "NFW-13","image": "./cards/NFW/13.jpg","deck": "B"}
-,{"name": "Metamor Pot","frame": "Monster","types": "Monster Demon","set": "04 - Nightfall Warriors","cardid": "NFW-14","image": "./cards/NFW/14.jpg","deck": "A"}
-,{"name": "Saint Magician","frame": "Monster","types": "Monster Spellcaster Blessed","set": "04 - Nightfall Warriors","cardid": "NFW-15","image": "./cards/NFW/15.jpg","deck": "A"}
-,{"name": "Anzu, the Saint Magician","frame": "Integration Monster","types": "Integration Monster Spellcaster Blessed","set": "04 - Nightfall Warriors","cardid": "NFW-16","image": "./cards/NFW/16.jpg","deck": "B"}
-,{"name": "Anthrosaurus","frame": "Monster","types": "Monster Dinosaur Support","set": "04 - Nightfall Warriors","cardid": "NFW-17","image": "./cards/NFW/17.jpg","deck": "A"}
-,{"name": "You Reap what you Sow","frame": "Trap","types": "Trap","set": "04 - Nightfall Warriors","cardid": "NFW-18","image": "./cards/NFW/18.jpg","deck": "A"}
-,{"name": "Electric Lizard","frame": "Monster","types": "Monster Demon Thunderblast","set": "04 - Nightfall Warriors","cardid": "NFW-19","image": "./cards/NFW/19.jpg","deck": "A"}
-,{"name": "Flesh-Eating Insect","frame": "Monster","types": "Monster Insect","set": "04 - Nightfall Warriors","cardid": "NFW-20","image": "./cards/NFW/20.jpg","deck": "A"}
-,{"name": "Horn of Ascension","frame": "Trap","types": "Trap","set": "04 - Nightfall Warriors","cardid": "NFW-21","image": "./cards/NFW/21.jpg","deck": "A"}
-,{"name": "High Priestess","frame": "Monster","types": "Monster Spellcaster Blessed","set": "04 - Nightfall Warriors","cardid": "NFW-22","image": "./cards/NFW/22.jpg","deck": "A"}
-,{"name": "Change of Heart","frame": "Spell","types": "Spell","set": "04 - Nightfall Warriors","cardid": "NFW-23","image": "./cards/NFW/23.jpg","deck": "A"}
-,{"name": "Bakura, the Change of Heart","frame": "Integration Monster","types": "Integration Monster Angel Demon","set": "04 - Nightfall Warriors","cardid": "NFW-24","image": "./cards/NFW/24.jpg","deck": "B"}
-,{"name": "Mai","frame": "Rule","types": "Rule Duelist Setup","set": "04 - Nightfall Warriors","cardid": "NFW-25","image": "./cards/NFW/25.jpg","deck": "B"}
-,{"name": "Yugi","frame": "Rule","types": "Rule Duelist Setup","set": "04 - Nightfall Warriors","cardid": "NFW-26","image": "./cards/NFW/26.jpg","deck": "B"}
-,{"name": "Panik","frame": "Rule","types": "Rule Duelist Setup","set": "04 - Nightfall Warriors","cardid": "NFW-27","image": "./cards/NFW/27.jpg","deck": "B"}
-,{"name": "Black Forest Lake","frame": "Rule","types": "Rule Field Setup Matched (Red Side)","set": "04 - Nightfall Warriors","cardid": "NFW-28","image": "./cards/NFW/28.jpg","deck": "B"}
-,{"name": "Black Forest Lake","frame": "Rule","types": "Rule Field Setup Matched (Blue Side)","set": "04 - Nightfall Warriors","cardid": "NFW-29","image": "./cards/NFW/29.jpg","deck": "B"}
-,{"name": "Castle of Darkening","frame": "Monster","types": "Monster Demon","set": "04 - Nightfall Warriors","cardid": "NFW-30","image": "./cards/NFW/30.jpg","deck": "A"}
-,{"name": "Flotation Ring","frame": "Spell","types": "Spell Equip","set": "04 - Nightfall Warriors","cardid": "NFW-31","image": "./cards/NFW/31.jpg","deck": "A"}
-,{"name": "Barox","frame": "Monster","types": "Monster Beast Demon Flying","set": "04 - Nightfall Warriors","cardid": "NFW-32","image": "./cards/NFW/32.jpg","deck": "A"}
-,{"name": "Dark Chimera","frame": "Monster","types": "Monster Demon","set": "04 - Nightfall Warriors","cardid": "NFW-33","image": "./cards/NFW/33.jpg","deck": "A"}
-,{"name": "Supreme King of the Dark Demon World","frame": "Monster","types": "Monster Demon","set": "04 - Nightfall Warriors","cardid": "NFW-34","image": "./cards/NFW/34.jpg","deck": "A"}
-,{"name": "Sealing Light","frame": "Rule","types": "Rule","set": "04 - Nightfall Warriors","cardid": "NFW-35","image": "./cards/NFW/35.jpg","deck": "B"}
-,{"name": "Chaos Shield","frame": "Spell","types": "Spell Equip","set": "04 - Nightfall Warriors","cardid": "NFW-36","image": "./cards/NFW/36.jpg","deck": "A"}
-,{"name": "Metal Guardian","frame": "Monster","types": "Monster Demon Machine Protector","set": "04 - Nightfall Warriors","cardid": "NFW-37","image": "./cards/NFW/37.jpg","deck": "A"}
-,{"name": "Watchful Protector","frame": "Rule","types": "Rule","set": "04 - Nightfall Warriors","cardid": "NFW-38","image": "./cards/NFW/38.jpg","deck": "B"}
-,{"name": "Catapult Turtle","frame": "Monster","types": "Monster Aquatic Machine","set": "04 - Nightfall Warriors","cardid": "NFW-39","image": "./cards/NFW/39.jpg","deck": "A"}
-,{"name": "Duel Disk System","frame": "Rule","types": "Rule Game Setup","set": "04 - Nightfall Warriors","cardid": "NFW-40","image": "./cards/NFW/40.jpg","deck": "B"}
-,{"name": "Jonouchi","frame": "Rule","types": "Rule Duelist Setup","set": "04 - Nightfall Warriors","cardid": "NFW-41","image": "./cards/NFW/41.jpg","deck": "B"}
-,{"name": "Kaiba","frame": "Rule","types": "Rule Duelist Setup","set": "04 - Nightfall Warriors","cardid": "NFW-42","image": "./cards/NFW/42.jpg","deck": "B"}
-,{"name": "Minotaurus","frame": "Monster","types": "Monster Beast Warrior","set": "04 - Nightfall Warriors","cardid": "NFW-43","image": "./cards/NFW/43.jpg","deck": "A"}
-,{"name": "Armored Lizard","frame": "Monster","types": "Monster Reptillian","set": "04 - Nightfall Warriors","cardid": "NFW-44","image": "./cards/NFW/44.jpg","deck": "A"}
-,{"name": "Minocentaur","frame": "Fusion Monster","types": "Fusion Monster Beast Warrior","set": "04 - Nightfall Warriors","cardid": "NFW-45","image": "./cards/NFW/45.jpg","deck": "B"}
-,{"name": "Garoozis","frame": "Monster","types": "Monster Reptillian Warrior","set": "04 - Nightfall Warriors","cardid": "NFW-46","image": "./cards/NFW/46.jpg","deck": "A"}
-,{"name": "Pegasus","frame": "Rule","types": "Rule Duelist Setup","set": "04 - Nightfall Warriors","cardid": "NFW-47","image": "./cards/NFW/47.jpg","deck": "B"}
-,{"name": "Keith","frame": "Rule","types": "Rule Duelist Setup","set": "04 - Nightfall Warriors","cardid": "NFW-48","image": "./cards/NFW/48.jpg","deck": "B"}
-,{"name": "Garnecia Elefantis","frame": "Monster","types": "Monster Beast Warrior","set": "04 - Nightfall Warriors","cardid": "NFW-49","image": "./cards/NFW/49.jpg","deck": "A"}
-,{"name": "Flying Elephant","frame": "Monster","types": "Monster Beast Flying","set": "04 - Nightfall Warriors","cardid": "NFW-50","image": "./cards/NFW/50.jpg","deck": "A"}
-
-,{"name": "Jonouchi","frame": "Rule","types": "Rule Duelist Setup","set": "05 - Castle Guardians","cardid": "CGU-01","image": "./cards/CGU/01.jpg","deck": "B"}
-,{"name": "Kotsuzuka","frame": "Rule","types": "Rule Duelist Setup","set": "05 - Castle Guardians","cardid": "CGU-02","image": "./cards/CGU/02.jpg","deck": "B"}
-,{"name": "Secret Graveyard","frame": "Rule","types": "Rule Field Setup Matched (Red Side)","set": "05 - Castle Guardians","cardid": "CGU-03","image": "./cards/CGU/03.jpg","deck": "B"}
-,{"name": "Secret Graveyard","frame": "Rule","types": "Rule Field Setup Matched (Blue Side)","set": "05 - Castle Guardians","cardid": "CGU-04","image": "./cards/CGU/04.jpg","deck": "B"}
-,{"name": "Medusa's Ghost","frame": "Monster","types": "Monster Undead","set": "05 - Castle Guardians","cardid": "CGU-05","image": "./cards/CGU/05.jpg","deck": "A"}
-,{"name": "Demon Slayer, the Armored Warrior","frame": "Monster","types": "Monster Warrior","set": "05 - Castle Guardians","cardid": "CGU-06","image": "./cards/CGU/06.jpg","deck": "A"}
-,{"name": "Crawling Dragon","frame": "Monster","types": "Monster Dragon Fireblast","set": "05 - Castle Guardians","cardid": "CGU-07","image": "./cards/CGU/07.jpg","deck": "A"}
-,{"name": "Murder Circus","frame": "Monster","types": "Monster Demon","set": "05 - Castle Guardians","cardid": "CGU-08","image": "./cards/CGU/08.jpg","deck": "A"}
-,{"name": "Call of the Living Dead","frame": "Spell","types": "Spell Continuous","set": "05 - Castle Guardians","cardid": "CGU-09","image": "./cards/CGU/09.jpg","deck": "A"}
-,{"name": "Living Graveyard","frame": "Rule","types": "Rule","set": "05 - Castle Guardians","cardid": "CGU-10","image": "./cards/CGU/10.jpg","deck": "B"}
-,{"name": "Armored Warrior Zombie","frame": "Alter Monster","types": "Alter Monster Zombie Warrior Regeneration","set": "05 - Castle Guardians","cardid": "CGU-11","image": "./cards/CGU/11.jpg","deck": "B"}
-,{"name": "Dragon Zombie","frame": "Alter Monster","types": "Alter Monster Zombie Dragon Regeneration","set": "05 - Castle Guardians","cardid": "CGU-12","image": "./cards/CGU/12.jpg","deck": "B"}
-,{"name": "Murder Circus Zombie","frame": "Alter Monster","types": "Alter Monster Zombie Demon Regeneration","set": "05 - Castle Guardians","cardid": "CGU-13","image": "./cards/CGU/13.jpg","deck": "B"}
-,{"name": "Ghost King - Pumpking","frame": "Monster","types": "Monster Undead","set": "05 - Castle Guardians","cardid": "CGU-14","image": "./cards/CGU/14.jpg","deck": "A"}
-,{"name": "Glassman","frame": "Monster","types": "Monster Warrior","set": "05 - Castle Guardians","cardid": "CGU-15","image": "./cards/CGU/15.jpg","deck": "A"}
-,{"name": "Grappling Warrior Ultimator","frame": "Monster","types": "Monster Warrior","set": "05 - Castle Guardians","cardid": "CGU-16","image": "./cards/CGU/16.jpg","deck": "A"}
-,{"name": "Shield in the Right Hand, Sword in the Left Hand","frame": "Spell","types": "Spell","set": "05 - Castle Guardians","cardid": "CGU-17","image": "./cards/CGU/17.jpg","deck": "A"}
-,{"name": "Yugi","frame": "Rule","types": "Rule Duelist Setup","set": "05 - Castle Guardians","cardid": "CGU-18","image": "./cards/CGU/18.jpg","deck": "B"}
-,{"name": "Jonouchi","frame": "Rule","types": "Rule Duelist Setup","set": "05 - Castle Guardians","cardid": "CGU-19","image": "./cards/CGU/19.jpg","deck": "B"}
-,{"name": "Brother Mei","frame": "Rule","types": "Rule Duelist Setup","set": "05 - Castle Guardians","cardid": "CGU-20","image": "./cards/CGU/20.jpg","deck": "B"}
-,{"name": "Brother Kyu","frame": "Rule","types": "Rule Duelist Setup","set": "05 - Castle Guardians","cardid": "CGU-21","image": "./cards/CGU/21.jpg","deck": "B"}
-,{"name": "Secret Underground Arena","frame": "Rule","types": "Rule Field Setup Matched (Red Side)","set": "05 - Castle Guardians","cardid": "CGU-22","image": "./cards/CGU/22.jpg","deck": "B"}
-,{"name": "Secret Underground Arena","frame": "Rule","types": "Rule Field Setup Matched (Blue Side)","set": "05 - Castle Guardians","cardid": "CGU-23","image": "./cards/CGU/23.jpg","deck": "B"}
-,{"name": "Labyrinth Wall","frame": "Spell Monster","types": "Spell Monster Elemental","set": "05 - Castle Guardians","cardid": "CGU-24","image": "./cards/CGU/24.jpg","deck": "A"}
-,{"name": "First Labyrinth Layout","frame": "Rule","types": "Rule","set": "05 - Castle Guardians","cardid": "CGU-25","image": "./cards/CGU/25.jpg","deck": "B"}
-,{"name": "Shadow Ghoul","frame": "Monster","types": "Monster Undead","set": "05 - Castle Guardians","cardid": "CGU-26","image": "./cards/CGU/26.jpg","deck": "A"}
-,{"name": "Wall Shadow","frame": "Fusion Monster","types": "Fusion Monster Elemental Undead","set": "05 - Castle Guardians","cardid": "CGU-27","image": "./cards/CGU/27.jpg","deck": "B"}
-,{"name": "Landmine Spider","frame": "Trap","types": "Trap","set": "05 - Castle Guardians","cardid": "CGU-28","image": "./cards/CGU/28.jpg","deck": "A"}
-,{"name": "Landmine Spider Token","frame": "Token Monster","types": "Token Monster Insect","set": "05 - Castle Guardians","cardid": "CGU-29","image": "./cards/CGU/29.jpg","deck": "A"}
-,{"name": "Demonic Tank of the Labyrinth","frame": "Monster","types": "Monster Demon Machine","set": "05 - Castle Guardians","cardid": "CGU-30","image": "./cards/CGU/30.jpg","deck": "A"}
-,{"name": "Chain-Attached Boomerang","frame": "Trap","types": "Trap Equip","set": "05 - Castle Guardians","cardid": "CGU-31","image": "./cards/CGU/31.jpg","deck": "A"}
-,{"name": "Labyrinth Change","frame": "Spell","types": "Spell","set": "05 - Castle Guardians","cardid": "CGU-32","image": "./cards/CGU/32.jpg","deck": "A"}
-,{"name": "Second Labyrinth Layout","frame": "Rule","types": "Rule","set": "05 - Castle Guardians","cardid": "CGU-33","image": "./cards/CGU/33.jpg","deck": "B"}
-,{"name": "Dungeon Worm","frame": "Monster","types": "Monster Insect Burrowing","set": "05 - Castle Guardians","cardid": "CGU-34","image": "./cards/CGU/34.jpg","deck": "A"}
-,{"name": "Burrowing Threat","frame": "Rule","types": "Rule","set": "05 - Castle Guardians","cardid": "CGU-35","image": "./cards/CGU/35.jpg","deck": "B"}
-,{"name": "Magic Box of Death","frame": "Spell","types": "Spell","set": "05 - Castle Guardians","cardid": "CGU-36","image": "./cards/CGU/36.jpg","deck": "A"}
-,{"name": "Awakening","frame": "Spell","types": "Spell Equip","set": "05 - Castle Guardians","cardid": "CGU-37","image": "./cards/CGU/37.jpg","deck": "A"}
-,{"name": "Monster Tamer","frame": "Monster","types": "Monster Warrior","set": "05 - Castle Guardians","cardid": "CGU-38","image": "./cards/CGU/38.jpg","deck": "A"}
-,{"name": "Salamandra","frame": "Spell","types": "Spell Equip","set": "05 - Castle Guardians","cardid": "CGU-39","image": "./cards/CGU/39.jpg","deck": "A"}
-,{"name": "Demonic Wind Deity - Hyuga","frame": "Divine Monster","types": "Divine Monster Demon Flying Storm Guardian (Hierarchy 1)","set": "05 - Castle Guardians","cardid": "CGU-40","image": "./cards/CGU/40.jpg","deck": "A"}
-,{"name": "Demonic Thunder Deity - Sanga","frame": "Divine Monster","types": "Divine Monster Demon Thunderblast Storm Guardian (Hierarchy 1)","set": "05 - Castle Guardians","cardid": "CGU-41","image": "./cards/CGU/41.jpg","deck": "A"}
-,{"name": "Demonic Water Deity - Suga","frame": "Divine Monster","types": "Divine Monster Demon Aquatic Storm Guardian (Hierarchy 1)","set": "05 - Castle Guardians","cardid": "CGU-42","image": "./cards/CGU/42.jpg","deck": "A"}
-,{"name": "Gate Guardian","frame": "Divine Fusion Monster","types": "Divine Fusion Monster Demon Protector Storm Guardian (Hierarchy 3)","set": "05 - Castle Guardians","cardid": "CGU-43","image": "./cards/CGU/43.jpg","deck": "B"}
-,{"name": "Storm Guardian Pantheon","frame": "Rule","types": "Rule","set": "05 - Castle Guardians","cardid": "CGU-44","image": "./cards/CGU/44.jpg","deck": "B"}
-,{"name": "Water Rising","frame": "Spell","types": "Spell Persist (until target leaves the field)","set": "05 - Castle Guardians","cardid": "CGU-45","image": "./cards/CGU/45.jpg","deck": "A"}
-,{"name": "Remove Trap","frame": "Spell","types": "Spell","set": "05 - Castle Guardians","cardid": "CGU-46","image": "./cards/CGU/46.jpg","deck": "A"}
-,{"name": "Black Demons Dragon","frame": "Fusion Monster","types": "Fusion Monster Demon Dragon Fireblast Flying","set": "05 - Castle Guardians","cardid": "CGU-47","image": "./cards/CGU/47.jpg","deck": "B"}
-,{"name": "Force","frame": "Spell","types": "Spell","set": "05 - Castle Guardians","cardid": "CGU-48","image": "./cards/CGU/48.jpg","deck": "A"}
-,{"name": "Mimic Illusionist","frame": "Spell Monster","types": "Spell Monster Illusion","set": "05 - Castle Guardians","cardid": "CGU-49","image": "./cards/CGU/49.jpg","deck": "A"}
-,{"name": "Monster Replace","frame": "Spell","types": "Spell","set": "05 - Castle Guardians","cardid": "CGU-50","image": "./cards/CGU/50.jpg","deck": "A"}
-
-,{"name": "Yugi","frame": "Rule","types": "Rule Duelist Setup","set": "06 - Shattered Hope","cardid": "SHH-01","image": "./cards/SHH/01.jpg","deck": "B"}
-,{"name": "Kaiba","frame": "Rule","types": "Rule Duelist Setup","set": "06 - Shattered Hope","cardid": "SHH-02","image": "./cards/SHH/02.jpg","deck": "B"}
-,{"name": "Gargoyle Powered","frame": "Monster","types": "Monster Demon","set": "06 - Shattered Hope","cardid": "SHH-03","image": "./cards/SHH/03.jpg","deck": "A"}
-,{"name": "Magic Lamp","frame": "Trap Monster","types": "Trap Monster Demon","set": "06 - Shattered Hope","cardid": "SHH-04","image": "./cards/SHH/04.jpg","deck": "A"}
-,{"name": "Multiply","frame": "Spell","types": "Spell","set": "06 - Shattered Hope","cardid": "SHH-05","image": "./cards/SHH/05.jpg","deck": "A"}
-,{"name": "Clone Token","frame": "Token Monster","types": "Token Monster Elemental","set": "06 - Shattered Hope","cardid": "SHH-06","image": "./cards/SHH/06.jpg","deck": "A"}
-,{"name": "The Eye of Truth","frame": "Spell","types": "Spell","set": "06 - Shattered Hope","cardid": "SHH-07","image": "./cards/SHH/07.jpg","deck": "A"}
-,{"name": "Sword Stalker of Revenge","frame": "Monster","types": "Monster Demon Warrior","set": "06 - Shattered Hope","cardid": "SHH-08","image": "./cards/SHH/08.jpg","deck": "A"}
-,{"name": "La Jinn the Demonic Spirit of the Lamp","frame": "Monster","types": "Monster Demon","set": "06 - Shattered Hope","cardid": "SHH-09","image": "./cards/SHH/09.jpg","deck": "A"}
-,{"name": "Magic Removal","frame": "Spell","types": "Spell","set": "06 - Shattered Hope","cardid": "SHH-10","image": "./cards/SHH/10.jpg","deck": "A"}
-,{"name": "Deck Destruction Virus of Death","frame": "Trap","types": "Trap Equip","set": "06 - Shattered Hope","cardid": "SHH-11","image": "./cards/SHH/11.jpg","deck": "A"}
-,{"name": "Holy Elf's Blessing","frame": "Spell","types": "Spell","set": "06 - Shattered Hope","cardid": "SHH-12","image": "./cards/SHH/12.jpg","deck": "A"}
-,{"name": "Blue-Eyes Ultimate Dragon","frame": "Fusion Monster","types": "Fusion Monster Dragon Flying","set": "06 - Shattered Hope","cardid": "SHH-13","image": "./cards/SHH/13.jpg","deck": "B"}
-,{"name": "Living Arrow","frame": "Spell","types": "Spell","set": "06 - Shattered Hope","cardid": "SHH-14","image": "./cards/SHH/14.jpg","deck": "A"}
-,{"name": "Swarm of Kuribohs","frame": "Alter Monster","types": "Alter Monster Swarm Demon Protector","set": "06 - Shattered Hope","cardid": "SHH-15","image": "./cards/SHH/15.jpg","deck": "B"}
-,{"name": "Mai","frame": "Rule","types": "Rule Duelist Setup","set": "06 - Shattered Hope","cardid": "SHH-16","image": "./cards/SHH/16.jpg","deck": "B"}
-,{"name": "Anzu","frame": "Rule","types": "Rule Duelist Setup","set": "06 - Shattered Hope","cardid": "SHH-17","image": "./cards/SHH/17.jpg","deck": "B"}
-,{"name": "Petit Angel","frame": "Monster","types": "Monster Angel Flying","set": "06 - Shattered Hope","cardid": "SHH-18","image": "./cards/SHH/18.jpg","deck": "A"}
-,{"name": "Fairy's Gift","frame": "Monster","types": "Monster Angel Spellcaster Flying","set": "06 - Shattered Hope","cardid": "SHH-19","image": "./cards/SHH/19.jpg","deck": "A"}
-,{"name": "Rose Whip","frame": "Spell","types": "Spell Equip","set": "06 - Shattered Hope","cardid": "SHH-20","image": "./cards/SHH/20.jpg","deck": "A"}
-,{"name": "Harpie's Feather Duster","frame": "Spell","types": "Spell","set": "06 - Shattered Hope","cardid": "SHH-21","image": "./cards/SHH/21.jpg","deck": "A"}
-,{"name": "Friendship","frame": "Monster","types": "Monster Angel Flying","set": "06 - Shattered Hope","cardid": "SHH-22","image": "./cards/SHH/22.jpg","deck": "A"}
-,{"name": "Emissaries of Reconciliation","frame": "Trap","types": "Trap","set": "06 - Shattered Hope","cardid": "SHH-23","image": "./cards/SHH/23.jpg","deck": "A"}
-,{"name": "Silver Bow and Arrow","frame": "Spell","types": "Spell Equip","set": "06 - Shattered Hope","cardid": "SHH-24","image": "./cards/SHH/24.jpg","deck": "A"}
-,{"name": "Elf's Light","frame": "Spell","types": "Spell","set": "06 - Shattered Hope","cardid": "SHH-25","image": "./cards/SHH/25.jpg","deck": "A"}
-,{"name": "Shining Friendship","frame": "Alter Monster","types": "Alter Monster Ascended Angel Flying","set": "06 - Shattered Hope","cardid": "SHH-26","image": "./cards/SHH/26.jpg","deck": "B"}
-,{"name": "Soul Prison","frame": "Emblem","types": "Emblem (This card cannot be used in a Duel)","set": "06 - Shattered Hope","cardid": "SHH-27","image": "./cards/SHH/27.jpg","deck": "A"}
-,{"name": "Pegasus","frame": "Rule","types": "Rule Duelist Setup","set": "06 - Shattered Hope","cardid": "SHH-28","image": "./cards/SHH/28.jpg","deck": "B"}
-,{"name": "Kaiba","frame": "Rule","types": "Rule Duelist Setup","set": "06 - Shattered Hope","cardid": "SHH-29","image": "./cards/SHH/29.jpg","deck": "B"}
-,{"name": "Duelist Kingdom Championship Arena","frame": "Rule","types": "Rule Field Setup Matched (Red Side)","set": "06 - Shattered Hope","cardid": "SHH-30","image": "./cards/SHH/30.jpg","deck": "B"}
-,{"name": "Duelist Kingdom Championship Arena","frame": "Rule","types": "Rule Field Setup Matched (Blue Side)","set": "06 - Shattered Hope","cardid": "SHH-31","image": "./cards/SHH/31.jpg","deck": "B"}
-,{"name": "Caricature Alligator","frame": "Monster","types": "Monster Reptillian","set": "06 - Shattered Hope","cardid": "SHH-32","image": "./cards/SHH/32.jpg","deck": "A"}
-,{"name": "Parrot Dragon","frame": "Monster","types": "Monster Avian Flying","set": "06 - Shattered Hope","cardid": "SHH-33","image": "./cards/SHH/33.jpg","deck": "A"}
-,{"name": "Hypnotism","frame": "Spell","types": "Spell","set": "06 - Shattered Hope","cardid": "SHH-34","image": "./cards/SHH/34.jpg","deck": "A"}
-,{"name": "Prognostication","frame": "Trap","types": "Trap","set": "06 - Shattered Hope","cardid": "SHH-35","image": "./cards/SHH/35.jpg","deck": "A"}
-,{"name": "Dark Energy","frame": "Spell","types": "Spell Persist (until your next End Phase)","set": "06 - Shattered Hope","cardid": "SHH-36","image": "./cards/SHH/36.jpg","deck": "A"}
-,{"name": "Dark Rabbit","frame": "Monster","types": "Monster Beast","set": "06 - Shattered Hope","cardid": "SHH-37","image": "./cards/SHH/37.jpg","deck": "A"}
-,{"name": "Toon World","frame": "Spell","types": "Spell Continuous","set": "06 - Shattered Hope","cardid": "SHH-38","image": "./cards/SHH/38.jpg","deck": "A"}
-,{"name": "Toon Rabbit","frame": "Alter Monster","types": "Alter Monster Toon Beast","set": "06 - Shattered Hope","cardid": "SHH-39","image": "./cards/SHH/39.jpg","deck": "B"}
-,{"name": "Elusive Toons","frame": "Rule","types": "Rule","set": "06 - Shattered Hope","cardid": "SHH-40","image": "./cards/SHH/40.jpg","deck": "B"}
-,{"name": "Blue-Eyes Toon Dragon","frame": "Alter Monster","types": "Alter Monster Toon Dragon Flying","set": "06 - Shattered Hope","cardid": "SHH-41","image": "./cards/SHH/41.jpg","deck": "B"}
-,{"name": "Shine Palace","frame": "Spell","types": "Spell","set": "06 - Shattered Hope","cardid": "SHH-42","image": "./cards/SHH/42.jpg","deck": "A"}
-,{"name": "Curse of Darkness","frame": "Spell","types": "Spell Equip","set": "06 - Shattered Hope","cardid": "SHH-43","image": "./cards/SHH/43.jpg","deck": "A"}
-,{"name": "Copycat","frame": "Spell","types": "Spell","set": "06 - Shattered Hope","cardid": "SHH-44","image": "./cards/SHH/44.jpg","deck": "A"}
-,{"name": "Devil Box","frame": "Monster","types": "Monster Demon","set": "06 - Shattered Hope","cardid": "SHH-45","image": "./cards/SHH/45.jpg","deck": "A"}
-,{"name": "Toon Devil Box","frame": "Alter Monster","types": "Alter Monster Toon Demon","set": "06 - Shattered Hope","cardid": "SHH-46","image": "./cards/SHH/46.jpg","deck": "B"}
-
-,{"name": "Yugi","frame": "Rule","types": "Rule Duelist Setup","set": "07 - King of Duelists","cardid": "KOD-01","image": "./cards/KOD/01.jpg","deck": "B"}
-,{"name": "Mai","frame": "Rule","types": "Rule Duelist Setup","set": "07 - King of Duelists","cardid": "KOD-02","image": "./cards/KOD/02.jpg","deck": "B"}
-,{"name": "Silver-Screen Mirror Wall","frame": "Trap","types": "Trap Continuous","set": "07 - King of Duelists","cardid": "KOD-03","image": "./cards/KOD/03.jpg","deck": "A"}
-,{"name": "Harpie's Pet Dragon","frame": "Monster","types": "Monster Dragon Fireblast Flying","set": "07 - King of Duelists","cardid": "KOD-04","image": "./cards/KOD/04.jpg","deck": "A"}
-,{"name": "Shadow of Seduction","frame": "Spell","types": "Spell Equip","set": "07 - King of Duelists","cardid": "KOD-05","image": "./cards/KOD/05.jpg","deck": "A"}
-,{"name": "Purity","frame": "Rule","types": "Rule","set": "07 - King of Duelists","cardid": "KOD-06","image": "./cards/KOD/06.jpg","deck": "B"}
-,{"name": "Brain Control","frame": "Spell","types": "Spell","set": "07 - King of Duelists","cardid": "KOD-07","image": "./cards/KOD/07.jpg","deck": "A"}
-,{"name": "Chaos Ritual","frame": "Spell","types": "Spell Persist (until the Ritual is fulfiled)","set": "07 - King of Duelists","cardid": "KOD-08","image": "./cards/KOD/08.jpg","deck": "A"}
-,{"name": "Chaos Soldier","frame": "Ritual Monster","types": "Ritual Monster Warrior","set": "07 - King of Duelists","cardid": "KOD-09","image": "./cards/KOD/09.jpg","deck": "B"}
-,{"name": "Jonouchi","frame": "Rule","types": "Rule Duelist Setup","set": "07 - King of Duelists","cardid": "KOD-10","image": "./cards/KOD/10.jpg","deck": "B"}
-,{"name": "Keith","frame": "Rule","types": "Rule Duelist Setup","set": "07 - King of Duelists","cardid": "KOD-11","image": "./cards/KOD/11.jpg","deck": "B"}
-,{"name": "Pendulum Blade Torture Machine","frame": "Monster","types": "Monster Machine","set": "07 - King of Duelists","cardid": "KOD-12","image": "./cards/KOD/12.jpg","deck": "A"}
-,{"name": "Spell Reflecting Armor","frame": "Rule","types": "Rule","set": "07 - King of Duelists","cardid": "KOD-13","image": "./cards/KOD/13.jpg","deck": "B"}
-,{"name": "Magic Knight Giltia","frame": "Monster","types": "Monster Spellcaster Warrior","set": "07 - King of Duelists","cardid": "KOD-14","image": "./cards/KOD/14.jpg","deck": "A"}
-,{"name": "TM-1 Launcher Spider","frame": "Monster","types": "Monster Machine","set": "07 - King of Duelists","cardid": "KOD-15","image": "./cards/KOD/15.jpg","deck": "A"}
-,{"name": "Devilzoa","frame": "Monster","types": "Monster Demon","set": "07 - King of Duelists","cardid": "KOD-16","image": "./cards/KOD/16.jpg","deck": "A"}
-,{"name": "Magic-Reflection Armor - Metal Force","frame": "Trap","types": "Trap Equip","set": "07 - King of Duelists","cardid": "KOD-17","image": "./cards/KOD/17.jpg","deck": "A"}
-,{"name": "Metal Devilzoa","frame": "Alter Monster","types": "Alter Monster Metalized Demon","set": "07 - King of Duelists","cardid": "KOD-18","image": "./cards/KOD/18.jpg","deck": "B"}
-,{"name": "Skewer Pitfall","frame": "Trap","types": "Trap","set": "07 - King of Duelists","cardid": "KOD-19","image": "./cards/KOD/19.jpg","deck": "A"}
-,{"name": "Revolver Dragon","frame": "Monster","types": "Monster Dragon Machine","set": "07 - King of Duelists","cardid": "KOD-20","image": "./cards/KOD/20.jpg","deck": "A"}
-,{"name": "Rusty Revolver Dragon","frame": "Alter Monster","types": "Alter Monster Timeshifted Dragon Machine","set": "07 - King of Duelists","cardid": "KOD-21","image": "./cards/KOD/21.jpg","deck": "B"}
-,{"name": "Time Machine","frame": "Trap","types": "Trap","set": "07 - King of Duelists","cardid": "KOD-22","image": "./cards/KOD/22.jpg","deck": "A"}
-,{"name": "Slot Machine AM-7","frame": "Monster","types": "Monster Machine","set": "07 - King of Duelists","cardid": "KOD-23","image": "./cards/KOD/23.jpg","deck": "A"}
-,{"name": "Red-Eyes Black Metal Dragon","frame": "Alter Monster","types": "Alter Monster Metalized Dragon Fireblast Flying","set": "07 - King of Duelists","cardid": "KOD-24","image": "./cards/KOD/24.jpg","deck": "B"}
-,{"name": "7 Completed","frame": "Spell","types": "Spell Equip","set": "07 - King of Duelists","cardid": "KOD-25","image": "./cards/KOD/25.jpg","deck": "A"}
-,{"name": "Spherical Time Bomb","frame": "Spell Monster","types": "Spell Monster Equip Machine","set": "07 - King of Duelists","cardid": "KOD-26","image": "./cards/KOD/26.jpg","deck": "A"}
-,{"name": "Iron Heart","frame": "Monster","types": "Monster Machine","set": "07 - King of Duelists","cardid": "KOD-27","image": "./cards/KOD/27.jpg","deck": "A"}
-,{"name": "Gatekeeper","frame": "Monster","types": "Monster Machine Protector","set": "07 - King of Duelists","cardid": "KOD-28","image": "./cards/KOD/28.jpg","deck": "A"}
-,{"name": "Killer Machine","frame": "Monster","types": "Monster Machine Warrior","set": "07 - King of Duelists","cardid": "KOD-29","image": "./cards/KOD/29.jpg","deck": "A"}
-,{"name": "Bandit","frame": "Spell","types": "Spell","set": "07 - King of Duelists","cardid": "KOD-30","image": "./cards/KOD/30.jpg","deck": "A"}
-,{"name": "Graverobber","frame": "Spell Trap","types": "Spell Trap","set": "07 - King of Duelists","cardid": "KOD-31","image": "./cards/KOD/31.jpg","deck": "A"}
-,{"name": "Jonouchi","frame": "Rule","types": "Rule Duelist Setup","set": "07 - King of Duelists","cardid": "KOD-32","image": "./cards/KOD/32.jpg","deck": "B"}
-,{"name": "Yugi","frame": "Rule","types": "Rule Duelist Setup","set": "07 - King of Duelists","cardid": "KOD-33","image": "./cards/KOD/33.jpg","deck": "B"}
-,{"name": "Torunka, the Black-Clothed Great Sage","frame": "Alter Monster","types": "Alter Monster Timeshifted Spellcaster","set": "07 - King of Duelists","cardid": "KOD-34","image": "./cards/KOD/34.jpg","deck": "B"}
-,{"name": "Yugi","frame": "Rule","types": "Rule Duelist Setup","set": "07 - King of Duelists","cardid": "KOD-35","image": "./cards/KOD/35.jpg","deck": "B"}
-,{"name": "Pegasus","frame": "Rule","types": "Rule Duelist Setup","set": "07 - King of Duelists","cardid": "KOD-36","image": "./cards/KOD/36.jpg","deck": "B"}
-,{"name": "Bow-Drawing Mermaid","frame": "Monster","types": "Monster Aquatic","set": "07 - King of Duelists","cardid": "KOD-37","image": "./cards/KOD/37.jpg","deck": "A"}
-,{"name": "Tears of a Mermaid","frame": "Trap","types": "Trap","set": "07 - King of Duelists","cardid": "KOD-38","image": "./cards/KOD/38.jpg","deck": "A"}
-,{"name": "Dragon Egger","frame": "Monster","types": "Monster Dragon Fireblast Flying","set": "07 - King of Duelists","cardid": "KOD-39","image": "./cards/KOD/39.jpg","deck": "A"}
-,{"name": "Trap Displacement","frame": "Trap","types": "Trap","set": "07 - King of Duelists","cardid": "KOD-40","image": "./cards/KOD/40.jpg","deck": "A"}
-,{"name": "Chains of Magic Energy","frame": "Spell","types": "Spell","set": "07 - King of Duelists","cardid": "KOD-41","image": "./cards/KOD/41.jpg","deck": "A"}
-,{"name": "Toon Mermaid","frame": "Alter Monster","types": "Alter Monster Toon Aquatic","set": "07 - King of Duelists","cardid": "KOD-42","image": "./cards/KOD/42.jpg","deck": "B"}
-,{"name": "Toon Dragon Egger","frame": "Alter Monster","types": "Alter Monster Toon Dragon Fireblast Flying","set": "07 - King of Duelists","cardid": "KOD-43","image": "./cards/KOD/43.jpg","deck": "B"}
-,{"name": "Gorgon's Eye","frame": "Trap","types": "Trap Continuous","set": "07 - King of Duelists","cardid": "KOD-44","image": "./cards/KOD/44.jpg","deck": "A"}
-,{"name": "Petrification","frame": "Rule","types": "Rule","set": "07 - King of Duelists","cardid": "KOD-45","image": "./cards/KOD/45.jpg","deck": "B"}
-,{"name": "Toon Demon","frame": "Alter Monster","types": "Alter Monster Toon Demon Thunderblast","set": "07 - King of Duelists","cardid": "KOD-46","image": "./cards/KOD/46.jpg","deck": "B"}
-,{"name": "Millennium Puzzle","frame": "Rule","types": "Rule Symbol Millennium Item","set": "07 - King of Duelists","cardid": "KOD-47","image": "./cards/KOD/47.jpg","deck": "B"}
-,{"name": "Magical Neutralizing Force Field","frame": "Spell","types": "Spell","set": "07 - King of Duelists","cardid": "KOD-48","image": "./cards/KOD/48.jpg","deck": "A"}
-,{"name": "Dark-Eyes Illusionist","frame": "Monster","types": "Monster Illusion","set": "07 - King of Duelists","cardid": "KOD-49","image": "./cards/KOD/49.jpg","deck": "A"}
-,{"name": "Illusion Ritual","frame": "Spell","types": "Spell Persist (until the Ritual is fulfiled)","set": "07 - King of Duelists","cardid": "KOD-50","image": "./cards/KOD/50.jpg","deck": "A"}
-,{"name": "Sacrifice","frame": "Ritual Monster","types": "Ritual Monster Illusion Absorption","set": "07 - King of Duelists","cardid": "KOD-51","image": "./cards/KOD/51.jpg","deck": "B"}
-,{"name": "Assimilation","frame": "Rule","types": "Rule","set": "07 - King of Duelists","cardid": "KOD-52","image": "./cards/KOD/52.jpg","deck": "B"}
-,{"name": "Time Bomber","frame": "Spell Monster","types": "Spell Monster Machine","set": "07 - King of Duelists","cardid": "KOD-53","image": "./cards/KOD/53.jpg","deck": "A"}
-,{"name": "Symbol of Friendship","frame": "Rule","types": "Rule Symbol","set": "07 - King of Duelists","cardid": "KOD-54","image": "./cards/KOD/54.jpg","deck": "B"}
-,{"name": "Chaos Black Magic Ritual","frame": "Spell","types": "Spell Persist (until the Ritual is fulfiled)","set": "07 - King of Duelists","cardid": "KOD-55","image": "./cards/KOD/55.jpg","deck": "A"}
-,{"name": "Magician of Black Chaos","frame": "Ritual Monster","types": "Ritual Monster Spellcaster","set": "07 - King of Duelists","cardid": "KOD-56","image": "./cards/KOD/56.jpg","deck": "B"}
-,{"name": "Thousand-Eyes Heresy God","frame": "Divine Monster","types": "Divine Monster Spellcaster Wicked God (Hierarchy 1)","set": "07 - King of Duelists","cardid": "KOD-57","image": "./cards/KOD/57.jpg","deck": "A"}
-,{"name": "Thousand-Eyes Sacrifice","frame": "Divine Fusion Monster","types": "Divine Fusion Monster Illusion Absorption Wicked God (Hierarchy 3)","set": "07 - King of Duelists","cardid": "KOD-58","image": "./cards/KOD/58.jpg","deck": "B"}
-,{"name": "Mask of Darkness","frame": "Spell Monster","types": "Spell Monster Demon","set": "07 - King of Duelists","cardid": "KOD-59","image": "./cards/KOD/59.jpg","deck": "A"}
-,{"name": "Doma the Angel of Silent Death","frame": "Monster","types": "Monster Angel Demon Flying","set": "07 - King of Duelists","cardid": "KOD-60","image": "./cards/KOD/60.jpg","deck": "A"}
-,{"name": "Millennium Ring","frame": "Rule","types": "Rule Symbol Millennium Item","set": "07 - King of Duelists","cardid": "KOD-61","image": "./cards/KOD/61.jpg","deck": "B"}
-,{"name": "Cyndia","frame": "Emblem","types": "Emblem (This card cannot be used in a Duel)","set": "07 - King of Duelists","cardid": "KOD-62","image": "./cards/KOD/62.jpg","deck": "A"}
-
-,{"name": "Bonds of Friendship","frame": "Emblem","types": "Emblem (This card cannot be used in a Duel)","set": "08 - Loose Ends","cardid": "LEN-01","image": "./cards/LEN/01.jpg","deck": "A"}
-,{"name": "Kajiki","frame": "Rule","types": "Rule Duelist Setup","set": "08 - Loose Ends","cardid": "LEN-02","image": "./cards/LEN/02.jpg","deck": "B"}
-,{"name": "Ryuzaki","frame": "Rule","types": "Rule Duelist Setup","set": "08 - Loose Ends","cardid": "LEN-03","image": "./cards/LEN/03.jpg","deck": "B"}
-,{"name": "Baby T-Rex","frame": "Monster","types": "Monster Dinosaur","set": "08 - Loose Ends","cardid": "LEN-04","image": "./cards/LEN/04.jpg","deck": "A"}
-,{"name": "Brachioraidus","frame": "Monster","types": "Monster Dinosaur","set": "08 - Loose Ends","cardid": "LEN-05","image": "./cards/LEN/05.jpg","deck": "A"}
-,{"name": "Dinosaur Bite","frame": "Spell","types": "Spell","set": "08 - Loose Ends","cardid": "LEN-06","image": "./cards/LEN/06.jpg","deck": "A"}
-,{"name": "Death Bird","frame": "Monster","types": "Monster Avian Dinosaur Flying","set": "08 - Loose Ends","cardid": "LEN-07","image": "./cards/LEN/07.jpg","deck": "A"}
-,{"name": "Fish Sonar","frame": "Spell","types": "Spell","set": "08 - Loose Ends","cardid": "LEN-08","image": "./cards/LEN/08.jpg","deck": "A"}
-,{"name": "Rainbow Fish","frame": "Monster","types": "Monster Aquatic","set": "08 - Loose Ends","cardid": "LEN-09","image": "./cards/LEN/09.jpg","deck": "A"}
-,{"name": "Ammoknight","frame": "Monster","types": "Monster Aquatic Protector","set": "08 - Loose Ends","cardid": "LEN-10","image": "./cards/LEN/10.jpg","deck": "A"}
-,{"name": "Fury of Leviathan","frame": "Spell","types": "Spell Continuous","set": "08 - Loose Ends","cardid": "LEN-11","image": "./cards/LEN/11.jpg","deck": "A"}
-,{"name": "Mai","frame": "Rule","types": "Rule Duelist Setup","set": "08 - Loose Ends","cardid": "LEN-12","image": "./cards/LEN/12.jpg","deck": "B"}
-,{"name": "Kotsuzuka","frame": "Rule","types": "Rule Duelist Setup","set": "08 - Loose Ends","cardid": "LEN-13","image": "./cards/LEN/13.jpg","deck": "B"}
-,{"name": "Arms of the Dead","frame": "Spell","types": "Spell Equip","set": "08 - Loose Ends","cardid": "LEN-14","image": "./cards/LEN/14.jpg","deck": "A"}
-,{"name": "Deepsea Shark","frame": "Monster","types": "Monster Aquatic","set": "08 - Loose Ends","cardid": "LEN-15","image": "./cards/LEN/15.jpg","deck": "A"}
-,{"name": "Corroding Shark","frame": "Alter Monster","types": "Alter Monster Zombie Aquatic Regeneration","set": "08 - Loose Ends","cardid": "LEN-16","image": "./cards/LEN/16.jpg","deck": "B"}
-,{"name": "Call from the Graveyard","frame": "Trap","types": "Trap","set": "08 - Loose Ends","cardid": "LEN-17","image": "./cards/LEN/17.jpg","deck": "A"}
-,{"name": "Gravedigger Ghoul","frame": "Monster","types": "Monster Undead","set": "08 - Loose Ends","cardid": "LEN-18","image": "./cards/LEN/18.jpg","deck": "A"}
-,{"name": "Electro Whip","frame": "Spell","types": "Spell Equip","set": "08 - Loose Ends","cardid": "LEN-19","image": "./cards/LEN/19.jpg","deck": "A"}
-,{"name": "Gust Fan","frame": "Spell","types": "Spell Equip","set": "08 - Loose Ends","cardid": "LEN-20","image": "./cards/LEN/20.jpg","deck": "A"}
-,{"name": "Mai","frame": "Rule","types": "Rule Duelist Setup","set": "08 - Loose Ends","cardid": "LEN-21","image": "./cards/LEN/21.jpg","deck": "B"}
-,{"name": "Kajiki","frame": "Rule","types": "Rule Duelist Setup","set": "08 - Loose Ends","cardid": "LEN-22","image": "./cards/LEN/22.jpg","deck": "B"}
-,{"name": "Brother Mei","frame": "Rule","types": "Rule Duelist Setup","set": "08 - Loose Ends","cardid": "LEN-23","image": "./cards/LEN/23.jpg","deck": "B"}
-,{"name": "Brother Kyu","frame": "Rule","types": "Rule Duelist Setup","set": "08 - Loose Ends","cardid": "LEN-24","image": "./cards/LEN/24.jpg","deck": "B"}
-,{"name": "Beautiful Monster Tamer","frame": "Monster","types": "Monster Warrior","set": "08 - Loose Ends","cardid": "LEN-25","image": "./cards/LEN/25.jpg","deck": "A"}
-,{"name": "Master & Expert","frame": "Monster","types": "Monster Beast Warrior","set": "08 - Loose Ends","cardid": "LEN-26","image": "./cards/LEN/26.jpg","deck": "A"}
-,{"name": "Patrol Robo","frame": "Monster","types": "Monster Machine Protector","set": "08 - Loose Ends","cardid": "LEN-27","image": "./cards/LEN/27.jpg","deck": "A"}
-,{"name": "Android #7","frame": "Monster","types": "Monster Esper Machine","set": "08 - Loose Ends","cardid": "LEN-28","image": "./cards/LEN/28.jpg","deck": "A"}
-,{"name": "Demonic Heavy Tank of the Labyrinth","frame": "Alter Monster","types": "Alter Monster Metalized Demon Machine","set": "08 - Loose Ends","cardid": "LEN-29","image": "./cards/LEN/29.jpg","deck": "B"}
-,{"name": "Squall","frame": "Spell","types": "Spell Persist (3 of your End Phases)","set": "08 - Loose Ends","cardid": "LEN-30","image": "./cards/LEN/30.jpg","deck": "A"}
-,{"name": "Alluring Mirror Split","frame": "Spell","types": "Spell Continuous","set": "08 - Loose Ends","cardid": "LEN-31","image": "./cards/LEN/31.jpg","deck": "A"}
-,{"name": "Harpie Lady Token","frame": "Token Monster","types": "Token Monster Avian Flying","set": "08 - Loose Ends","cardid": "LEN-32","image": "./cards/LEN/32.jpg","deck": "A"}
-,{"name": "Arrival of the Harpie Lady","frame": "Trap","types": "Trap","set": "08 - Loose Ends","cardid": "LEN-33","image": "./cards/LEN/33.jpg","deck": "A"}
-,{"name": "Harpie Queens","frame": "Alter Monster","types": "Alter Monster Swarm Avian Flying","set": "08 - Loose Ends","cardid": "LEN-34","image": "./cards/LEN/34.jpg","deck": "B"}
-,{"name": "Mai","frame": "Rule","types": "Rule Duelist Setup","set": "08 - Loose Ends","cardid": "LEN-35","image": "./cards/LEN/35.jpg","deck": "B"}
-,{"name": "Kajiki","frame": "Rule","types": "Rule Duelist Setup","set": "08 - Loose Ends","cardid": "LEN-36","image": "./cards/LEN/36.jpg","deck": "B"}
-,{"name": "Low Tide Islet","frame": "Rule","types": "Rule Field Setup Matched (Red Side)","set": "08 - Loose Ends","cardid": "LEN-37","image": "./cards/LEN/37.jpg","deck": "B"}
-,{"name": "Low Tide Islet","frame": "Rule","types": "Rule Field Setup Matched (Blue Side)","set": "08 - Loose Ends","cardid": "LEN-38","image": "./cards/LEN/38.jpg","deck": "B"}
-,{"name": "Kaiba","frame": "Rule","types": "Rule Duelist Setup","set": "08 - Loose Ends","cardid": "LEN-39","image": "./cards/LEN/39.jpg","deck": "B"}
-,{"name": "Mokuba","frame": "Rule","types": "Rule Duelist Setup","set": "08 - Loose Ends","cardid": "LEN-40","image": "./cards/LEN/40.jpg","deck": "B"}
-,{"name": "The Big Five","frame": "Rule","types": "Rule Duelist Setup","set": "08 - Loose Ends","cardid": "LEN-41","image": "./cards/LEN/41.jpg","deck": "B"}
-,{"name": "Draconic Virtual Realm","frame": "Rule","types": "Rule Field Setup","set": "08 - Loose Ends","cardid": "LEN-42","image": "./cards/LEN/42.jpg","deck": "B"}
-,{"name": "Laughing Flower","frame": "Spell","types": "Spell Continuous","set": "08 - Loose Ends","cardid": "LEN-43","image": "./cards/LEN/43.jpg","deck": "A"}
-,{"name": "Niwatori","frame": "Monster","types": "Monster Avian Beast","set": "08 - Loose Ends","cardid": "LEN-44","image": "./cards/LEN/44.jpg","deck": "A"}
-,{"name": "Mushroom Man","frame": "Monster","types": "Monster Plant","set": "08 - Loose Ends","cardid": "LEN-45","image": "./cards/LEN/45.jpg","deck": "A"}
-,{"name": "Matango, the Mushroom Horror","frame": "Alter Monster","types": "Alter Monster Eldritch Plant","set": "08 - Loose Ends","cardid": "LEN-46","image": "./cards/LEN/46.jpg","deck": "B"}
-,{"name": "Burglar","frame": "Spell","types": "Spell","set": "08 - Loose Ends","cardid": "LEN-47","image": "./cards/LEN/47.jpg","deck": "A"}
-,{"name": "Wicked Blaze Dragon","frame": "Monster","types": "Monster Dragon Elemental Flying Fireblast","set": "08 - Loose Ends","cardid": "LEN-48","image": "./cards/LEN/48.jpg","deck": "A"}
-,{"name": "Roaring Ocean Dragon","frame": "Monster","types": "Monster Aquatic Dragon","set": "08 - Loose Ends","cardid": "LEN-49","image": "./cards/LEN/49.jpg","deck": "A"}
-,{"name": "Cave Dwelling Dragon","frame": "Monster","types": "Monster Dragon Burrowing ","set": "08 - Loose Ends","cardid": "LEN-50","image": "./cards/LEN/50.jpg","deck": "A"}
-,{"name": "Mechanical Winged Dragon","frame": "Monster","types": "Monster Dragon Machine Flying","set": "08 - Loose Ends","cardid": "LEN-51","image": "./cards/LEN/51.jpg","deck": "A"}
-,{"name": "Goddess of Reversal","frame": "Divine Monster","types": "Divine Monster Angel World God (Hierarchy 1)","set": "08 - Loose Ends","cardid": "LEN-52","image": "./cards/LEN/52.jpg","deck": "A"}
-,{"name": "Five God Dragon","frame": "Divine Fusion Monster","types": "Divine Fusion Monster Dragon Flying World God (Hierarchy 1)","set": "08 - Loose Ends","cardid": "LEN-53","image": "./cards/LEN/53.jpg","deck": "B"}
-,{"name": "World God Pantheon","frame": "Rule","types": "Rule","set": "08 - Loose Ends","cardid": "LEN-54","image": "./cards/LEN/54.jpg","deck": "B"}
-,{"name": "Yugi","frame": "Rule","types": "Rule Duelist Setup","set": "08 - Loose Ends","cardid": "LEN-55","image": "./cards/LEN/55.jpg","deck": "B"}
-,{"name": "Rebecca","frame": "Rule","types": "Rule Duelist Setup","set": "08 - Loose Ends","cardid": "LEN-56","image": "./cards/LEN/56.jpg","deck": "B"}
-,{"name": "Sugoroku","frame": "Rule","types": "Rule Duelist Setup","set": "08 - Loose Ends","cardid": "LEN-57","image": "./cards/LEN/57.jpg","deck": "B"}
-,{"name": "Arthur","frame": "Rule","types": "Rule Duelist Setup","set": "08 - Loose Ends","cardid": "LEN-58","image": "./cards/LEN/58.jpg","deck": "B"}
-,{"name": "Witch of the Black Forest","frame": "Monster","types": "Monster Spellcaster","set": "08 - Loose Ends","cardid": "LEN-59","image": "./cards/LEN/59.jpg","deck": "A"}
-,{"name": "Tribute to the Dead","frame": "Spell","types": "Spell","set": "08 - Loose Ends","cardid": "LEN-60","image": "./cards/LEN/60.jpg","deck": "A"}
-,{"name": "Ring of Magnetism","frame": "Spell","types": "Spell Equip","set": "08 - Loose Ends","cardid": "LEN-61","image": "./cards/LEN/61.jpg","deck": "A"}
-,{"name": "Cannon Soldier","frame": "Spell Monster","types": "Spell Monster Machine","set": "08 - Loose Ends","cardid": "LEN-62","image": "./cards/LEN/62.jpg","deck": "A"}
-,{"name": "Judgment Bomber","frame": "Spell","types": "Spell","set": "08 - Loose Ends","cardid": "LEN-63","image": "./cards/LEN/63.jpg","deck": "A"}
-,{"name": "Soul Release","frame": "Spell","types": "Spell","set": "08 - Loose Ends","cardid": "LEN-64","image": "./cards/LEN/64.jpg","deck": "A"}
-
-,{"name": "Anzu","frame": "Rule","types": "Rule Duelist Setup","set": "09 - Dungeon of Luck","cardid": "DOL-01","image": "./cards/DOL/01.jpg","deck": "B"}
-,{"name": "Honda","frame": "Rule","types": "Rule Duelist Setup","set": "09 - Dungeon of Luck","cardid": "DOL-02","image": "./cards/DOL/02.jpg","deck": "B"}
-,{"name": "Raremetal Lady","frame": "Monster","types": "Monster Machine Warrior","set": "09 - Dungeon of Luck","cardid": "DOL-03","image": "./cards/DOL/03.jpg","deck": "A"}
-,{"name": "Gattling Buggy","frame": "Spell","types": "Spell","set": "09 - Dungeon of Luck","cardid": "DOL-04","image": "./cards/DOL/04.jpg","deck": "A"}
-,{"name": "Great Infiltrator Spy","frame": "Monster","types": "Monster Warrior Support","set": "09 - Dungeon of Luck","cardid": "DOL-05","image": "./cards/DOL/05.jpg","deck": "A"}
-,{"name": "Angel Witch","frame": "Monster","types": "Monster Angel Spellcaster Flying","set": "09 - Dungeon of Luck","cardid": "DOL-06","image": "./cards/DOL/06.jpg","deck": "A"}
-,{"name": "Supporter in the Shadows","frame": "Spell Monster","types": "Spell Monster Support","set": "09 - Dungeon of Luck","cardid": "DOL-07","image": "./cards/DOL/07.jpg","deck": "A"}
-,{"name": "God's Blessing","frame": "Trap","types": "Trap Continuous","set": "09 - Dungeon of Luck","cardid": "DOL-08","image": "./cards/DOL/08.jpg","deck": "A"}
-,{"name": "Holy Chain","frame": "Spell","types": "Spell Equip","set": "09 - Dungeon of Luck","cardid": "DOL-09","image": "./cards/DOL/09.jpg","deck": "A"}
-,{"name": "Valkyrie","frame": "Monster","types": "Monster Angel Warrior Flying","set": "09 - Dungeon of Luck","cardid": "DOL-10","image": "./cards/DOL/10.jpg","deck": "A"}
-,{"name": "Jonouchi","frame": "Rule","types": "Rule Duelist Setup","set": "09 - Dungeon of Luck","cardid": "DOL-11","image": "./cards/DOL/11.jpg","deck": "B"}
-,{"name": "Otogi","frame": "Rule","types": "Rule Duelist Setup","set": "09 - Dungeon of Luck","cardid": "DOL-12","image": "./cards/DOL/12.jpg","deck": "B"}
-,{"name": "Opening Packs Challenge","frame": "Rule","types": "Rule Challenge Setup","set": "09 - Dungeon of Luck","cardid": "DOL-13","image": "./cards/DOL/13.jpg","deck": "B"}
-,{"name": "Oni Tank T-34","frame": "Monster","types": "Monster Demon Machine","set": "09 - Dungeon of Luck","cardid": "DOL-14","image": "./cards/DOL/14.jpg","deck": "A"}
-,{"name": "Sword Hunter","frame": "Monster","types": "Monster Warrior Absorption","set": "09 - Dungeon of Luck","cardid": "DOL-15","image": "./cards/DOL/15.jpg","deck": "A"}
-,{"name": "Dark Bat","frame": "Monster","types": "Monster Beast Flying","set": "09 - Dungeon of Luck","cardid": "DOL-16","image": "./cards/DOL/16.jpg","deck": "A"}
-,{"name": "Stampeding Sword Beast","frame": "Monster","types": "Monster Beast","set": "09 - Dungeon of Luck","cardid": "DOL-17","image": "./cards/DOL/17.jpg","deck": "A"}
-,{"name": "Fellow Traveler","frame": "Trap","types": "Trap","set": "09 - Dungeon of Luck","cardid": "DOL-18","image": "./cards/DOL/18.jpg","deck": "A"}
-,{"name": "Spike Head","frame": "Monster","types": "Monster Machine","set": "09 - Dungeon of Luck","cardid": "DOL-19","image": "./cards/DOL/19.jpg","deck": "A"}
-,{"name": "Limiter Removal","frame": "Spell","types": "Spell","set": "09 - Dungeon of Luck","cardid": "DOL-20","image": "./cards/DOL/20.jpg","deck": "A"}
-,{"name": "Goblin Attack Force","frame": "Monster","types": "Monster Beast Warrior","set": "09 - Dungeon of Luck","cardid": "DOL-21","image": "./cards/DOL/21.jpg","deck": "A"}
-,{"name": "Bedtime","frame": "Rule","types": "Rule","set": "09 - Dungeon of Luck","cardid": "DOL-22","image": "./cards/DOL/22.jpg","deck": "B"}
-,{"name": "Super-Dimensional Fighter Vic Viper","frame": "Monster","types": "Monster Cosmic Machine Flying","set": "09 - Dungeon of Luck","cardid": "DOL-23","image": "./cards/DOL/23.jpg","deck": "A"}
-,{"name": "Meteor Strike","frame": "Spell","types": "Spell","set": "09 - Dungeon of Luck","cardid": "DOL-24","image": "./cards/DOL/24.jpg","deck": "A"}
-,{"name": "Yugi","frame": "Rule","types": "Rule Duelist Setup","set": "09 - Dungeon of Luck","cardid": "DOL-25","image": "./cards/DOL/25.jpg","deck": "B"}
-,{"name": "Otogi","frame": "Rule","types": "Rule Duelist Setup","set": "09 - Dungeon of Luck","cardid": "DOL-26","image": "./cards/DOL/26.jpg","deck": "B"}
-,{"name": "D.D.M. Arena","frame": "Spell","types": "Spell Continuous","set": "09 - Dungeon of Luck","cardid": "DOL-27","image": "./cards/DOL/27.jpg","deck": "A"}
-,{"name": "Dungeon Dice Monsters","frame": "Rule","types": "Rule","set": "09 - Dungeon of Luck","cardid": "DOL-28","image": "./cards/DOL/28.jpg","deck": "B"}
-,{"name": "Dice Phase","frame": "Rule","types": "Rule","set": "09 - Dungeon of Luck","cardid": "DOL-29","image": "./cards/DOL/29.jpg","deck": "B"}
-,{"name": "Dice Crests","frame": "Rule","types": "Rule","set": "09 - Dungeon of Luck","cardid": "DOL-30","image": "./cards/DOL/30.jpg","deck": "B"}
-,{"name": "Dungeon Master Token","frame": "Token Monster","types": "Token Monster Machine","set": "09 - Dungeon of Luck","cardid": "DOL-31","image": "./cards/DOL/31.jpg","deck": "A"}
-,{"name": "Dimension Dice Token - Red","frame": "Token Monster","types": "Token Monster Machine","set": "09 - Dungeon of Luck","cardid": "DOL-32","image": "./cards/DOL/32.jpg","deck": "A"}
-,{"name": "Dimension Dice Token - Blue","frame": "Token Monster","types": "Token Monster Machine","set": "09 - Dungeon of Luck","cardid": "DOL-33","image": "./cards/DOL/33.jpg","deck": "A"}
-,{"name": "Dimension Dice Token - Rare Black","frame": "Token Monster","types": "Token Monster Machine","set": "09 - Dungeon of Luck","cardid": "DOL-34","image": "./cards/DOL/34.jpg","deck": "A"}
-,{"name": "Warp Hole","frame": "Rule","types": "Rule","set": "09 - Dungeon of Luck","cardid": "DOL-35","image": "./cards/DOL/35.jpg","deck": "B"}
-,{"name": "Gargoyle","frame": "Monster","types": "Monster Demon","set": "09 - Dungeon of Luck","cardid": "DOL-36","image": "./cards/DOL/36.jpg","deck": "A"}
-,{"name": "Yaranzo","frame": "Trap Monster","types": "Trap Monster Undead","set": "09 - Dungeon of Luck","cardid": "DOL-37","image": "./cards/DOL/37.jpg","deck": "A"}
-,{"name": "Lizardragon","frame": "Monster","types": "Monster Dragon Flying Fireblast","set": "09 - Dungeon of Luck","cardid": "DOL-38","image": "./cards/DOL/38.jpg","deck": "A"}
-,{"name": "The 13th Buried","frame": "Monster","types": "Monster Undead","set": "09 - Dungeon of Luck","cardid": "DOL-39","image": "./cards/DOL/39.jpg","deck": "A"}
-,{"name": "Little Wizard","frame": "Monster","types": "Monster Spellcaster Thunderblast","set": "09 - Dungeon of Luck","cardid": "DOL-40","image": "./cards/DOL/40.jpg","deck": "A"}
-,{"name": "Bomb Lizard","frame": "Monster","types": "Monster Reptillian Warrior","set": "09 - Dungeon of Luck","cardid": "DOL-41","image": "./cards/DOL/41.jpg","deck": "A"}
-,{"name": "Dark Assassin","frame": "Monster","types": "Monster Undead Warrior","set": "09 - Dungeon of Luck","cardid": "DOL-42","image": "./cards/DOL/42.jpg","deck": "A"}
-,{"name": "Iron Ball Devil Gorogon","frame": "Monster","types": "Monster Demon Elemental Machine","set": "09 - Dungeon of Luck","cardid": "DOL-43","image": "./cards/DOL/43.jpg","deck": "A"}
-,{"name": "Duker Twin Swords","frame": "Monster","types": "Monster Warrior","set": "09 - Dungeon of Luck","cardid": "DOL-44","image": "./cards/DOL/44.jpg","deck": "A"}
-,{"name": "Swift Black Ninja","frame": "Monster","types": "Monster Warrior","set": "09 - Dungeon of Luck","cardid": "DOL-45","image": "./cards/DOL/45.jpg","deck": "A"}
-,{"name": "God Orgoth","frame": "Divine Monster","types": "Divine Monster Warrior World God (Hierarchy 1)","set": "09 - Dungeon of Luck","cardid": "DOL-46","image": "./cards/DOL/46.jpg","deck": "A"}
-,{"name": "Micro Ray","frame": "Spell","types": "Spell","set": "09 - Dungeon of Luck","cardid": "DOL-47","image": "./cards/DOL/47.jpg","deck": "A"}
-,{"name": "Monster Cannon","frame": "Monster","types": "Monster Beast Machine","set": "09 - Dungeon of Luck","cardid": "DOL-48","image": "./cards/DOL/48.jpg","deck": "A"}
-,{"name": "Jonouchi","frame": "Rule","types": "Rule Duelist Setup","set": "09 - Dungeon of Luck","cardid": "DOL-49","image": "./cards/DOL/49.jpg","deck": "B"}
-,{"name": "Honda","frame": "Rule","types": "Rule Duelist Setup","set": "09 - Dungeon of Luck","cardid": "DOL-50","image": "./cards/DOL/50.jpg","deck": "B"}
-,{"name": "Thunder Kid","frame": "Monster","types": "Monster Beast Thunderblast","set": "09 - Dungeon of Luck","cardid": "DOL-51","image": "./cards/DOL/51.jpg","deck": "A"}
-,{"name": "Gadget Soldier","frame": "Monster","types": "Monster Machine Warrior","set": "09 - Dungeon of Luck","cardid": "DOL-52","image": "./cards/DOL/52.jpg","deck": "A"}
-,{"name": "Barbarian Rage","frame": "Trap","types": "Trap Continuous","set": "09 - Dungeon of Luck","cardid": "DOL-53","image": "./cards/DOL/53.jpg","deck": "A"}
-,{"name": "Raremetal Soldier","frame": "Monster","types": "Monster Machine Warrior","set": "09 - Dungeon of Luck","cardid": "DOL-54","image": "./cards/DOL/54.jpg","deck": "A"}
-,{"name": "Warrior Elimination","frame": "Spell","types": "Spell Equip","set": "09 - Dungeon of Luck","cardid": "DOL-55","image": "./cards/DOL/55.jpg","deck": "A"}
+                ...CHAPTER1_ARC1_DUELISTKINGDOM.cards,
+                ...CHAPTER1_ARC2_MUSEUM.cards
             ]
         };
+        
     </script>
 </body>
 </html>
