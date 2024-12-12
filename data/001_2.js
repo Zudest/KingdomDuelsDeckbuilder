@@ -31,7 +31,7 @@ const CHAPTER1_ARC2_MUSEUM = {
         ,{"name": "Demonic Heavy Tank of the Labyrinth","frame": "Alter Monster","types": "Alter Monster Metalized Demon Machine","set": "08 - Loose Ends","cardid": "LEN-29","image": "./cards/LEN/29.jpg","deck": "B","duelist": "Brother Kyu"}
         ,{"name": "Squall","frame": "Spell","types": "Spell Persist (3 of your End Phases)","set": "08 - Loose Ends","cardid": "LEN-30","image": "./cards/LEN/30.jpg","deck": "A","duelist": "Kajiki"}
         ,{"name": "Alluring Mirror Split","frame": "Spell","types": "Spell Continuous","set": "08 - Loose Ends","cardid": "LEN-31","image": "./cards/LEN/31.jpg","deck": "A","duelist": "Mai"}
-        ,{"name": "Harpie Lady Token","frame": "Token Monster","types": "Token Monster Avian Flying","set": "08 - Loose Ends","cardid": "LEN-32","image": "./cards/LEN/32.jpg","deck": "A","duelist": "Mai"}
+        ,{"name": "Harpie Lady Token","frame": "Token Monster","types": "Token Monster Avian Flying","set": "08 - Loose Ends","cardid": "LEN-32","image": "./cards/LEN/32.jpg","deck": "C","duelist": "Mai"}
         ,{"name": "Arrival of the Harpie Lady","frame": "Trap","types": "Trap","set": "08 - Loose Ends","cardid": "LEN-33","image": "./cards/LEN/33.jpg","deck": "A","duelist": "Mai"}
         ,{"name": "Harpie Queens","frame": "Alter Monster","types": "Alter Monster Swarm Avian Flying","set": "08 - Loose Ends","cardid": "LEN-34","image": "./cards/LEN/34.jpg","deck": "B","duelist": "Mai"}
         ,{"name": "Mai","frame": "Rule","types": "Rule Duelist Setup","set": "08 - Loose Ends","cardid": "LEN-35","image": "./cards/LEN/35.jpg","deck": "B","duelist": ""}
@@ -95,10 +95,10 @@ const CHAPTER1_ARC2_MUSEUM = {
         ,{"name": "Dungeon Dice Monsters","frame": "Rule","types": "Rule","set": "09 - Dungeon of Luck","cardid": "DOL-28","image": "./cards/DOL/28.jpg","deck": "B","duelist": "Otogi"}
         ,{"name": "Dice Phase","frame": "Rule","types": "Rule","set": "09 - Dungeon of Luck","cardid": "DOL-29","image": "./cards/DOL/29.jpg","deck": "B","duelist": "Otogi"}
         ,{"name": "Dice Crests","frame": "Rule","types": "Rule","set": "09 - Dungeon of Luck","cardid": "DOL-30","image": "./cards/DOL/30.jpg","deck": "B","duelist": "Otogi"}
-        ,{"name": "Dungeon Master Token","frame": "Token Monster","types": "Token Monster Machine","set": "09 - Dungeon of Luck","cardid": "DOL-31","image": "./cards/DOL/31.jpg","deck": "A","duelist": "Otogi, Yugi"}
-        ,{"name": "Dimension Dice Token - Red","frame": "Token Monster","types": "Token Monster Machine","set": "09 - Dungeon of Luck","cardid": "DOL-32","image": "./cards/DOL/32.jpg","deck": "A","duelist": "Otogi"}
-        ,{"name": "Dimension Dice Token - Blue","frame": "Token Monster","types": "Token Monster Machine","set": "09 - Dungeon of Luck","cardid": "DOL-33","image": "./cards/DOL/33.jpg","deck": "A","duelist": "Yugi"}
-        ,{"name": "Dimension Dice Token - Rare Black","frame": "Token Monster","types": "Token Monster Machine","set": "09 - Dungeon of Luck","cardid": "DOL-34","image": "./cards/DOL/34.jpg","deck": "A","duelist": "Otogi, Yugi"}
+        ,{"name": "Dungeon Master Token","frame": "Token Monster","types": "Token Monster Machine","set": "09 - Dungeon of Luck","cardid": "DOL-31","image": "./cards/DOL/31.jpg","deck": "C","duelist": "Otogi, Yugi"}
+        ,{"name": "Dimension Dice Token - Red","frame": "Token Monster","types": "Token Monster Machine","set": "09 - Dungeon of Luck","cardid": "DOL-32","image": "./cards/DOL/32.jpg","deck": "C","duelist": "Otogi"}
+        ,{"name": "Dimension Dice Token - Blue","frame": "Token Monster","types": "Token Monster Machine","set": "09 - Dungeon of Luck","cardid": "DOL-33","image": "./cards/DOL/33.jpg","deck": "C","duelist": "Yugi"}
+        ,{"name": "Dimension Dice Token - Rare Black","frame": "Token Monster","types": "Token Monster Machine","set": "09 - Dungeon of Luck","cardid": "DOL-34","image": "./cards/DOL/34.jpg","deck": "C","duelist": "Otogi, Yugi"}
         ,{"name": "Warp Hole","frame": "Rule","types": "Rule","set": "09 - Dungeon of Luck","cardid": "DOL-35","image": "./cards/DOL/35.jpg","deck": "B","duelist": "Otogi, Yugi"}
         ,{"name": "Gargoyle","frame": "Monster","types": "Monster Demon","set": "09 - Dungeon of Luck","cardid": "DOL-36","image": "./cards/DOL/36.jpg","deck": "A","duelist": "Otogi"}
         ,{"name": "Yaranzo","frame": "Trap Monster","types": "Trap Monster Undead","set": "09 - Dungeon of Luck","cardid": "DOL-37","image": "./cards/DOL/37.jpg","deck": "A","duelist": "Otogi"}

@@ -136,7 +136,7 @@ const CHAPTER1_ARC1_DUELISTKINGDOM = {
         ,{"name": "Kaiba","frame": "Rule","types": "Rule Duelist Setup","set": "03 - Changing Tides","cardid": "CHT-19","image": "./cards/CHT/19.jpg","deck": "B","duelist": ""}
         ,{"name": "Defense Seal","frame": "Spell Trap","types": "Spell Trap","set": "03 - Changing Tides","cardid": "CHT-20","image": "./cards/CHT/20.jpg","deck": "A","duelist": "Kaiba, Kotsuzuka, Keith"}
         ,{"name": "Magical Silk Hats","frame": "Spell","types": "Spell Persist (5 of your End Phases)","set": "03 - Changing Tides","cardid": "CHT-21","image": "./cards/CHT/21.jpg","deck": "A","duelist": "Yugi"}
-        ,{"name": "Silk Hat Token","frame": "Token Monster","types": "Token Monster Elemental","set": "03 - Changing Tides","cardid": "CHT-22","image": "./cards/CHT/22.jpg","deck": "A","duelist": "Yugi"}
+        ,{"name": "Silk Hat Token","frame": "Token Monster","types": "Token Monster Elemental","set": "03 - Changing Tides","cardid": "CHT-22","image": "./cards/CHT/22.jpg","deck": "C","duelist": "Yugi"}
         ,{"name": "Curse of the Hexagram","frame": "Trap","types": "Trap Equip","set": "03 - Changing Tides","cardid": "CHT-23","image": "./cards/CHT/23.jpg","deck": "A","duelist": "Yugi"}
         ,{"name": "Grappler","frame": "Monster","types": "Monster Reptillian","set": "03 - Changing Tides","cardid": "CHT-24","image": "./cards/CHT/24.jpg","deck": "A","duelist": "Kaiba"}
         ,{"name": "Kentauros","frame": "Monster","types": "Monster Beast","set": "03 - Changing Tides","cardid": "CHT-25","image": "./cards/CHT/25.jpg","deck": "A","duelist": "Kaiba"}
@@ -246,7 +246,7 @@ const CHAPTER1_ARC1_DUELISTKINGDOM = {
         ,{"name": "Shadow Ghoul","frame": "Monster","types": "Monster Undead","set": "05 - Castle Guardians","cardid": "CGU-26","image": "./cards/CGU/26.jpg","deck": "A","duelist": "Brother Mei, Rebecca, Arthur"}
         ,{"name": "Wall Shadow","frame": "Fusion Monster","types": "Fusion Monster Elemental Undead","set": "05 - Castle Guardians","cardid": "CGU-27","image": "./cards/CGU/27.jpg","deck": "B","duelist": "Brother Mei"}
         ,{"name": "Landmine Spider","frame": "Trap","types": "Trap","set": "05 - Castle Guardians","cardid": "CGU-28","image": "./cards/CGU/28.jpg","deck": "A","duelist": "Brother Kyu"}
-        ,{"name": "Landmine Spider Token","frame": "Token Monster","types": "Token Monster Insect","set": "05 - Castle Guardians","cardid": "CGU-29","image": "./cards/CGU/29.jpg","deck": "A","duelist": "Brother Kyu"}
+        ,{"name": "Landmine Spider Token","frame": "Token Monster","types": "Token Monster Insect","set": "05 - Castle Guardians","cardid": "CGU-29","image": "./cards/CGU/29.jpg","deck": "C","duelist": "Brother Kyu"}
         ,{"name": "Demonic Tank of the Labyrinth","frame": "Monster","types": "Monster Demon Machine","set": "05 - Castle Guardians","cardid": "CGU-30","image": "./cards/CGU/30.jpg","deck": "A","duelist": "Brother Kyu"}
         ,{"name": "Chain-Attached Boomerang","frame": "Trap","types": "Trap Equip","set": "05 - Castle Guardians","cardid": "CGU-31","image": "./cards/CGU/31.jpg","deck": "A","duelist": "Jonouchi"}
         ,{"name": "Labyrinth Change","frame": "Spell","types": "Spell","set": "05 - Castle Guardians","cardid": "CGU-32","image": "./cards/CGU/32.jpg","deck": "A","duelist": "Brother Mei"}
@@ -274,7 +274,7 @@ const CHAPTER1_ARC1_DUELISTKINGDOM = {
         ,{"name": "Gargoyle Powered","frame": "Monster","types": "Monster Demon","set": "06 - Shattered Hope","cardid": "SHH-03","image": "./cards/SHH/03.jpg","deck": "A","duelist": "Kaiba"}
         ,{"name": "Magic Lamp","frame": "Trap Monster","types": "Trap Monster Demon","set": "06 - Shattered Hope","cardid": "SHH-04","image": "./cards/SHH/04.jpg","deck": "A","duelist": "Kaiba"}
         ,{"name": "Multiply","frame": "Spell","types": "Spell","set": "06 - Shattered Hope","cardid": "SHH-05","image": "./cards/SHH/05.jpg","deck": "A","duelist": "Yugi"}
-        ,{"name": "Clone Token","frame": "Token Monster","types": "Token Monster Elemental","set": "06 - Shattered Hope","cardid": "SHH-06","image": "./cards/SHH/06.jpg","deck": "A","duelist": "Yugi"}
+        ,{"name": "Clone Token","frame": "Token Monster","types": "Token Monster Elemental","set": "06 - Shattered Hope","cardid": "SHH-06","image": "./cards/SHH/06.jpg","deck": "C","duelist": "Yugi"}
         ,{"name": "The Eye of Truth","frame": "Spell","types": "Spell","set": "06 - Shattered Hope","cardid": "SHH-07","image": "./cards/SHH/07.jpg","deck": "A","duelist": "Yugi"}
         ,{"name": "Sword Stalker of Revenge","frame": "Monster","types": "Monster Demon Warrior","set": "06 - Shattered Hope","cardid": "SHH-08","image": "./cards/SHH/08.jpg","deck": "A","duelist": "Kaiba"}
         ,{"name": "La Jinn the Demonic Spirit of the Lamp","frame": "Monster","types": "Monster Demon","set": "06 - Shattered Hope","cardid": "SHH-09","image": "./cards/SHH/09.jpg","deck": "A","duelist": "Kaiba"}
