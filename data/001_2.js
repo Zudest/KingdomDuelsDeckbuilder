@@ -120,5 +120,68 @@ const CHAPTER1_ARC2_MUSEUM = {
         ,{"name": "Barbarian Rage","frame": "Trap","types": "Trap Continuous","set": "09 - Dungeon of Luck","cardid": "DOL-53","image": "./cards/DOL/53.jpg","deck": "A","duelist": "Jonouchi"}
         ,{"name": "Raremetal Soldier","frame": "Monster","types": "Monster Machine Warrior","set": "09 - Dungeon of Luck","cardid": "DOL-54","image": "./cards/DOL/54.jpg","deck": "A","duelist": "Honda"}
         ,{"name": "Warrior Elimination","frame": "Spell","types": "Spell Equip","set": "09 - Dungeon of Luck","cardid": "DOL-55","image": "./cards/DOL/55.jpg","deck": "A","duelist": "Honda"}
+        
+        ,{"name": "Deckmaster System","frame": "Rule","types": "Rule Game Setup","set": "10 - Virtual Nightmare","cardid": "VIN-01","image": "./cards/VIN/01.jpg","deck": "B","duelist": ""}
+        ,{"name": "Deckmaster Change","frame": "Rule","types": "Rule","set": "10 - Virtual Nightmare","cardid": "VIN-02","image": "./cards/VIN/02.jpg","deck": "B","duelist": ""}
+        ,{"name": "Yugi","frame": "Rule","types": "Rule Duelist Setup","set": "10 - Virtual Nightmare","cardid": "VIN-03","image": "./cards/VIN/03.jpg","deck": "B","duelist": ""}
+        ,{"name": "Oshita","frame": "Rule","types": "Rule Duelist Setup","set": "10 - Virtual Nightmare","cardid": "VIN-04","image": "./cards/VIN/04.jpg","deck": "B","duelist": ""}
+        ,{"name": "Remote Swamp","frame": "Rule","types": "Rule Field Setup","set": "10 - Virtual Nightmare","cardid": "VIN-05","image": "./cards/VIN/05.jpg","deck": "B","duelist": ""}
+        ,{"name": "Deckmaster Kuriboh","frame": "Rule","types": "Rule","set": "10 - Virtual Nightmare","cardid": "VIN-06","image": "./cards/VIN/06.jpg","deck": "B","duelist": "Yugi"}
+        ,{"name": "Deckmaster Deepsea Warrior","frame": "Rule","types": "Rule","set": "10 - Virtual Nightmare","cardid": "VIN-07","image": "./cards/VIN/07.jpg","deck": "B","duelist": "Oshita, The Big Five"}
+        ,{"name": "Deepsea Warrior","frame": "Monster","types": "Monster Aquatic Warrior","set": "10 - Virtual Nightmare","cardid": "VIN-08","image": "./cards/VIN/08.jpg","deck": "A","duelist": "Oshita, The Big Five"}
+        ,{"name": "Ashingray","frame": "Monster","types": "Monster Avian Flying","set": "10 - Virtual Nightmare","cardid": "VIN-09","image": "./cards/VIN/09.jpg","deck": "A","duelist": "Oshita, The Big Five"}
+        ,{"name": "Ipiria","frame": "Monster","types": "Monster Reptillian","set": "10 - Virtual Nightmare","cardid": "VIN-10","image": "./cards/VIN/10.jpg","deck": "A","duelist": "Oshita, The Big Five"}
+        ,{"name": "Phantom Beast King Gazelle","frame": "Monster","types": "Monster Beast Illusion","set": "10 - Virtual Nightmare","cardid": "VIN-11","image": "./cards/VIN/11.jpg","deck": "A","duelist": "Yugi"}
+        ,{"name": "Baphomet","frame": "Monster","types": "Monster Demon Flying","set": "10 - Virtual Nightmare","cardid": "VIN-12","image": "./cards/VIN/12.jpg","deck": "A","duelist": "Yugi"}
+        ,{"name": "Chimaera the Winged Phantom Beast","frame": "Fusion Monster","types": "Fusion Monster Beast Illusion Flying","set": "10 - Virtual Nightmare","cardid": "VIN-13","image": "./cards/VIN/13.jpg","deck": "B","duelist": "Yugi"}
+        ,{"name": "Yowie","frame": "Monster","types": "Monster Reptillian","set": "10 - Virtual Nightmare","cardid": "VIN-14","image": "./cards/VIN/14.jpg","deck": "A","duelist": "Oshita, The Big Five"}
+        ,{"name": "Premature Burial","frame": "Spell","types": "Spell Equip","set": "10 - Virtual Nightmare","cardid": "VIN-15","image": "./cards/VIN/15.jpg","deck": "A","duelist": "Oshita, The Big Five"}
+        ,{"name": "Ruklamba the Spirit King","frame": "Monster","types": "Monster Demon Reptillian","set": "10 - Virtual Nightmare","cardid": "VIN-16","image": "./cards/VIN/16.jpg","deck": "A","duelist": "Oshita, The Big Five"}
+        ,{"name": "Wall of Illusion","frame": "Trap Monster","types": "Trap Monster Demon Illusion","set": "10 - Virtual Nightmare","cardid": "VIN-17","image": "./cards/VIN/17.jpg","deck": "A","duelist": "Oshita, The Big Five"}
+        ,{"name": "Snake Fangs Ritual","frame": "Spell","types": "Spell Persist (until the Ritual is fulfiled)","set": "10 - Virtual Nightmare","cardid": "VIN-18","image": "./cards/VIN/18.jpg","deck": "A","duelist": "Oshita, The Big Five"}
+        ,{"name": "Rainbow Snake Eingana","frame": "Ritual Monster","types": "Ritual Monster Reptillian","set": "10 - Virtual Nightmare","cardid": "VIN-19","image": "./cards/VIN/19.jpg","deck": "B","duelist": "Oshita, The Big Five"}
+        ,{"name": "Rainbow-Colored Blessing","frame": "Spell","types": "Spell Equip","set": "10 - Virtual Nightmare","cardid": "VIN-20","image": "./cards/VIN/20.jpg","deck": "A","duelist": "Yugi"}
+        ,{"name": "Anzu","frame": "Rule","types": "Rule Duelist Setup","set": "10 - Virtual Nightmare","cardid": "VIN-21","image": "./cards/VIN/21.jpg","deck": "B","duelist": ""}
+        ,{"name": "Otaki","frame": "Rule","types": "Rule Duelist Setup","set": "10 - Virtual Nightmare","cardid": "VIN-22","image": "./cards/VIN/22.jpg","deck": "B","duelist": ""}
+        ,{"name": "Polar Sea","frame": "Rule","types": "Rule Field Setup","set": "10 - Virtual Nightmare","cardid": "VIN-23","image": "./cards/VIN/23.jpg","deck": "B","duelist": ""}
+        ,{"name": "Deckmaster Fire Sorcerer","frame": "Rule","types": "Rule","set": "10 - Virtual Nightmare","cardid": "VIN-24","image": "./cards/VIN/24.jpg","deck": "B","duelist": "Anzu"}
+        ,{"name": "Deckmaster Nightmare Penguin","frame": "Rule","types": "Rule","set": "10 - Virtual Nightmare","cardid": "VIN-25","image": "./cards/VIN/25.jpg","deck": "B","duelist": "Otaki, The Big Five"}
+        ,{"name": "Fire Sorcerer","frame": "Monster","types": "Monster Spellcaster Fireblast","set": "10 - Virtual Nightmare","cardid": "VIN-26","image": "./cards/VIN/26.jpg","deck": "A","duelist": "Anzu"}
+        ,{"name": "Nightmare Penguin","frame": "Monster","types": "Monster Aquatic","set": "10 - Virtual Nightmare","cardid": "VIN-27","image": "./cards/VIN/27.jpg","deck": "A","duelist": "Otaki, The Big Five"}
+        ,{"name": "Ancient Elf","frame": "Monster","types": "Monster Spellcaster","set": "10 - Virtual Nightmare","cardid": "VIN-28","image": "./cards/VIN/28.jpg","deck": "A","duelist": "Anzu"}
+        ,{"name": "Seasarion","frame": "Monster","types": "Monster Aquatic","set": "10 - Virtual Nightmare","cardid": "VIN-29","image": "./cards/VIN/29.jpg","deck": "A","duelist": "Otaki, The Big Five"}
+        ,{"name": "Large Cold Wave","frame": "Spell","types": "Spell","set": "10 - Virtual Nightmare","cardid": "VIN-30","image": "./cards/VIN/30.jpg","deck": "A","duelist": "Otaki, The Big Five"}
+        ,{"name": "Gemini Elf","frame": "Monster","types": "Monster Spellcaster","set": "10 - Virtual Nightmare","cardid": "VIN-31","image": "./cards/VIN/31.jpg","deck": "A","duelist": "Anzu"}
+        ,{"name": "Cyclone","frame": "Spell","types": "Spell","set": "10 - Virtual Nightmare","cardid": "VIN-32","image": "./cards/VIN/32.jpg","deck": "A","duelist": "Anzu"}
+        ,{"name": "Gust","frame": "Trap","types": "Trap","set": "10 - Virtual Nightmare","cardid": "VIN-33","image": "./cards/VIN/33.jpg","deck": "A","duelist": "Otaki, The Big Five"}
+        ,{"name": "Blizzard","frame": "Trap","types": "Trap","set": "10 - Virtual Nightmare","cardid": "VIN-34","image": "./cards/VIN/34.jpg","deck": "A","duelist": "Otaki, The Big Five"}
+        ,{"name": "Offerings to the Dead","frame": "Spell","types": "Spell","set": "10 - Virtual Nightmare","cardid": "VIN-35","image": "./cards/VIN/35.jpg","deck": "A","duelist": "Anzu"}
+        ,{"name": "Flying Penguin","frame": "Monster","types": "Monster Aquatic Flying","set": "10 - Virtual Nightmare","cardid": "VIN-36","image": "./cards/VIN/36.jpg","deck": "A","duelist": "Otaki, The Big Five"}
+        ,{"name": "Penguin Sword","frame": "Spell","types": "Spell Equip","set": "10 - Virtual Nightmare","cardid": "VIN-37","image": "./cards/VIN/37.jpg","deck": "A","duelist": "Otaki, The Big Five"}
+        ,{"name": "Pot of Greed","frame": "Spell","types": "Spell","set": "10 - Virtual Nightmare","cardid": "VIN-38","image": "./cards/VIN/38.jpg","deck": "A","duelist": "Anzu, Jonouchi"}
+        ,{"name": "Transparent Angel","frame": "Monster","types": "Monster Angel Flying","set": "10 - Virtual Nightmare","cardid": "VIN-39","image": "./cards/VIN/39.jpg","deck": "A","duelist": "Anzu, Ooka, The Big Five"}
+        ,{"name": "Bolt Penguin","frame": "Monster","types": "Monster Aquatic Thunderblast","set": "10 - Virtual Nightmare","cardid": "VIN-40","image": "./cards/VIN/40.jpg","deck": "A","duelist": "Otaki, The Big Five"}
+        ,{"name": "Maha Vailo","frame": "Monster","types": "Monster Spellcaster Thunderblast","set": "10 - Virtual Nightmare","cardid": "VIN-41","image": "./cards/VIN/41.jpg","deck": "A","duelist": "Anzu"}
+        ,{"name": "Angel's Charity","frame": "Spell","types": "Spell","set": "10 - Virtual Nightmare","cardid": "VIN-42","image": "./cards/VIN/42.jpg","deck": "A","duelist": "Anzu"}
+        ,{"name": "Revenge Sacrifice","frame": "Trap","types": "Trap","set": "10 - Virtual Nightmare","cardid": "VIN-43","image": "./cards/VIN/43.jpg","deck": "A","duelist": "Otaki, The Big Five"}
+        ,{"name": "Invincible Glacier - Defend Iceberg","frame": "Monster","types": "Monster Frost Protector","set": "10 - Virtual Nightmare","cardid": "VIN-44","image": "./cards/VIN/44.jpg","deck": "A","duelist": "Otaki, The Big Five"}
+        ,{"name": "Penguin Torpedo","frame": "Monster","types": "Monster Aquatic Machine","set": "10 - Virtual Nightmare","cardid": "VIN-45","image": "./cards/VIN/45.jpg","deck": "A","duelist": "Otaki, The Big Five"}
+        ,{"name": "Ocean of Regeneration","frame": "Spell","types": "Spell Continuous","set": "10 - Virtual Nightmare","cardid": "VIN-46","image": "./cards/VIN/46.jpg","deck": "A","duelist": "Otaki, The Big Five"}
+        ,{"name": "Sage's Jewel","frame": "Spell","types": "Spell","set": "10 - Virtual Nightmare","cardid": "VIN-47","image": "./cards/VIN/47.jpg","deck": "A","duelist": "Anzu"}
+        ,{"name": "Melting Ice","frame": "Rule","types": "Rule","set": "10 - Virtual Nightmare","cardid": "VIN-48","image": "./cards/VIN/48.jpg","deck": "B","duelist": "Anzu"}
+        ,{"name": "Jonouchi","frame": "Rule","types": "Rule Duelist Setup","set": "10 - Virtual Nightmare","cardid": "VIN-49","image": "./cards/VIN/49.jpg","deck": "B","duelist": ""}
+        ,{"name": "Ooka","frame": "Rule","types": "Rule Duelist Setup","set": "10 - Virtual Nightmare","cardid": "VIN-50","image": "./cards/VIN/50.jpg","deck": "B","duelist": ""}
+        ,{"name": "Grand Court Room","frame": "Rule","types": "Rule Field Setup","set": "10 - Virtual Nightmare","cardid": "VIN-51","image": "./cards/VIN/51.jpg","deck": "B","duelist": ""}
+        ,{"name": "Deckmaster Flame Swordsman","frame": "Rule","types": "Rule","set": "10 - Virtual Nightmare","cardid": "VIN-52","image": "./cards/VIN/52.jpg","deck": "B","duelist": "Jonouchi"}
+        ,{"name": "Deckmaster Judge Man","frame": "Rule","types": "Rule","set": "10 - Virtual Nightmare","cardid": "VIN-53","image": "./cards/VIN/53.jpg","deck": "B","duelist": "Ooka, The Big Five"}
+        ,{"name": "Hysteric Angel","frame": "Monster","types": "Monster Angel Support Flying","set": "10 - Virtual Nightmare","cardid": "VIN-54","image": "./cards/VIN/54.jpg","deck": "A","duelist": "Ooka, The Big Five"}
+        ,{"name": "Naraka Pitfall","frame": "Spell Trap","types": "Spell Trap","set": "10 - Virtual Nightmare","cardid": "VIN-55","image": "./cards/VIN/55.jpg","deck": "A","duelist": "Jonouchi"}
+        ,{"name": "Chaos Wizard","frame": "Monster","types": "Monster Warrior","set": "10 - Virtual Nightmare","cardid": "VIN-56","image": "./cards/VIN/56.jpg","deck": "A","duelist": "Ooka, The Big Five"}
+        ,{"name": "Plea Bargain of the Demon World","frame": "Spell","types": "Spell Equip","set": "10 - Virtual Nightmare","cardid": "VIN-57","image": "./cards/VIN/57.jpg","deck": "A","duelist": "Ooka, The Big Five"}
+        ,{"name": "Ha Des' Leading Question","frame": "Spell","types": "Spell Continuous","set": "10 - Virtual Nightmare","cardid": "VIN-58","image": "./cards/VIN/58.jpg","deck": "A","duelist": "Ooka, The Big Five"}
+        ,{"name": "Gamble","frame": "Trap","types": "Trap Continuous","set": "10 - Virtual Nightmare","cardid": "VIN-59","image": "./cards/VIN/59.jpg","deck": "A","duelist": "Jonouchi"}
+        ,{"name": "Dragoness the Magic-Equipped Knight","frame": "Monster","types": "Monster Warrior Flying","set": "10 - Virtual Nightmare","cardid": "VIN-60","image": "./cards/VIN/60.jpg","deck": "A","duelist": "Ooka, The Big Five"}
+        ,{"name": "Ally-Killing Demon Sword - Burning Soul","frame": "Spell","types": "Spell Equip","set": "10 - Virtual Nightmare","cardid": "VIN-61","image": "./cards/VIN/61.jpg","deck": "A","duelist": "Jonouchi"}
+        ,{"name": "Arduous Decision","frame": "Spell","types": "Spell","set": "10 - Virtual Nightmare","cardid": "VIN-62","image": "./cards/VIN/62.jpg","deck": "A","duelist": "Jonouchi"}
     ]
 };
