@@ -26,7 +26,7 @@ const CHAPTER1_ARC1_DUELISTKINGDOM = {
         ,{"name": "Beaver Warrior","frame": "Monster","types": "Monster Beast Warrior","set": "01 - Seal of Exodia","cardid": "SOE-24","image": "./cards/SOE/24.jpg","deck": "A","duelist": "Yugi"}
         ,{"name": "Swords of Revealing Light","frame": "Spell","types": "Spell Persist (3 opponent End Phases)","set": "01 - Seal of Exodia","cardid": "SOE-25","image": "./cards/SOE/25.jpg","deck": "A","duelist": "Yugi, Sugoroku"}
         ,{"name": "Rude Kaiser","frame": "Monster","types": "Monster Reptillian Warrior","set": "01 - Seal of Exodia","cardid": "SOE-26","image": "./cards/SOE/26.jpg","deck": "A","duelist": "Yugi, Kaiba, Jonouchi"}
-        ,{"name": "Judge Man","frame": "Monster","types": "Monster Warrior","set": "01 - Seal of Exodia","cardid": "SOE-27","image": "./cards/SOE/27.jpg","deck": "A","duelist": "Kaiba"}
+        ,{"name": "Judge Man","frame": "Monster","types": "Monster Warrior","set": "01 - Seal of Exodia","cardid": "SOE-27","image": "./cards/SOE/27.jpg","deck": "A","duelist": "Kaiba, Ooka, The Big Five"}
         ,{"name": "Dark Magician","frame": "Monster","types": "Monster Spellcaster","set": "01 - Seal of Exodia","cardid": "SOE-28","image": "./cards/SOE/28.jpg","deck": "A","duelist": "Yugi, Sugoroku"}
         ,{"name": "Heart of the Cards","frame": "Rule","types": "Rule Symbol","set": "01 - Seal of Exodia","cardid": "SOE-29","image": "./cards/SOE/29.jpg","deck": "B","duelist": "Yugi"}
         ,{"name": "Head of the Sealed One","frame": "Divine Monster","types": "Divine Monster Spellcaster Sealed Palace God (Hierarchy 1)","set": "01 - Seal of Exodia","cardid": "SOE-30","image": "./cards/SOE/30.jpg","deck": "A","duelist": "Yugi"}
@@ -56,7 +56,7 @@ const CHAPTER1_ARC1_DUELISTKINGDOM = {
         ,{"name": "Jar Djinn","frame": "Monster","types": "Monster Spellcaster","set": "01 - Seal of Exodia","cardid": "SOE-54","image": "./cards/SOE/54.jpg","deck": "A","duelist": "Pegasus"}
         ,{"name": "Sun Shower","frame": "Trap","types": "Trap","set": "01 - Seal of Exodia","cardid": "SOE-55","image": "./cards/SOE/55.jpg","deck": "A","duelist": "Pegasus"}
         ,{"name": "Undead Warrior","frame": "Monster","types": "Monster Undead Warrior","set": "01 - Seal of Exodia","cardid": "SOE-56","image": "./cards/SOE/56.jpg","deck": "A","duelist": "Yugi"}
-        ,{"name": "Book of Secret Arts","frame": "Spell","types": "Spell Equip","set": "01 - Seal of Exodia","cardid": "SOE-57","image": "./cards/SOE/57.jpg","deck": "A","duelist": "Yugi"}
+        ,{"name": "Book of Secret Arts","frame": "Spell","types": "Spell Equip","set": "01 - Seal of Exodia","cardid": "SOE-57","image": "./cards/SOE/57.jpg","deck": "A","duelist": "Yugi, Anzu"}
         ,{"name": "Illusionist Faceless Mage","frame": "Monster","types": "Monster Illusion Spellcaster","set": "01 - Seal of Exodia","cardid": "SOE-58","image": "./cards/SOE/58.jpg","deck": "A","duelist": "Pegasus"}
         ,{"name": "Eye of Illusion","frame": "Spell","types": "Spell Equip","set": "01 - Seal of Exodia","cardid": "SOE-59","image": "./cards/SOE/59.jpg","deck": "A","duelist": "Pegasus"}
         ,{"name": "Power of Hypnosis","frame": "Rule","types": "Rule","set": "01 - Seal of Exodia","cardid": "SOE-60","image": "./cards/SOE/60.jpg","deck": "B","duelist": "Pegasus"}
@@ -83,7 +83,7 @@ const CHAPTER1_ARC1_DUELISTKINGDOM = {
         ,{"name": "Roachball","frame": "Monster","types": "Monster Insect","set": "02 - The Star Chasers","cardid": "TSC-18","image": "./cards/TSC/18.jpg","deck": "A","duelist": "Haga"}
         ,{"name": "Big Ant","frame": "Monster","types": "Monster Insect","set": "02 - The Star Chasers","cardid": "TSC-19","image": "./cards/TSC/19.jpg","deck": "A","duelist": "Haga"}
         ,{"name": "Sickle Killer","frame": "Monster","types": "Monster Insect","set": "02 - The Star Chasers","cardid": "TSC-20","image": "./cards/TSC/20.jpg","deck": "A","duelist": "Haga"}
-        ,{"name": "Holy Barrier - Mirror Force","frame": "Trap","types": "Trap","set": "02 - The Star Chasers","cardid": "TSC-21","image": "./cards/TSC/21.jpg","deck": "A","duelist": "Yugi"}
+        ,{"name": "Holy Barrier - Mirror Force","frame": "Trap","types": "Trap","set": "02 - The Star Chasers","cardid": "TSC-21","image": "./cards/TSC/21.jpg","deck": "A","duelist": "Yugi, Anzu"}
         ,{"name": "Larva Moth","frame": "Monster","types": "Monster Insect","set": "02 - The Star Chasers","cardid": "TSC-22","image": "./cards/TSC/22.jpg","deck": "A","duelist": "Haga"}
         ,{"name": "Monster Recovery","frame": "Spell","types": "Spell","set": "02 - The Star Chasers","cardid": "TSC-23","image": "./cards/TSC/23.jpg","deck": "A","duelist": "Yugi"}
         ,{"name": "Kuriboh","frame": "Monster","types": "Monster Demon","set": "02 - The Star Chasers","cardid": "TSC-24","image": "./cards/TSC/24.jpg","deck": "A","duelist": "Yugi"}
@@ -140,7 +140,7 @@ const CHAPTER1_ARC1_DUELISTKINGDOM = {
         ,{"name": "Curse of the Hexagram","frame": "Trap","types": "Trap Equip","set": "03 - Changing Tides","cardid": "CHT-23","image": "./cards/CHT/23.jpg","deck": "A","duelist": "Yugi"}
         ,{"name": "Grappler","frame": "Monster","types": "Monster Reptillian","set": "03 - Changing Tides","cardid": "CHT-24","image": "./cards/CHT/24.jpg","deck": "A","duelist": "Kaiba"}
         ,{"name": "Kentauros","frame": "Monster","types": "Monster Beast","set": "03 - Changing Tides","cardid": "CHT-25","image": "./cards/CHT/25.jpg","deck": "A","duelist": "Kaiba"}
-        ,{"name": "Holy Elf","frame": "Monster","types": "Monster Spellcaster Blessed","set": "03 - Changing Tides","cardid": "CHT-26","image": "./cards/CHT/26.jpg","deck": "A","duelist": "Yugi"}
+        ,{"name": "Holy Elf","frame": "Monster","types": "Monster Spellcaster Blessed","set": "03 - Changing Tides","cardid": "CHT-26","image": "./cards/CHT/26.jpg","deck": "A","duelist": "Yugi, Ooka, The Big Five"}
         ,{"name": "Attack Nullification","frame": "Spell","types": "Spell","set": "03 - Changing Tides","cardid": "CHT-27","image": "./cards/CHT/27.jpg","deck": "A","duelist": "Kaiba"}
         ,{"name": "Resurrection of the Dead","frame": "Spell","types": "Spell","set": "03 - Changing Tides","cardid": "CHT-28","image": "./cards/CHT/28.jpg","deck": "A","duelist": "Yugi, Kaiba, Mai, Sugoroku"}
         ,{"name": "Bond with Blue-Eyes","frame": "Rule","types": "Rule Symbol","set": "03 - Changing Tides","cardid": "CHT-29","image": "./cards/CHT/29.jpg","deck": "B","duelist": ""}
