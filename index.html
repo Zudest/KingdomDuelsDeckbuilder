@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Kingdom Duels Deckbuilder</title>
 </head>
+
 <body>
     <div class="container">
         <div class="cards-container">
@@ -32,7 +34,7 @@
                 <div class="import-export">
                     <div class="button-group">
                         <button class="button-alt" onclick="document.getElementById('fileInput').click()">Import Deck</button>
-                        <button class="button-alt" onclick="exportDeckJSON()">Export as JSON</button>
+                        <button class="button-alt" onclick="exportDeckJSON()">Export Deck</button>
                     </div>
                     <p id="importError">Error importing the deck</p>
                 </div>
@@ -51,7 +53,11 @@
             </div>
             <button class="button-warning" onclick="clearDeck()">Reset Decks</button>
             <button class="button" onclick="showDeckPreview()">Preview</button>
-            <button class="button" onclick="saveDeck()">Save as Text</button>
+            <button class="button" onclick="saveDeck()">Save for TTS</button>
+            <div class="tooltip-container">
+                <div class="question-icon" role="img" aria-label="Help">?</div>
+                <div class="tooltip" role="tooltip">To import your deck in Tabletop Simulator press "Save for TTS" and save the file into your Steam Saved Objects folder, that is usually in Documents → My Games → Tabletop Simulator → Saves → Saved Objects. Then load the object from the game itself.</div>
+            </div>
         </div>
     </div>
 
@@ -68,12 +74,13 @@
 
     <input type="file" id="fileInput" accept=".json" style="display: none;">
 
-    <!--DATA--> 
+    <!--DATA-->
+    <script src="data/000_T.js"></script>
     <script src="data/001_1.js"></script>
     <script src="data/001_2.js"></script>
 
     <script>
-        // Configuración de límites de cartas y mazos
+        // Card and decks limits
         const CARD_DISPLAY_LIMIT = 100;
         const DECK_LIMITS = {
             A: 30,
@@ -85,7 +92,7 @@
         let deck = [];
         let filteredCards = [...cardsData];
 
-        // Inicializar datos de cartas
+        // Card data init (load everything)
         function loadCardsData() {
             cardsData = CARDS_DATABASE.cards;
             filteredCards = [...cardsData];
@@ -99,16 +106,20 @@
         // Import functionality
         document.querySelector('.button-group').innerHTML = `
             <button class="button-alt" onclick="document.getElementById('fileInput').click()">Import Deck</button>
-            <button class="button-alt" onclick="exportDeckJSON()">Export as JSON</button>
+            <button class="button-alt" onclick="exportDeckJSON()">Export Deck</button>
         `;
 
-        document.getElementById('fileInput').addEventListener('change', function(e) {
+        document.getElementById('fileInput').addEventListener('change', function (e) {
             const file = e.target.files[0];
             if (!file) return;
             importDeck(file);
         });
 
-        // Función para importar mazo
+        //#########################
+        //#### IMPORT / EXPORT ####
+        //#########################
+
+        // Import Deck as a JSON file that was previously exported
         async function importDeck(file) {
             const importError = document.getElementById('importError');
             importError.style.display = 'none';
@@ -118,16 +129,16 @@
             try {
                 const fileContent = await file.text();
                 const importedDeck = JSON.parse(fileContent);
-                
-                // Verificar que el archivo tenga el formato correcto
+
+                // Verify proper file format
                 if (!Array.isArray(importedDeck.cards)) {
                     throw new Error('Invalid file format');
                 }
 
-                // Limpiar el mazo actual
+                // Clear current deck
                 deck = [];
 
-                // Agregar cada carta del archivo importado
+                // Add each card from the imported file
                 importedDeck.cards.forEach(cardCode => {
                     const card = cardsData.find(c => c.cardid === cardCode);
                     if (card) {
@@ -145,7 +156,7 @@
             }
         }
 
-        // Función para exportar mazo como JSON
+        // Export deck as JSON to later import to edit
         function exportDeckJSON() {
             const deckData = {
                 cards: deck.map(card => card.cardid)
@@ -160,6 +171,10 @@
             window.URL.revokeObjectURL(url);
         }
 
+        //#################
+        //#### FILTERS ####
+        //#################
+
         function initializeFilters() {
             const sets = [...new Set(cardsData.map(card => card.set))];
             const frames = [...new Set(cardsData.map(card => card.frame))].sort();
@@ -173,7 +188,7 @@
                 option.textContent = set;
                 setFilter.appendChild(option);
             });
-            
+
             frames.forEach(frame => {
                 const option = document.createElement('option');
                 option.value = frame;
@@ -202,17 +217,17 @@
             renderCards();
         }
 
-        // Check and apply URL Set filter
+        // Check and apply URL Set filter (filter by set directly on the url)
         function checkUrlFilter() {
             // Remove the # from the hash if it exists
             const hash = window.location.hash.replace('#', '');
-            
+
             if (hash) {
                 // Try to find a matching set
                 const setFilter = document.getElementById('setFilter');
                 const matchingSet = Array.from(setFilter.options)
                     .find(option => option.value.includes(hash));
-                
+
                 if (matchingSet) {
                     setFilter.value = matchingSet.value;
                     applyFilters();
@@ -220,11 +235,14 @@
             }
         }
 
+        //################
+        //#### RENDER ####
+        //################
+
         function renderCards() {
             const cardGrid = document.getElementById('cardGrid');
             cardGrid.innerHTML = '';
 
-            // Limit the total display of cards
             totalCards = filteredCards.length;
             filteredCards = filteredCards.slice(0, CARD_DISPLAY_LIMIT);
 
@@ -271,7 +289,7 @@
                 <div class="import-export">
                     <div class="button-group">
                         <button class="button-alt" onclick="document.getElementById('fileInput').click()">Import Deck</button>
-                        <button class="button-alt" onclick="exportDeckJSON()">Export as JSON</button>
+                        <button class="button-alt" onclick="exportDeckJSON()">Export Deck</button>
                     </div>
                     <p id="importError">Error importing the deck</p>
                 </div>
@@ -292,7 +310,7 @@
                 alert(`The Token Pile has reached its limit of ${DECK_LIMITS.C} cards`);
                 return;
             }
-            
+
             deck.push(card);
             renderDeck();
             updateDeckStatus();
@@ -311,21 +329,21 @@
                 cardCounts[card.cardid] = (cardCounts[card.cardid] || 0) + 1;
             });
 
-            // Ordenar las cartas por mazo
+            // Order the cards depending on deck
             const sortedCards = Object.entries(cardCounts).map(([cardid, count]) => {
                 const card = deck.find(c => c.cardid === cardid);
                 return { card, count };
             }).sort((a, b) => {
-               // First, sort by deck
+                // First, sort by deck
                 if (a.card.deck !== b.card.deck) {
                     return a.card.deck.localeCompare(b.card.deck);
                 }
-                
+
                 // If decks are the same, then sort by card type
                 if (a.card.types !== b.card.types) {
                     return a.card.types.localeCompare(b.card.types);
                 }
-                
+
                 // If card types are also the same, sort by name
                 return a.card.name.localeCompare(b.card.name);
             });
@@ -338,10 +356,10 @@
                     <span>${card.name} (${count})</span>
                     <button onclick="removeFromDeck('${card.cardid}')">x</button>
                 `;
-                
+
                 if (card.deck === 'A') {
                     deckListA.appendChild(deckCard);
-                } else if(card.deck === 'B') {
+                } else if (card.deck === 'B') {
                     deckListB.appendChild(deckCard);
                 } else {
                     deckListC.appendChild(deckCard);
@@ -358,13 +376,18 @@
             }
         }
 
-        function saveDeck() {
+        //#################
+        //#### BUTTONS ####
+        //#################
+        
+        //NOTE: Not used at the moment
+        function saveDeckTXT() {
             const deckText = deck.map(card => {
-                const deckType = card.deck === 'A' ? "Main Deck" 
-                                : card.deck === 'B' ? "Extra Deck" 
-                                : "Tokens";
+                const deckType = card.deck === 'A' ? "Main Deck"
+                    : card.deck === 'B' ? "Extra Deck"
+                        : "Tokens";
                 return `${card.cardid} (${card.name}) - ${deckType}`
-                }).join('\n');
+            }).join('\n');
             const blob = new Blob([deckText], { type: 'text/plain' });
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
@@ -374,23 +397,116 @@
             window.URL.revokeObjectURL(url);
         }
 
+        function transformToTTS() {
+            const customDeckMapping = {};
+            let currentDeckKey = 1;
+
+            const deckGroups = deck.reduce((acc, card) => {
+                const deck = card.deck || 'Default';
+                if (!acc[deck]) {
+                    acc[deck] = [];
+                }
+                acc[deck].push(card);
+                return acc;
+            }, {});
+
+            // Sort keys alphabetically in a new ordered object
+            const sortedDeckGroups = Object.keys(deckGroups)
+                .sort() 
+                .reduce((acc, key) => {
+                    acc[key] = deckGroups[key];
+                    return acc;
+                }, {});
+
+            const cardImagePath = "https://zudest.github.io/KingdomDuelsDeckbuilder/";
+            const defaultCardBack = cardImagePath + "cards/Cardback.png";
+
+            // Each deck group is a different object
+            const objectStates = Object.entries(sortedDeckGroups).map(([deckName, cards], deckIndex) => {
+                const customDeckMapping = {};
+
+                const containedObjects = cards.map((card, index) => {
+                    const cardId = (index + 1) * 100;
+
+                    customDeckMapping[1 + index] = {
+                        FaceURL: card.image.replace("./", cardImagePath),
+                        BackURL: defaultCardBack,
+                        NumHeight: 1,
+                        NumWidth: 1,
+                        BackIsHidden: true,
+                        UniqueBack: false,
+                        Type: 1
+                    };
+
+                    return {
+                        CardID: cardId,
+                        Name: "Card",
+                        Nickname: card.name,
+                        Transform: {
+                            posX: 0,
+                            posY: 0,
+                            posZ: 0,
+                            rotX: 0,
+                            rotY: 180,
+                            rotZ: 180,
+                            scaleX: 1,
+                            scaleY: 1,
+                            scaleZ: 1
+                        }
+                    };
+                });
+
+                return {
+                    Name: "DeckCustom",
+                    ContainedObjects: containedObjects,
+                    DeckIDs: containedObjects.map(obj => obj.CardID),
+                    CustomDeck: customDeckMapping,
+                    Transform: {
+                        posX: deckIndex * 2.2, // Offset each deck horizontally
+                        posY: deckIndex * 1,
+                        posZ: 0,
+                        rotX: 0,
+                        rotY: 180,
+                        rotZ: 0,
+                        scaleX: 1,
+                        scaleY: 1,
+                        scaleZ: 1
+                    }
+                };
+            });
+
+            return { ObjectStates: objectStates };
+        }
+
+        function saveDeck() {
+            const outputJson = transformToTTS();
+
+            const jsonString = JSON.stringify(outputJson, null, 4);
+            const blob = new Blob([jsonString], { type: 'application/json' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'tabletop_simulator_export.json';
+            link.click();
+        }
+
+
         function showDeckPreview() {
             const previewContainer = document.getElementById('previewContainer');
             const previewGrid = document.getElementById('previewGrid');
             previewGrid.innerHTML = '';
 
-            // Ordenar las cartas: primero mazo A, despues mazo B
+            // Order the cards depending on deck
             const sortedDeck = [...deck].sort((a, b) => {
                 // First, sort by deck
                 if (a.deck !== b.deck) {
                     return a.deck.localeCompare(b.deck);
                 }
-                
+
                 // If decks are the same, then sort by card type
                 if (a.types !== b.types) {
                     return a.types.localeCompare(b.types);
                 }
-                
+
                 // If card types are also the same, sort by name
                 return a.name.localeCompare(b.name);
             });
@@ -421,29 +537,34 @@
         // Function to show card popup
         function showCardPopup(event, imageUrl) {
             event.preventDefault(); // Prevent default right-click menu
-            
+
             const popup = document.getElementById('cardPopup');
             const popupImage = document.getElementById('popupImage');
-            
+
             // Set image source
             popupImage.src = imageUrl;
-            
+
             // Position popup near cursor
             popup.style.left = event.pageX + 'px';
             popup.style.top = event.pageY + 'px';
-            
+
             // Show popup
             popup.style.display = 'block';
         }
 
         // Add event listener to close popup when clicking outside
-        document.addEventListener('click', function(event) {
+        document.addEventListener('click', function (event) {
             const popup = document.getElementById('cardPopup');
             if (event.target !== popup && !popup.contains(event.target)) {
                 popup.style.display = 'none';
             }
         });
 
+        //###################
+        //#### CORE LOOP ####
+        //###################
+
+        // Filter listeners
         document.getElementById('nameFilter').addEventListener('input', applyFilters);
         document.getElementById('codeFilter').addEventListener('input', applyFilters);
         document.getElementById('duelistFilter').addEventListener('input', applyFilters);
@@ -457,16 +578,18 @@
         updateDeckStatus();
 
         document.addEventListener('DOMContentLoaded', loadCardsData);
-        
+
         //##############################################################################################################################
-        
+
         const CARDS_DATABASE = {
             "cards": [
                 ...CHAPTER1_ARC1_DUELISTKINGDOM.cards,
-                ...CHAPTER1_ARC2_MUSEUM.cards
+                ...CHAPTER1_ARC2_MUSEUM.cards,
+                ...EXTRA_TERRAINS.cards
             ]
         };
-        
+
     </script>
 </body>
+
 </html>
