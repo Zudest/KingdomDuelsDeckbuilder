@@ -39,7 +39,7 @@ const CHAPTER1_ARC1_DUELISTKINGDOM = {
         ,{"name": "Anzu","frame": "Rule","types": "Rule Duelist Setup","set": "01 - Seal of Exodia","cardid": "SOE-37","image": "./cards/SOE/37.jpg","deck": "B","duelist": ""}
         ,{"name": "Jonouchi","frame": "Rule","types": "Rule Duelist Setup","set": "01 - Seal of Exodia","cardid": "SOE-38","image": "./cards/SOE/38.jpg","deck": "B","duelist": ""}
         ,{"name": "Cavern Devil - Ogre Rock","frame": "Monster","types": "Monster Elemental","set": "01 - Seal of Exodia","cardid": "SOE-39","image": "./cards/SOE/39.jpg","deck": "A","duelist": "Jonouchi"}
-        ,{"name": "Happy Lover","frame": "Monster","types": "Monster Angel Flying","set": "01 - Seal of Exodia","cardid": "SOE-40","image": "./cards/SOE/40.jpg","deck": "A","duelist": "Anzu"}
+        ,{"name": "Happy Lover","frame": "Monster","types": "Monster Angel Flying","set": "01 - Seal of Exodia","cardid": "SOE-40","image": "./cards/SOE/40.jpg","deck": "A","duelist": "Anzu, Bakura"}
         ,{"name": "Breath of God","frame": "Spell","types": "Spell","set": "01 - Seal of Exodia","cardid": "SOE-41","image": "./cards/SOE/41.jpg","deck": "A","duelist": "Anzu, Yugi"}
         ,{"name": "Haga","frame": "Rule","types": "Rule Duelist Setup","set": "01 - Seal of Exodia","cardid": "SOE-42","image": "./cards/SOE/42.jpg","deck": "B","duelist": ""}
         ,{"name": "Ryuzaki","frame": "Rule","types": "Rule Duelist Setup","set": "01 - Seal of Exodia","cardid": "SOE-43","image": "./cards/SOE/43.jpg","deck": "B","duelist": ""}
@@ -62,7 +62,7 @@ const CHAPTER1_ARC1_DUELISTKINGDOM = {
         ,{"name": "Power of Hypnosis","frame": "Rule","types": "Rule","set": "01 - Seal of Exodia","cardid": "SOE-60","image": "./cards/SOE/60.jpg","deck": "B","duelist": "Pegasus"}
         ,{"name": "Elf Swordsman","frame": "Monster","types": "Monster Warrior","set": "01 - Seal of Exodia","cardid": "SOE-61","image": "./cards/SOE/61.jpg","deck": "A","duelist": "Yugi, Sugoroku"}
         ,{"name": "Demon's Summon","frame": "Monster","types": "Monster Demon Thunderblast","set": "01 - Seal of Exodia","cardid": "SOE-62","image": "./cards/SOE/62.jpg","deck": "A","duelist": "Yugi, Sugoroku"}
-        
+
         ,{"name": "Duelist Kingdom","frame": "Emblem","types": "Emblem (This card cannot be used in a Duel)","set": "02 - The Star Chasers","cardid": "TSC-01","image": "./cards/TSC/01.jpg","deck": "A","duelist": ""}
         ,{"name": "Set Sail for the Kingdom","frame": "Emblem","types": "Emblem (This card cannot be used in a Duel)","set": "02 - The Star Chasers","cardid": "TSC-02","image": "./cards/TSC/02.jpg","deck": "A","duelist": ""}
         ,{"name": "Duelist's Glove","frame": "Emblem","types": "Emblem (This card cannot be used in a Duel)","set": "02 - The Star Chasers","cardid": "TSC-03","image": "./cards/TSC/03.jpg","deck": "A","duelist": ""}
@@ -114,7 +114,7 @@ const CHAPTER1_ARC1_DUELISTKINGDOM = {
         ,{"name": "Time Wizard","frame": "Spell Monster","types": "Spell Monster Spellcaster","set": "02 - The Star Chasers","cardid": "TSC-49","image": "./cards/TSC/49.jpg","deck": "A","duelist": "Jonouchi"}
         ,{"name": "Thousand Dragon","frame": "Alter Monster","types": "Alter Monster Timeshifted Dragon Fireblast Flying","set": "02 - The Star Chasers","cardid": "TSC-50","image": "./cards/TSC/50.jpg","deck": "B","duelist": "Jonouchi"}
         ,{"name": "Decrepit Harpie Lady","frame": "Alter Monster","types": "Alter Monster Timeshifted Avian Flying","set": "02 - The Star Chasers","cardid": "TSC-51","image": "./cards/TSC/51.jpg","deck": "B","duelist": "Mai"}
-        
+
         ,{"name": "Yugi","frame": "Rule","types": "Rule Duelist Setup","set": "03 - Changing Tides","cardid": "CHT-01","image": "./cards/CHT/01.jpg","deck": "B","duelist": ""}
         ,{"name": "Kajiki","frame": "Rule","types": "Rule Duelist Setup","set": "03 - Changing Tides","cardid": "CHT-02","image": "./cards/CHT/02.jpg","deck": "B","duelist": ""}
         ,{"name": "Ocean Cliff","frame": "Rule","types": "Rule Field Setup Matched (Red Side)","set": "03 - Changing Tides","cardid": "CHT-03","image": "./cards/CHT/03.jpg","deck": "B","duelist": ""}
@@ -166,7 +166,7 @@ const CHAPTER1_ARC1_DUELISTKINGDOM = {
         ,{"name": "Trakodon","frame": "Monster","types": "Monster Dinosaur","set": "03 - Changing Tides","cardid": "CHT-49","image": "./cards/CHT/49.jpg","deck": "A","duelist": "Ryuzaki"}
         ,{"name": "Red-Eyes Black Dragon","frame": "Monster","types": "Monster Dragon Fireblast Flying","set": "03 - Changing Tides","cardid": "CHT-50","image": "./cards/CHT/50.jpg","deck": "A","duelist": "Ryuzaki, Jonouchi"}
         ,{"name": "Claw of the Dark Dragon Tribe","frame": "Spell","types": "Spell Equip","set": "03 - Changing Tides","cardid": "CHT-51","image": "./cards/CHT/51.jpg","deck": "A","duelist": "Ryuzaki, Jonouchi"}
-        
+
         ,{"name": "Bakura","frame": "Rule","types": "Rule Duelist Setup","set": "04 - Nightfall Warriors","cardid": "NFW-01","image": "./cards/NFW/01.jpg","deck": "B","duelist": ""}
         ,{"name": "The Other Yugi","frame": "Rule","types": "Rule Duelist Setup","set": "04 - Nightfall Warriors","cardid": "NFW-02","image": "./cards/NFW/02.jpg","deck": "B","duelist": ""}
         ,{"name": "Yugi","frame": "Rule","types": "Rule Duelist Setup","set": "04 - Nightfall Warriors","cardid": "NFW-03","image": "./cards/NFW/03.jpg","deck": "B","duelist": ""}
@@ -177,7 +177,7 @@ const CHAPTER1_ARC1_DUELISTKINGDOM = {
         ,{"name": "Honda, the Commander","frame": "Integration Monster","types": "Integration Monster Machine Warrior","set": "04 - Nightfall Warriors","cardid": "NFW-08","image": "./cards/NFW/08.jpg","deck": "B","duelist": "Honda"}
         ,{"name": "White Thief","frame": "Monster","types": "Monster Spellcaster","set": "04 - Nightfall Warriors","cardid": "NFW-09","image": "./cards/NFW/09.jpg","deck": "A","duelist": "Bakura"}
         ,{"name": "Reaper of the Cards","frame": "Monster","types": "Monster Demon Flying","set": "04 - Nightfall Warriors","cardid": "NFW-10","image": "./cards/NFW/10.jpg","deck": "A","duelist": "Bakura, Panik"}
-        ,{"name": "Babylon","frame": "Monster","types": "Monster Demon","set": "04 - Nightfall Warriors","cardid": "NFW-11","image": "./cards/NFW/11.jpg","deck": "A","duelist": "Jonouchi"}
+        ,{"name": "Babylon","frame": "Monster","types": "Monster Demon","set": "04 - Nightfall Warriors","cardid": "NFW-11","image": "./cards/NFW/11.jpg","deck": "A","duelist": "Jonouchi, Daimon"}
         ,{"name": "Jonouchi, the Flame Swordsman","frame": "Integration Monster","types": "Integration Monster Warrior Fireblast","set": "04 - Nightfall Warriors","cardid": "NFW-12","image": "./cards/NFW/12.jpg","deck": "B","duelist": "Jonouchi"}
         ,{"name": "Yugi, the Dark Magician","frame": "Integration Monster","types": "Integration Monster Spellcaster","set": "04 - Nightfall Warriors","cardid": "NFW-13","image": "./cards/NFW/13.jpg","deck": "B","duelist": "Yugi"}
         ,{"name": "Metamor Pot","frame": "Monster","types": "Monster Demon","set": "04 - Nightfall Warriors","cardid": "NFW-14","image": "./cards/NFW/14.jpg","deck": "A","duelist": "Bakura"}
@@ -217,7 +217,7 @@ const CHAPTER1_ARC1_DUELISTKINGDOM = {
         ,{"name": "Keith","frame": "Rule","types": "Rule Duelist Setup","set": "04 - Nightfall Warriors","cardid": "NFW-48","image": "./cards/NFW/48.jpg","deck": "B","duelist": ""}
         ,{"name": "Garnecia Elefantis","frame": "Monster","types": "Monster Beast Warrior","set": "04 - Nightfall Warriors","cardid": "NFW-49","image": "./cards/NFW/49.jpg","deck": "A","duelist": "Keith"}
         ,{"name": "Flying Elephant","frame": "Monster","types": "Monster Beast Flying","set": "04 - Nightfall Warriors","cardid": "NFW-50","image": "./cards/NFW/50.jpg","deck": "A","duelist": "Pegasus"}
-        
+
         ,{"name": "Jonouchi","frame": "Rule","types": "Rule Duelist Setup","set": "05 - Castle Guardians","cardid": "CGU-01","image": "./cards/CGU/01.jpg","deck": "B","duelist": ""}
         ,{"name": "Kotsuzuka","frame": "Rule","types": "Rule Duelist Setup","set": "05 - Castle Guardians","cardid": "CGU-02","image": "./cards/CGU/02.jpg","deck": "B","duelist": ""}
         ,{"name": "Secret Graveyard","frame": "Rule","types": "Rule Field Setup Matched (Red Side)","set": "05 - Castle Guardians","cardid": "CGU-03","image": "./cards/CGU/03.jpg","deck": "B","duelist": ""}
@@ -268,7 +268,7 @@ const CHAPTER1_ARC1_DUELISTKINGDOM = {
         ,{"name": "Force","frame": "Spell","types": "Spell","set": "05 - Castle Guardians","cardid": "CGU-48","image": "./cards/CGU/48.jpg","deck": "A","duelist": "Brother Kyu"}
         ,{"name": "Mimic Illusionist","frame": "Spell Monster","types": "Spell Monster Illusion","set": "05 - Castle Guardians","cardid": "CGU-49","image": "./cards/CGU/49.jpg","deck": "A","duelist": "Jonouchi"}
         ,{"name": "Monster Replace","frame": "Spell","types": "Spell","set": "05 - Castle Guardians","cardid": "CGU-50","image": "./cards/CGU/50.jpg","deck": "A","duelist": "Yugi"}
-        
+
         ,{"name": "Yugi","frame": "Rule","types": "Rule Duelist Setup","set": "06 - Shattered Hope","cardid": "SHH-01","image": "./cards/SHH/01.jpg","deck": "B","duelist": ""}
         ,{"name": "Kaiba","frame": "Rule","types": "Rule Duelist Setup","set": "06 - Shattered Hope","cardid": "SHH-02","image": "./cards/SHH/02.jpg","deck": "B","duelist": ""}
         ,{"name": "Gargoyle Powered","frame": "Monster","types": "Monster Demon","set": "06 - Shattered Hope","cardid": "SHH-03","image": "./cards/SHH/03.jpg","deck": "A","duelist": "Kaiba"}
@@ -280,7 +280,7 @@ const CHAPTER1_ARC1_DUELISTKINGDOM = {
         ,{"name": "La Jinn the Demonic Spirit of the Lamp","frame": "Monster","types": "Monster Demon","set": "06 - Shattered Hope","cardid": "SHH-09","image": "./cards/SHH/09.jpg","deck": "A","duelist": "Kaiba"}
         ,{"name": "Magic Removal","frame": "Spell","types": "Spell","set": "06 - Shattered Hope","cardid": "SHH-10","image": "./cards/SHH/10.jpg","deck": "A","duelist": "Kaiba, Mai, Anzu"}
         ,{"name": "Deck Destruction Virus of Death","frame": "Trap","types": "Trap Equip","set": "06 - Shattered Hope","cardid": "SHH-11","image": "./cards/SHH/11.jpg","deck": "A","duelist": "Kaiba"}
-        ,{"name": "Holy Elf's Blessing","frame": "Spell","types": "Spell","set": "06 - Shattered Hope","cardid": "SHH-12","image": "./cards/SHH/12.jpg","deck": "A","duelist": "Kaiba"}
+        ,{"name": "Holy Elf's Blessing","frame": "Spell","types": "Spell","set": "06 - Shattered Hope","cardid": "SHH-12","image": "./cards/SHH/12.jpg","deck": "A","duelist": "Kaiba, Shizuka"}
         ,{"name": "Blue-Eyes Ultimate Dragon","frame": "Fusion Monster","types": "Fusion Monster Dragon Flying","set": "06 - Shattered Hope","cardid": "SHH-13","image": "./cards/SHH/13.jpg","deck": "B","duelist": "Kaiba"}
         ,{"name": "Living Arrow","frame": "Spell","types": "Spell","set": "06 - Shattered Hope","cardid": "SHH-14","image": "./cards/SHH/14.jpg","deck": "A","duelist": "Yugi"}
         ,{"name": "Swarm of Kuribohs","frame": "Alter Monster","types": "Alter Monster Swarm Demon Protector","set": "06 - Shattered Hope","cardid": "SHH-15","image": "./cards/SHH/15.jpg","deck": "B","duelist": "Yugi"}
@@ -315,7 +315,7 @@ const CHAPTER1_ARC1_DUELISTKINGDOM = {
         ,{"name": "Copycat","frame": "Spell","types": "Spell","set": "06 - Shattered Hope","cardid": "SHH-44","image": "./cards/SHH/44.jpg","deck": "A","duelist": "Pegasus"}
         ,{"name": "Devil Box","frame": "Monster","types": "Monster Demon","set": "06 - Shattered Hope","cardid": "SHH-45","image": "./cards/SHH/45.jpg","deck": "A","duelist": "Pegasus"}
         ,{"name": "Toon Devil Box","frame": "Alter Monster","types": "Alter Monster Toon Demon","set": "06 - Shattered Hope","cardid": "SHH-46","image": "./cards/SHH/46.jpg","deck": "B","duelist": "Pegasus"}
-        
+
         ,{"name": "Yugi","frame": "Rule","types": "Rule Duelist Setup","set": "07 - King of Duelists","cardid": "KOD-01","image": "./cards/KOD/01.jpg","deck": "B","duelist": ""}
         ,{"name": "Mai","frame": "Rule","types": "Rule Duelist Setup","set": "07 - King of Duelists","cardid": "KOD-02","image": "./cards/KOD/02.jpg","deck": "B","duelist": ""}
         ,{"name": "Silver-Screen Mirror Wall","frame": "Trap","types": "Trap Continuous","set": "07 - King of Duelists","cardid": "KOD-03","image": "./cards/KOD/03.jpg","deck": "A","duelist": "Mai"}

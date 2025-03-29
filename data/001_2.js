@@ -64,7 +64,7 @@ const CHAPTER1_ARC2_MUSEUM = {
         ,{"name": "Cannon Soldier","frame": "Spell Monster","types": "Spell Monster Machine","set": "08 - Loose Ends","cardid": "LEN-62","image": "./cards/LEN/62.jpg","deck": "A","duelist": "Rebecca, Arthur"}
         ,{"name": "Judgment Bomber","frame": "Spell","types": "Spell","set": "08 - Loose Ends","cardid": "LEN-63","image": "./cards/LEN/63.jpg","deck": "A","duelist": "Rebecca, Arthur"}
         ,{"name": "Soul Release","frame": "Spell","types": "Spell","set": "08 - Loose Ends","cardid": "LEN-64","image": "./cards/LEN/64.jpg","deck": "A","duelist": "Yugi, Sugoroku"}
-        
+
         ,{"name": "Anzu","frame": "Rule","types": "Rule Duelist Setup","set": "09 - Dungeon of Luck","cardid": "DOL-01","image": "./cards/DOL/01.jpg","deck": "B","duelist": ""}
         ,{"name": "Honda","frame": "Rule","types": "Rule Duelist Setup","set": "09 - Dungeon of Luck","cardid": "DOL-02","image": "./cards/DOL/02.jpg","deck": "B","duelist": ""}
         ,{"name": "Raremetal Lady","frame": "Monster","types": "Monster Machine Warrior","set": "09 - Dungeon of Luck","cardid": "DOL-03","image": "./cards/DOL/03.jpg","deck": "A","duelist": "Honda"}
@@ -72,7 +72,7 @@ const CHAPTER1_ARC2_MUSEUM = {
         ,{"name": "Great Infiltrator Spy","frame": "Monster","types": "Monster Warrior Support","set": "09 - Dungeon of Luck","cardid": "DOL-05","image": "./cards/DOL/05.jpg","deck": "A","duelist": "Honda"}
         ,{"name": "Angel Witch","frame": "Monster","types": "Monster Angel Spellcaster Flying","set": "09 - Dungeon of Luck","cardid": "DOL-06","image": "./cards/DOL/06.jpg","deck": "A","duelist": "Anzu"}
         ,{"name": "Supporter in the Shadows","frame": "Spell Monster","types": "Spell Monster Support","set": "09 - Dungeon of Luck","cardid": "DOL-07","image": "./cards/DOL/07.jpg","deck": "A","duelist": "Anzu"}
-        ,{"name": "God's Blessing","frame": "Trap","types": "Trap Continuous","set": "09 - Dungeon of Luck","cardid": "DOL-08","image": "./cards/DOL/08.jpg","deck": "A","duelist": "Anzu"}
+        ,{"name": "God's Blessing","frame": "Trap","types": "Trap Continuous","set": "09 - Dungeon of Luck","cardid": "DOL-08","image": "./cards/DOL/08.jpg","deck": "A","duelist": "Anzu, Daimon"}
         ,{"name": "Holy Chain","frame": "Spell","types": "Spell Equip","set": "09 - Dungeon of Luck","cardid": "DOL-09","image": "./cards/DOL/09.jpg","deck": "A","duelist": "Anzu"}
         ,{"name": "Valkyrie","frame": "Monster","types": "Monster Angel Warrior Flying","set": "09 - Dungeon of Luck","cardid": "DOL-10","image": "./cards/DOL/10.jpg","deck": "A","duelist": "Anzu"}
         ,{"name": "Jonouchi","frame": "Rule","types": "Rule Duelist Setup","set": "09 - Dungeon of Luck","cardid": "DOL-11","image": "./cards/DOL/11.jpg","deck": "B","duelist": ""}
@@ -109,7 +109,7 @@ const CHAPTER1_ARC2_MUSEUM = {
         ,{"name": "Dark Assassin","frame": "Monster","types": "Monster Undead Warrior","set": "09 - Dungeon of Luck","cardid": "DOL-42","image": "./cards/DOL/42.jpg","deck": "A","duelist": "Otogi"}
         ,{"name": "Iron Ball Devil Gorogon","frame": "Monster","types": "Monster Demon Elemental Machine","set": "09 - Dungeon of Luck","cardid": "DOL-43","image": "./cards/DOL/43.jpg","deck": "A","duelist": "Yugi"}
         ,{"name": "Duker Twin Swords","frame": "Monster","types": "Monster Warrior","set": "09 - Dungeon of Luck","cardid": "DOL-44","image": "./cards/DOL/44.jpg","deck": "A","duelist": "Yugi"}
-        ,{"name": "Swift Black Ninja","frame": "Monster","types": "Monster Warrior","set": "09 - Dungeon of Luck","cardid": "DOL-45","image": "./cards/DOL/45.jpg","deck": "A","duelist": "Yugi"}
+        ,{"name": "Swift Black Ninja","frame": "Monster","types": "Monster Warrior","set": "09 - Dungeon of Luck","cardid": "DOL-45","image": "./cards/DOL/45.jpg","deck": "A","duelist": "Yugi, Otogi"}
         ,{"name": "God Orgoth","frame": "Divine Monster","types": "Divine Monster Warrior World God (Hierarchy 1)","set": "09 - Dungeon of Luck","cardid": "DOL-46","image": "./cards/DOL/46.jpg","deck": "A","duelist": "Otogi"}
         ,{"name": "Micro Ray","frame": "Spell","types": "Spell","set": "09 - Dungeon of Luck","cardid": "DOL-47","image": "./cards/DOL/47.jpg","deck": "A","duelist": "Yugi"}
         ,{"name": "Monster Cannon","frame": "Monster","types": "Monster Beast Machine","set": "09 - Dungeon of Luck","cardid": "DOL-48","image": "./cards/DOL/48.jpg","deck": "A","duelist": "Otogi"}
@@ -120,7 +120,7 @@ const CHAPTER1_ARC2_MUSEUM = {
         ,{"name": "Barbarian Rage","frame": "Trap","types": "Trap Continuous","set": "09 - Dungeon of Luck","cardid": "DOL-53","image": "./cards/DOL/53.jpg","deck": "A","duelist": "Jonouchi"}
         ,{"name": "Raremetal Soldier","frame": "Monster","types": "Monster Machine Warrior","set": "09 - Dungeon of Luck","cardid": "DOL-54","image": "./cards/DOL/54.jpg","deck": "A","duelist": "Honda"}
         ,{"name": "Warrior Elimination","frame": "Spell","types": "Spell Equip","set": "09 - Dungeon of Luck","cardid": "DOL-55","image": "./cards/DOL/55.jpg","deck": "A","duelist": "Honda"}
-        
+
         ,{"name": "Deckmaster System","frame": "Rule","types": "Rule Game Setup","set": "10 - Virtual Nightmare","cardid": "VIN-01","image": "./cards/VIN/01.jpg","deck": "B","duelist": ""}
         ,{"name": "Deckmaster Change","frame": "Rule","types": "Rule","set": "10 - Virtual Nightmare","cardid": "VIN-02","image": "./cards/VIN/02.jpg","deck": "B","duelist": ""}
         ,{"name": "Yugi","frame": "Rule","types": "Rule Duelist Setup","set": "10 - Virtual Nightmare","cardid": "VIN-03","image": "./cards/VIN/03.jpg","deck": "B","duelist": ""}
@@ -158,7 +158,7 @@ const CHAPTER1_ARC2_MUSEUM = {
         ,{"name": "Offerings to the Dead","frame": "Spell","types": "Spell","set": "10 - Virtual Nightmare","cardid": "VIN-35","image": "./cards/VIN/35.jpg","deck": "A","duelist": "Anzu"}
         ,{"name": "Flying Penguin","frame": "Monster","types": "Monster Aquatic Flying","set": "10 - Virtual Nightmare","cardid": "VIN-36","image": "./cards/VIN/36.jpg","deck": "A","duelist": "Otaki, The Big Five"}
         ,{"name": "Penguin Sword","frame": "Spell","types": "Spell Equip","set": "10 - Virtual Nightmare","cardid": "VIN-37","image": "./cards/VIN/37.jpg","deck": "A","duelist": "Otaki, The Big Five"}
-        ,{"name": "Pot of Greed","frame": "Spell","types": "Spell","set": "10 - Virtual Nightmare","cardid": "VIN-38","image": "./cards/VIN/38.jpg","deck": "A","duelist": "Anzu, Jonouchi"}
+        ,{"name": "Pot of Greed","frame": "Spell","types": "Spell","set": "10 - Virtual Nightmare","cardid": "VIN-38","image": "./cards/VIN/38.jpg","deck": "A","duelist": "Anzu, Jonouchi, Kaiba"}
         ,{"name": "Transparent Angel","frame": "Monster","types": "Monster Angel Flying","set": "10 - Virtual Nightmare","cardid": "VIN-39","image": "./cards/VIN/39.jpg","deck": "A","duelist": "Anzu, Ooka, The Big Five"}
         ,{"name": "Bolt Penguin","frame": "Monster","types": "Monster Aquatic Thunderblast","set": "10 - Virtual Nightmare","cardid": "VIN-40","image": "./cards/VIN/40.jpg","deck": "A","duelist": "Otaki, The Big Five"}
         ,{"name": "Maha Vailo","frame": "Monster","types": "Monster Spellcaster Thunderblast","set": "10 - Virtual Nightmare","cardid": "VIN-41","image": "./cards/VIN/41.jpg","deck": "A","duelist": "Anzu"}
@@ -183,5 +183,72 @@ const CHAPTER1_ARC2_MUSEUM = {
         ,{"name": "Dragoness the Magic-Equipped Knight","frame": "Monster","types": "Monster Warrior Flying","set": "10 - Virtual Nightmare","cardid": "VIN-60","image": "./cards/VIN/60.jpg","deck": "A","duelist": "Ooka, The Big Five"}
         ,{"name": "Ally-Killing Demon Sword - Burning Soul","frame": "Spell","types": "Spell Equip","set": "10 - Virtual Nightmare","cardid": "VIN-61","image": "./cards/VIN/61.jpg","deck": "A","duelist": "Jonouchi"}
         ,{"name": "Arduous Decision","frame": "Spell","types": "Spell","set": "10 - Virtual Nightmare","cardid": "VIN-62","image": "./cards/VIN/62.jpg","deck": "A","duelist": "Jonouchi"}
+
+        ,{"name": "Honda","frame": "Rule","types": "Rule Duelist Setup","set": "11 - Body Snatchers","cardid": "BSN-01","image": "./cards/BSN/01.jpg","deck": "B","duelist": ""}
+        ,{"name": "Shizuka","frame": "Rule","types": "Rule Duelist Setup","set": "11 - Body Snatchers","cardid": "BSN-02","image": "./cards/BSN/02.jpg","deck": "B","duelist": ""}
+        ,{"name": "Otogi","frame": "Rule","types": "Rule Duelist Setup","set": "11 - Body Snatchers","cardid": "BSN-03","image": "./cards/BSN/03.jpg","deck": "B","duelist": ""}
+        ,{"name": "Ota","frame": "Rule","types": "Rule Duelist Setup","set": "11 - Body Snatchers","cardid": "BSN-04","image": "./cards/BSN/04.jpg","deck": "B","duelist": ""}
+        ,{"name": "War Factory","frame": "Rule","types": "Rule Field Setup","set": "11 - Body Snatchers","cardid": "BSN-05","image": "./cards/BSN/05.jpg","deck": "B","duelist": ""}
+        ,{"name": "Deckmaster Raremetal Knight","frame": "Rule","types": "Rule","set": "11 - Body Snatchers","cardid": "BSN-06","image": "./cards/BSN/06.jpg","deck": "B","duelist": "Honda"}
+        ,{"name": "Deckmaster Goddess of the Mind's Eye","frame": "Rule","types": "Rule","set": "11 - Body Snatchers","cardid": "BSN-07","image": "./cards/BSN/07.jpg","deck": "B","duelist": "Shizuka"}
+        ,{"name": "Deckmaster Swift-Strike Black Ninja","frame": "Rule","types": "Rule","set": "11 - Body Snatchers","cardid": "BSN-08","image": "./cards/BSN/08.jpg","deck": "B","duelist": "Otogi"}
+        ,{"name": "Deckmaster Machine Sergeant","frame": "Rule","types": "Rule","set": "11 - Body Snatchers","cardid": "BSN-09","image": "./cards/BSN/09.jpg","deck": "B","duelist": "Ota"}
+        ,{"name": "Raremetal Knight","frame": "Alter Monster","types": "Alter Monster Timeshifted Machine Warrior","set": "11 - Body Snatchers","cardid": "BSN-10","image": "./cards/BSN/10.jpg","deck": "B","duelist": "Honda"}
+        ,{"name": "Raremetal Valkyrie","frame": "Alter Monster","types": "Alter Monster Timeshifted Machine Warrior","set": "11 - Body Snatchers","cardid": "BSN-11","image": "./cards/BSN/11.jpg","deck": "B","duelist": "Honda"}
+        ,{"name": "Goddess of the Mind's Eye","frame": "Divine Monster","types": "Divine Monster Angel World God (Hierarchy 1)","set": "11 - Body Snatchers","cardid": "BSN-12","image": "./cards/BSN/12.jpg","deck": "A","duelist": "Shizuka"}
+        ,{"name": "Machine Sergeant","frame": "Monster","types": "Monster Machine","set": "11 - Body Snatchers","cardid": "BSN-13","image": "./cards/BSN/13.jpg","deck": "A","duelist": "Ota"}
+        ,{"name": "Demon Monster Tamer","frame": "Monster","types": "Monster Warrior","set": "11 - Body Snatchers","cardid": "BSN-14","image": "./cards/BSN/14.jpg","deck": "A","duelist": "Shizuka"}
+        ,{"name": "Giga-Tech Wolf","frame": "Monster","types": "Monster Beast Machine","set": "11 - Body Snatchers","cardid": "BSN-15","image": "./cards/BSN/15.jpg","deck": "A","duelist": "Ota"}
+        ,{"name": "The Forgiving Nun","frame": "Monster","types": "Monster Support Blessed","set": "11 - Body Snatchers","cardid": "BSN-16","image": "./cards/BSN/16.jpg","deck": "A","duelist": "Shizuka"}
+        ,{"name": "Attack Seal","frame": "Spell Trap","types": "Spell Trap","set": "11 - Body Snatchers","cardid": "BSN-17","image": "./cards/BSN/17.jpg","deck": "A","duelist": "Honda"}
+        ,{"name": "Force Field","frame": "Trap","types": "Trap","set": "11 - Body Snatchers","cardid": "BSN-18","image": "./cards/BSN/18.jpg","deck": "A","duelist": "Ota"}
+        ,{"name": "Machine King","frame": "Monster","types": "Monster Machine","set": "11 - Body Snatchers","cardid": "BSN-19","image": "./cards/BSN/19.jpg","deck": "A","duelist": "Ota"}
+        ,{"name": "Treasure Cards from the Heavens","frame": "Spell","types": "Spell","set": "11 - Body Snatchers","cardid": "BSN-20","image": "./cards/BSN/20.jpg","deck": "A","duelist": "Ota"}
+        ,{"name": "Mechafalcon","frame": "Monster","types": "Monster Avian Machine Flying","set": "11 - Body Snatchers","cardid": "BSN-21","image": "./cards/BSN/21.jpg","deck": "A","duelist": "Ota"}
+        ,{"name": "Ground Attacker Bugroth","frame": "Monster","types": "Monster Machine","set": "11 - Body Snatchers","cardid": "BSN-22","image": "./cards/BSN/22.jpg","deck": "A","duelist": "Ota"}
+        ,{"name": "Lady Leopard Mercenary","frame": "Monster","types": "Monster Beast Warrior Protector","set": "11 - Body Snatchers","cardid": "BSN-23","image": "./cards/BSN/23.jpg","deck": "A","duelist": "Shizuka"}
+        ,{"name": "Command Angel","frame": "Monster","types": "Monster Angel Warrior Flying","set": "11 - Body Snatchers","cardid": "BSN-24","image": "./cards/BSN/24.jpg","deck": "A","duelist": "Honda"}
+        ,{"name": "Backup Soldier","frame": "Trap","types": "Trap","set": "11 - Body Snatchers","cardid": "BSN-25","image": "./cards/BSN/25.jpg","deck": "A","duelist": "Ota"}
+        ,{"name": "Mechanical Night - Clock Work Night","frame": "Spell","types": "Spell Continuous","set": "11 - Body Snatchers","cardid": "BSN-26","image": "./cards/BSN/26.jpg","deck": "A","duelist": "Ota"}
+        ,{"name": "Short","frame": "Spell","types": "Spell","set": "11 - Body Snatchers","cardid": "BSN-27","image": "./cards/BSN/27.jpg","deck": "A","duelist": "Ota"}
+        ,{"name": "Worm Hole","frame": "Spell","types": "Spell Continuous","set": "11 - Body Snatchers","cardid": "BSN-28","image": "./cards/BSN/28.jpg","deck": "A","duelist": "Otogi"}
+        ,{"name": "Scrap-Iron Recycling Ritual","frame": "Spell","types": "Spell Persist (until the Ritual is fulfiled)","set": "11 - Body Snatchers","cardid": "BSN-29","image": "./cards/BSN/29.jpg","deck": "A","duelist": "Ota"}
+        ,{"name": "Deckmaster Perfect Machine King","frame": "Rule","types": "Rule","set": "11 - Body Snatchers","cardid": "BSN-30","image": "./cards/BSN/30.jpg","deck": "B","duelist": "Ota"}
+        ,{"name": "Perfect Machine King","frame": "Ritual Monster","types": "Ritual Monster Machine Flying","set": "11 - Body Snatchers","cardid": "BSN-31","image": "./cards/BSN/31.jpg","deck": "B","duelist": "Ota"}
+        ,{"name": "Fallen Angel Marie","frame": "Monster","types": "Monster Angel Flying","set": "11 - Body Snatchers","cardid": "BSN-32","image": "./cards/BSN/32.jpg","deck": "A","duelist": "Shizuka"}
+        ,{"name": "Dreamful Freedom Ritual","frame": "Spell","types": "Spell Persist (until the Ritual is fulfiled)","set": "11 - Body Snatchers","cardid": "BSN-33","image": "./cards/BSN/33.jpg","deck": "A","duelist": "Shizuka"}
+        ,{"name": "Saint Jeanne","frame": "Ritual Monster","types": "Ritual Monster Warrior Blessed","set": "11 - Body Snatchers","cardid": "BSN-34","image": "./cards/BSN/34.jpg","deck": "B","duelist": "Shizuka"}
+        ,{"name": "Raremetal Soul","frame": "Spell","types": "Spell","set": "11 - Body Snatchers","cardid": "BSN-35","image": "./cards/BSN/35.jpg","deck": "A","duelist": "Honda"}
+        ,{"name": "Acrobat Monkey","frame": "Monster","types": "Monster Beast Machine","set": "11 - Body Snatchers","cardid": "BSN-36","image": "./cards/BSN/36.jpg","deck": "A","duelist": "Honda"}
+        ,{"name": "Honda, the Acrobat Monkey","frame": "Integration Monster","types": "Integration Monster Beast Machine","set": "11 - Body Snatchers","cardid": "BSN-37","image": "./cards/BSN/37.jpg","deck": "B","duelist": "Honda"}
+        ,{"name": "Kaiba","frame": "Rule","types": "Rule Duelist Setup","set": "11 - Body Snatchers","cardid": "BSN-38","image": "./cards/BSN/38.jpg","deck": "B","duelist": ""}
+        ,{"name": "Daimon","frame": "Rule","types": "Rule Duelist Setup","set": "11 - Body Snatchers","cardid": "BSN-39","image": "./cards/BSN/39.jpg","deck": "B","duelist": ""}
+        ,{"name": "City Bridge","frame": "Rule","types": "Rule Field Setup","set": "11 - Body Snatchers","cardid": "BSN-40","image": "./cards/BSN/40.jpg","deck": "B","duelist": ""}
+        ,{"name": "Deckmaster Lord of Dragons","frame": "Rule","types": "Rule","set": "11 - Body Snatchers","cardid": "BSN-41","image": "./cards/BSN/41.jpg","deck": "B","duelist": "Kaiba"}
+        ,{"name": "Deckmaster Psycho Shocker","frame": "Rule","types": "Rule","set": "11 - Body Snatchers","cardid": "BSN-42","image": "./cards/BSN/42.jpg","deck": "B","duelist": "Daimon"}
+        ,{"name": "Lord of Dragons","frame": "Monster","types": "Monster Spellcaster","set": "11 - Body Snatchers","cardid": "BSN-43","image": "./cards/BSN/43.jpg","deck": "A","duelist": "Kaiba"}
+        ,{"name": "Psychic Ritual","frame": "Spell","types": "Spell Persist (until the Ritual is fulfiled)","set": "11 - Body Snatchers","cardid": "BSN-44","image": "./cards/BSN/44.jpg","deck": "A","duelist": "Daimon"}
+        ,{"name": "Psycho Shocker","frame": "Ritual Monster","types": "Ritual Monster Esper Machine","set": "11 - Body Snatchers","cardid": "BSN-45","image": "./cards/BSN/45.jpg","deck": "B","duelist": "Daimon"}
+        ,{"name": "Spear Dragon","frame": "Monster","types": "Monster Dragon Flying","set": "11 - Body Snatchers","cardid": "BSN-46","image": "./cards/BSN/46.jpg","deck": "A","duelist": "Kaiba"}
+        ,{"name": "Giant Virus","frame": "Monster","types": "Monster Demon Regeneration","set": "11 - Body Snatchers","cardid": "BSN-47","image": "./cards/BSN/47.jpg","deck": "A","duelist": "Kaiba"}
+        ,{"name": "Mask of Perplexity","frame": "Trap","types": "Trap Equip","set": "11 - Body Snatchers","cardid": "BSN-48","image": "./cards/BSN/48.jpg","deck": "A","duelist": "Daimon"}
+        ,{"name": "Cyber Pod","frame": "Monster","types": "Monster Machine","set": "11 - Body Snatchers","cardid": "BSN-49","image": "./cards/BSN/49.jpg","deck": "A","duelist": "Daimon"}
+        ,{"name": "Dol Dora","frame": "Monster","types": "Monster Demon Flying Regeneration","set": "11 - Body Snatchers","cardid": "BSN-50","image": "./cards/BSN/50.jpg","deck": "A","duelist": "Kaiba"}
+        ,{"name": "Injection Angel Lily","frame": "Monster","types": "Monster Angel Support Flying","set": "11 - Body Snatchers","cardid": "BSN-51","image": "./cards/BSN/51.jpg","deck": "A","duelist": "Daimon"}
+        ,{"name": "Watch Tranquilizer","frame": "Spell","types": "Spell","set": "11 - Body Snatchers","cardid": "BSN-52","image": "./cards/BSN/52.jpg","deck": "A","duelist": "Daimon"}
+        ,{"name": "Sebek's Blessing","frame": "Spell","types": "Spell","set": "11 - Body Snatchers","cardid": "BSN-53","image": "./cards/BSN/53.jpg","deck": "A","duelist": "Daimon"}
+        ,{"name": "Life Absorbing Machine","frame": "Spell","types": "Spell Equip","set": "11 - Body Snatchers","cardid": "BSN-54","image": "./cards/BSN/54.jpg","deck": "A","duelist": "Daimon"}
+        ,{"name": "Spring of Elements","frame": "Spell","types": "Spell Continuous","set": "11 - Body Snatchers","cardid": "BSN-55","image": "./cards/BSN/55.jpg","deck": "A","duelist": "Daimon"}
+        ,{"name": "Emergency Provisions","frame": "Spell","types": "Spell","set": "11 - Body Snatchers","cardid": "BSN-56","image": "./cards/BSN/56.jpg","deck": "A","duelist": "Daimon"}
+        ,{"name": "Heavy Storm","frame": "Spell","types": "Spell Persist (until your next Standby Phase)","set": "11 - Body Snatchers","cardid": "BSN-57","image": "./cards/BSN/57.jpg","deck": "A","duelist": "Kaiba"}
+        ,{"name": "Imperial Order","frame": "Trap","types": "Trap","set": "11 - Body Snatchers","cardid": "BSN-58","image": "./cards/BSN/58.jpg","deck": "A","duelist": "Daimon"}
+        ,{"name": "Satellite Cannon","frame": "Monster","types": "Monster Machine Cosmic","set": "11 - Body Snatchers","cardid": "BSN-59","image": "./cards/BSN/59.jpg","deck": "A","duelist": "Daimon"}
+        ,{"name": "The Wicked Worm Beast","frame": "Monster","types": "Monster Insect Beast Burrowing","set": "11 - Body Snatchers","cardid": "BSN-60","image": "./cards/BSN/60.jpg","deck": "A","duelist": "Kaiba"}
+        ,{"name": "Quick Attack","frame": "Spell","types": "Spell","set": "11 - Body Snatchers","cardid": "BSN-61","image": "./cards/BSN/61.jpg","deck": "A","duelist": "Kaiba"}
+        ,{"name": "Illusion Sprite","frame": "Monster","types": "Monster Illusion Plant","set": "11 - Body Snatchers","cardid": "BSN-62","image": "./cards/BSN/62.jpg","deck": "A","duelist": "Daimon"}
+        ,{"name": "Mokuba","frame": "Rule","types": "Rule Duelist Setup","set": "11 - Body Snatchers","cardid": "BSN-63","image": "./cards/BSN/63.jpg","deck": "B","duelist": ""}
+        ,{"name": "Noah","frame": "Rule","types": "Rule Duelist Setup","set": "11 - Body Snatchers","cardid": "BSN-64","image": "./cards/BSN/64.jpg","deck": "B","duelist": ""}
+        ,{"name": "Key Mace","frame": "Monster","types": "Monster Angel","set": "11 - Body Snatchers","cardid": "BSN-65","image": "./cards/BSN/65.jpg","deck": "A","duelist": "Mokuba"}
+        ,{"name": "Sacred God Ares","frame": "Divine Monster","types": "Divine Monster Warrior Greek God (Hierarchy 3)","set": "11 - Body Snatchers","cardid": "BSN-66","image": "./cards/BSN/66.jpg","deck": "A","duelist": "Noah"}
     ]
 };
